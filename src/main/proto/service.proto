@@ -1,0 +1,36 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package grpc;
+
+message GameManagement {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string type = 4;
+  bool allowedItemTrade = 5;
+  string tutorial = 6;
+  int32 status = 7;
+}
+
+message GameManagementInfoRequest {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string type = 4;
+  bool allowedItemTrade = 5;
+  string tutorial = 6;
+}
+
+message GameManagementStatusRequest {
+  string id = 1;
+  int32 status = 2;
+}
+
+message GameManagementResponse {
+  bool finished = 1;
+}
+
+service GameManagementService {
+  rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
+  rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
+}
