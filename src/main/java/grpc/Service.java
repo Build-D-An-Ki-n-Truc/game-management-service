@@ -62,13 +62,13 @@ public final class Service {
       "name\030\002 \001(\t\022\r\n\005image\030\003 \001(\t\022\014\n\004type\030\004 \001(\t\022" +
       "\030\n\020allowedItemTrade\030\005 \001(\010\022\020\n\010tutorial\030\006 " +
       "\001(\t\"9\n\033GameManagementStatusRequest\022\n\n\002id" +
-      "\030\001 \001(\t\022\016\n\006status\030\002 \001(\005\"*\n\026GameManagement" +
-      "Response\022\020\n\010finished\030\001 \001(\0102\265\001\n\025GameManag" +
-      "ementService\022K\n\nupdateInfo\022\037.grpc.GameMa" +
-      "nagementInfoRequest\032\034.grpc.GameManagemen" +
-      "tResponse\022O\n\014updateStatus\022!.grpc.GameMan" +
-      "agementStatusRequest\032\034.grpc.GameManageme" +
-      "ntResponseB\002P\001b\006proto3"
+      "\030\001 \001(\t\022\016\n\006status\030\002 \001(\005\";\n\026GameManagement" +
+      "Response\022\020\n\010finished\030\001 \001(\010\022\017\n\007message\030\002 " +
+      "\001(\t2\265\001\n\025GameManagementService\022K\n\nupdateI" +
+      "nfo\022\037.grpc.GameManagementInfoRequest\032\034.g" +
+      "rpc.GameManagementResponse\022O\n\014updateStat" +
+      "us\022!.grpc.GameManagementStatusRequest\032\034." +
+      "grpc.GameManagementResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -97,7 +97,7 @@ public final class Service {
     internal_static_grpc_GameManagementResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementResponse_descriptor,
-        new java.lang.String[] { "Finished", });
+        new java.lang.String[] { "Finished", "Message", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

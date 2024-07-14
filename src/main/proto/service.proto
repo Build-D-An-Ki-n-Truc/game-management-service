@@ -28,6 +28,7 @@ message GameManagementStatusRequest {
 
 message GameManagementResponse {
   bool finished = 1;
+  string message = 2;
 }
 
 service GameManagementService {
