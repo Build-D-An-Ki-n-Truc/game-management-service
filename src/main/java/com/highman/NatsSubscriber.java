@@ -35,7 +35,6 @@ public class NatsSubscriber {
             String resp = new String(msg.getData(), StandardCharsets.UTF_8);
             System.out.println(resp);
             natsConn.publish(msg.getReplyTo(), "fasdf".getBytes(StandardCharsets.UTF_8));
-            natsConn.;
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
