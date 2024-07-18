@@ -1,3 +1,1 @@
-2024-07-14 18:58:24 DEBUG GameManagementServiceServer:17 - Server is running
-2024-07-14 18:58:29 DEBUG GameManagementService:91 - Error while updating game statusERROR: syntax error at or near "'Game'"
-  Position: 67
+2024-07-18 10:30:12 DEBUG GameManagementServiceServer:29 - Server is running

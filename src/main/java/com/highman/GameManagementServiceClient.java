@@ -13,8 +13,8 @@ public class GameManagementServiceClient {
 
         GameManagementServiceGrpc.GameManagementServiceBlockingStub stub = GameManagementServiceGrpc.newBlockingStub(channel);
 
-        GameManagementResponse infoUpdateResponse = stub.updateStatus(GameManagementStatusRequest.newBuilder()
-                .setId("GME140724153638").setStatus(5).build());
+        GameManagementResponse infoUpdateResponse = stub.updateInfo(GameManagementInfoRequest.newBuilder()
+                .setId("GME140724153638").setName("Game abc").setType("fdsafds").setImage("").setAllowedItemTrade(false).build());
         System.out.println(infoUpdateResponse.getFinished());
 
         channel.shutdown();

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class DBConnectionPool {
     static final int MAX_CONNECTION = 50;
-    static final String dbRelativePath = "/VOU_Project";
+    static final String dbRelativePath = "/vou_proj";
     static final String dbUser = "postgres";
     static final String dbPwd = "abc123";
 

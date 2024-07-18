@@ -35,7 +35,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
         try {
             // Find the game by its id and update its info
-            String sql = "UPDATE \"Game\" SET name=?, image=?, type=?, alloweditemtrade=?, tutorial=? WHERE id=?";
+            String sql = "UPDATE game SET name=?, image=?, type=?, alloweditemtrade=?, tutorial=? WHERE id=?";
             PreparedStatement updateStatement = conn.prepareStatement(sql);
             updateStatement.setString(1, request.getName());
             updateStatement.setString(2, request.getImage());
@@ -43,6 +43,9 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             updateStatement.setBoolean(4, request.getAllowedItemTrade());
             updateStatement.setString(5, request.getTutorial());
             updateStatement.setString(6, request.getId());
+            System.out.println(sql);
+            updateStatement.executeUpdate();
+            conn.commit();
 
             // Response message
             String msg = "Game info update complete.";
@@ -68,7 +71,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
         try {
             // Find the game by its id and update its info
-            String sql = "UPDATE \"Game\" SET status=? WHERE id=?";
+            String sql = "UPDATE game SET status=? WHERE id=?";
             PreparedStatement updateStatement = conn.prepareStatement(sql);
             updateStatement.setInt(1, request.getStatus());
             updateStatement.setString(2, request.getId());
