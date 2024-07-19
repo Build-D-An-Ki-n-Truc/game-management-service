@@ -1,6 +1,7 @@
 package com.highman;
 
 import com.google.gson.*;
+import com.highman.nats.MessageResponse;
 import grpc.GameManagementInfoRequest;
 import grpc.GameManagementResponse;
 import grpc.GameManagementServiceGrpc;
@@ -40,54 +41,13 @@ public class RequestHandler {
         }
 
         if (response != null) {
-            Gson gson = new Gson();
             JsonObject responsePayload = new JsonObject();
-            responsePayload.addProperty("type", gson.toJson(List.of("info")));
-            responsePayload.addProperty("status", 200);
-            responsePayload.addProperty("data", gson.toJson(Map.of("finished", response.getFinished(), "message", response.getMessage())));
+            responsePayload.addProperty("finished", response.getFinished());
+            responsePayload.addProperty("message", response.getMessage());
+            MessageResponse natsResponse = new MessageResponse(responsePayload);
+            System.out.println(natsResponse.toString());
+            conn.publish(requestMsg.getReplyTo(), natsResponse.toString().getBytes(StandardCharsets.UTF_8));
 //            conn.publish(requestMsg.getReplyTo(), responsePayload.toString().getBytes(StandardCharsets.UTF_8));
-            HttpResponse httpResponse = new HttpResponse() {
-                @Override
-                public int statusCode() {
-                    return 200;
-                }
-
-                @Override
-                public HttpRequest request() {
-                    return null;
-                }
-
-                @Override
-                public Optional<HttpResponse> previousResponse() {
-                    return Optional.empty();
-                }
-
-                @Override
-                public HttpHeaders headers() {
-                    return null;
-                }
-
-                @Override
-                public Object body() {
-                    return responsePayload;
-                }
-
-                @Override
-                public Optional<SSLSession> sslSession() {
-                    return Optional.empty();
-                }
-
-                @Override
-                public URI uri() {
-                    return null;
-                }
-
-                @Override
-                public HttpClient.Version version() {
-                    return null;
-                }
-            };
-            conn.publish(requestMsg.getReplyTo(), httpResponse.toString().getBytes());
         }
         else {
 

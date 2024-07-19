@@ -28,18 +28,6 @@ public class NatsSubscriber {
         ManagedChannel channel = ManagedChannelBuilder.forAddress(grpcHost, grpcPort).usePlaintext().build();
         GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub = GameManagementServiceGrpc.newBlockingStub(channel);
 
-        try (Connection natsConn = Nats.connect(natsUrl)) {
-            MessagePattern updateInfoMP = new MessagePattern("gameManage", "updateTest", "GET");
-            Subscription sub = natsConn.subscribe(updateInfoMP.toString());
-            Message msg = sub.nextMessage(Duration.ofMillis(100000));
-            String resp = new String(msg.getData(), StandardCharsets.UTF_8);
-            System.out.println(resp);
-            natsConn.publish(msg.getReplyTo(), "fasdf".getBytes(StandardCharsets.UTF_8));
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
         MessagePattern updateInfoMP = new MessagePattern("gameManage", "updateInfo", "POST");
         subscribe(updateInfoMP, grpcStub);
 
