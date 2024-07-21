@@ -75,7 +75,7 @@ public class RequestHandler {
         if (payload.has("id") && payload.has("id")) {
             GameManagementStatusRequest request = GameManagementStatusRequest.newBuilder()
                     .setId(payload.get("id").getAsString())
-                    .setStatus(payload.get("status").getAsInt())
+                    .setStatus(payload.get("status").getAsString())
                     .build();
 
             return grpcStub.updateStatus(request);

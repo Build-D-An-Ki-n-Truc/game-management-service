@@ -4,12 +4,17 @@ package grpc;
 
 message GameManagement {
   string id = 1;
-  string name = 2;
-  string image = 3;
-  string type = 4;
-  bool allowedItemTrade = 5;
-  string tutorial = 6;
-  int32 status = 7;
+  string eventId = 2;
+  string name = 3;
+  string image = 4;
+  string type = 5;
+  bool allowedItemTrade = 6;
+  string tutorial = 7;
+  string status = 8;
+  int64 startTime = 9;
+  int64 endTime = 10;
+  int32 maxPlayers = 11;
+  int32 duration = 12;
 }
 
 message GameManagementInfoRequest {
@@ -19,11 +24,15 @@ message GameManagementInfoRequest {
   string type = 4;
   bool allowedItemTrade = 5;
   string tutorial = 6;
+  int64 startTime = 7;
+  int64 endTime = 8;
+  int32 maxPlayers = 9;
+  int32 duration = 10;
 }
 
 message GameManagementStatusRequest {
   string id = 1;
-  int32 status = 2;
+  string status = 2;
 }
 
 message GameManagementResponse {

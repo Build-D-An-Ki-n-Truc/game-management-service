@@ -54,21 +54,26 @@ public final class Service {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rservice.proto\022\004grpc\"\203\001\n\016GameManagement" +
-      "\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005image\030\003 \001(" +
-      "\t\022\014\n\004type\030\004 \001(\t\022\030\n\020allowedItemTrade\030\005 \001(" +
-      "\010\022\020\n\010tutorial\030\006 \001(\t\022\016\n\006status\030\007 \001(\005\"~\n\031G" +
-      "ameManagementInfoRequest\022\n\n\002id\030\001 \001(\t\022\014\n\004" +
-      "name\030\002 \001(\t\022\r\n\005image\030\003 \001(\t\022\014\n\004type\030\004 \001(\t\022" +
-      "\030\n\020allowedItemTrade\030\005 \001(\010\022\020\n\010tutorial\030\006 " +
-      "\001(\t\"9\n\033GameManagementStatusRequest\022\n\n\002id" +
-      "\030\001 \001(\t\022\016\n\006status\030\002 \001(\005\";\n\026GameManagement" +
-      "Response\022\020\n\010finished\030\001 \001(\010\022\017\n\007message\030\002 " +
-      "\001(\t2\265\001\n\025GameManagementService\022K\n\nupdateI" +
-      "nfo\022\037.grpc.GameManagementInfoRequest\032\034.g" +
-      "rpc.GameManagementResponse\022O\n\014updateStat" +
-      "us\022!.grpc.GameManagementStatusRequest\032\034." +
-      "grpc.GameManagementResponseB\002P\001b\006proto3"
+      "\n\rservice.proto\022\004grpc\"\336\001\n\016GameManagement" +
+      "\022\n\n\002id\030\001 \001(\t\022\017\n\007eventId\030\002 \001(\t\022\014\n\004name\030\003 " +
+      "\001(\t\022\r\n\005image\030\004 \001(\t\022\014\n\004type\030\005 \001(\t\022\030\n\020allo" +
+      "wedItemTrade\030\006 \001(\010\022\020\n\010tutorial\030\007 \001(\t\022\016\n\006" +
+      "status\030\010 \001(\t\022\021\n\tstartTime\030\t \001(\003\022\017\n\007endTi" +
+      "me\030\n \001(\003\022\022\n\nmaxPlayers\030\013 \001(\005\022\020\n\010duration" +
+      "\030\014 \001(\005\"\310\001\n\031GameManagementInfoRequest\022\n\n\002" +
+      "id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005image\030\003 \001(\t\022\014\n" +
+      "\004type\030\004 \001(\t\022\030\n\020allowedItemTrade\030\005 \001(\010\022\020\n" +
+      "\010tutorial\030\006 \001(\t\022\021\n\tstartTime\030\007 \001(\003\022\017\n\007en" +
+      "dTime\030\010 \001(\003\022\022\n\nmaxPlayers\030\t \001(\005\022\020\n\010durat" +
+      "ion\030\n \001(\005\"9\n\033GameManagementStatusRequest" +
+      "\022\n\n\002id\030\001 \001(\t\022\016\n\006status\030\002 \001(\t\";\n\026GameMana" +
+      "gementResponse\022\020\n\010finished\030\001 \001(\010\022\017\n\007mess" +
+      "age\030\002 \001(\t2\265\001\n\025GameManagementService\022K\n\nu" +
+      "pdateInfo\022\037.grpc.GameManagementInfoReque" +
+      "st\032\034.grpc.GameManagementResponse\022O\n\014upda" +
+      "teStatus\022!.grpc.GameManagementStatusRequ" +
+      "est\032\034.grpc.GameManagementResponseB\002P\001b\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -79,13 +84,13 @@ public final class Service {
     internal_static_grpc_GameManagement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagement_descriptor,
-        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", });
+        new java.lang.String[] { "Id", "EventId", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", "StartTime", "EndTime", "MaxPlayers", "Duration", });
     internal_static_grpc_GameManagementInfoRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_grpc_GameManagementInfoRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementInfoRequest_descriptor,
-        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", });
+        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "StartTime", "EndTime", "MaxPlayers", "Duration", });
     internal_static_grpc_GameManagementStatusRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_grpc_GameManagementStatusRequest_fieldAccessorTable = new

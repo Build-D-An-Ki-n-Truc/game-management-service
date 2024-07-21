@@ -22,62 +22,104 @@ public interface GameManagementOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>string name = 2;</code>
+   * <code>string eventId = 2;</code>
+   * @return The eventId.
+   */
+  java.lang.String getEventId();
+  /**
+   * <code>string eventId = 2;</code>
+   * @return The bytes for eventId.
+   */
+  com.google.protobuf.ByteString
+      getEventIdBytes();
+
+  /**
+   * <code>string name = 3;</code>
    * @return The name.
    */
   java.lang.String getName();
   /**
-   * <code>string name = 2;</code>
+   * <code>string name = 3;</code>
    * @return The bytes for name.
    */
   com.google.protobuf.ByteString
       getNameBytes();
 
   /**
-   * <code>string image = 3;</code>
+   * <code>string image = 4;</code>
    * @return The image.
    */
   java.lang.String getImage();
   /**
-   * <code>string image = 3;</code>
+   * <code>string image = 4;</code>
    * @return The bytes for image.
    */
   com.google.protobuf.ByteString
       getImageBytes();
 
   /**
-   * <code>string type = 4;</code>
+   * <code>string type = 5;</code>
    * @return The type.
    */
   java.lang.String getType();
   /**
-   * <code>string type = 4;</code>
+   * <code>string type = 5;</code>
    * @return The bytes for type.
    */
   com.google.protobuf.ByteString
       getTypeBytes();
 
   /**
-   * <code>bool allowedItemTrade = 5;</code>
+   * <code>bool allowedItemTrade = 6;</code>
    * @return The allowedItemTrade.
    */
   boolean getAllowedItemTrade();
 
   /**
-   * <code>string tutorial = 6;</code>
+   * <code>string tutorial = 7;</code>
    * @return The tutorial.
    */
   java.lang.String getTutorial();
   /**
-   * <code>string tutorial = 6;</code>
+   * <code>string tutorial = 7;</code>
    * @return The bytes for tutorial.
    */
   com.google.protobuf.ByteString
       getTutorialBytes();
 
   /**
-   * <code>int32 status = 7;</code>
+   * <code>string status = 8;</code>
    * @return The status.
    */
-  int getStatus();
+  java.lang.String getStatus();
+  /**
+   * <code>string status = 8;</code>
+   * @return The bytes for status.
+   */
+  com.google.protobuf.ByteString
+      getStatusBytes();
+
+  /**
+   * <code>int64 startTime = 9;</code>
+   * @return The startTime.
+   */
+  long getStartTime();
+
+  /**
+   * <code>int64 endTime = 10;</code>
+   * @return The endTime.
+   */
+  long getEndTime();
+
+  /**
+   * <code>int32 maxPlayers = 11;</code>
+   * @return The maxPlayers.
+   */
+  int getMaxPlayers();
+
+  /**
+   * <code>int32 duration = 12;</code>
+   * @return The duration.
+   */
+  int getDuration();
 }

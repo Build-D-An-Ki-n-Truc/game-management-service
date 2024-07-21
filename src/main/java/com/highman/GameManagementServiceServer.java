@@ -1,5 +1,6 @@
 package com.highman;
 
+import com.highman.prometheus.MetricsRegisters;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.ServerInterceptor;
@@ -10,6 +11,7 @@ import io.nats.client.Nats;
 import io.nats.client.Options;
 import io.netty.util.concurrent.Future;
 import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.HTTPServer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.maven.plugin.logging.Log;
@@ -25,9 +27,13 @@ public class GameManagementServiceServer {
     public static void main(String[] args) throws IOException, InterruptedException{
         Server server = ServerBuilder.forPort(4010).addService(new GameManagementService()).build();
 
+        HTTPServer prometheusServer = new HTTPServer(4011);
+
         server.start();
         LOGGER.debug("Server is running");
         server.awaitTermination();
         LOGGER.debug("Server has stopped running");
+
+        prometheusServer.close();
     }
 }
