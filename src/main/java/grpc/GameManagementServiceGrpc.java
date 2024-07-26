@@ -108,6 +108,37 @@ public final class GameManagementServiceGrpc {
     return getGetAllMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementAddRequest,
+      grpc.GameManagementResponse> getAddMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "add",
+      requestType = grpc.GameManagementAddRequest.class,
+      responseType = grpc.GameManagementResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementAddRequest,
+      grpc.GameManagementResponse> getAddMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementAddRequest, grpc.GameManagementResponse> getAddMethod;
+    if ((getAddMethod = GameManagementServiceGrpc.getAddMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getAddMethod = GameManagementServiceGrpc.getAddMethod) == null) {
+          GameManagementServiceGrpc.getAddMethod = getAddMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementAddRequest, grpc.GameManagementResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "add"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementAddRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("add"))
+              .build();
+        }
+      }
+    }
+    return getAddMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -176,6 +207,13 @@ public final class GameManagementServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void add(grpc.GameManagementAddRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddMethod(), responseObserver);
+    }
   }
 
   /**
@@ -228,6 +266,14 @@ public final class GameManagementServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetAllMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void add(grpc.GameManagementAddRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -265,6 +311,13 @@ public final class GameManagementServiceGrpc {
     public grpc.GameManagementGetAllResponse getAll(grpc.GameManagementGetAllRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementResponse add(grpc.GameManagementAddRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddMethod(), getCallOptions(), request);
     }
   }
 
@@ -307,11 +360,20 @@ public final class GameManagementServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetAllMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementResponse> add(
+        grpc.GameManagementAddRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_UPDATE_INFO = 0;
   private static final int METHODID_UPDATE_STATUS = 1;
   private static final int METHODID_GET_ALL = 2;
+  private static final int METHODID_ADD = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -341,6 +403,10 @@ public final class GameManagementServiceGrpc {
         case METHODID_GET_ALL:
           serviceImpl.getAll((grpc.GameManagementGetAllRequest) request,
               (io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse>) responseObserver);
+          break;
+        case METHODID_ADD:
+          serviceImpl.add((grpc.GameManagementAddRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -381,6 +447,13 @@ public final class GameManagementServiceGrpc {
               grpc.GameManagementGetAllRequest,
               grpc.GameManagementGetAllResponse>(
                 service, METHODID_GET_ALL)))
+        .addMethod(
+          getAddMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementAddRequest,
+              grpc.GameManagementResponse>(
+                service, METHODID_ADD)))
         .build();
   }
 
@@ -432,6 +505,7 @@ public final class GameManagementServiceGrpc {
               .addMethod(getUpdateInfoMethod())
               .addMethod(getUpdateStatusMethod())
               .addMethod(getGetAllMethod())
+              .addMethod(getAddMethod())
               .build();
         }
       }

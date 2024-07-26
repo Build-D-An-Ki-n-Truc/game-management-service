@@ -12,6 +12,7 @@ import grpc.GameManagementServiceGrpc;
 import grpc.GameManagementStatusRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.netty.NettyChannelBuilder;
 import io.nats.client.*;
 import io.nats.service.*;
 import org.reflections.Reflections;
@@ -42,6 +43,9 @@ public class NatsSubscriber {
 
         MessagePattern getAllMP = new MessagePattern("gameManage", "getAll", "GET");
         subscribe(getAllMP, grpcStub);
+
+        MessagePattern addMP = new MessagePattern("gameManage", "add", "POST");
+        subscribe(addMP, grpcStub);
     }
 
     private static void subscribe(MessagePattern messagePattern, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {

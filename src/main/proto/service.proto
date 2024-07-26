@@ -30,6 +30,11 @@ message GameManagementInfoRequest {
   int32 duration = 10;
 }
 
+message GameManagementStatusRequest {
+  string id = 1;
+  string status = 2;
+}
+
 message GameManagementGetRequest {}
 message GameManagementGetAllRequest {}
 message GameManagementQuestion {
@@ -37,6 +42,27 @@ message GameManagementQuestion {
   repeated string options = 2;
   int32 correctAnswer = 3;
 }
+
+message GameManagementAddRequest {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string type = 4;
+  bool allowedItemTrade = 5;
+  string tutorial = 6;
+  string status = 7;
+  int64 startTime = 8;
+  int64 endTime = 9;
+  int32 maxPlayers = 10;
+  int32 duration = 11;
+  repeated GameManagementQuestion questions = 12;
+}
+
+message GameManagementResponse {
+  bool finished = 1;
+  string message = 2;
+}
+
 message GameManagementGetResponse {
   string id = 1;
   string name = 2;
@@ -55,18 +81,9 @@ message GameManagementGetAllResponse {
   repeated GameManagementGetResponse games = 1;
 }
 
-message GameManagementStatusRequest {
-  string id = 1;
-  string status = 2;
-}
-
-message GameManagementResponse {
-  bool finished = 1;
-  string message = 2;
-}
-
 service GameManagementService {
   rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
   rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
   rpc getAll(GameManagementGetAllRequest) returns (GameManagementGetAllResponse);
+  rpc add(GameManagementAddRequest) returns (GameManagementResponse);
 }

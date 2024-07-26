@@ -1,22 +1,17 @@
 package com.highman.handlers;
 
 import com.google.gson.JsonObject;
-import grpc.GameManagementInfoRequest;
-import grpc.GameManagementResponse;
-import grpc.GameManagementServiceGrpc;
-import io.nats.client.Connection;
-import io.nats.client.Message;
+import grpc.*;
 
-public class UpdateInfoRequestHandler implements RequestHandlerBase{
+public class AddRequestHandler implements RequestHandlerBase{
     private final String ERROR_MSG = "Response returns null or request has invalid structure";
 
     @Override
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
-        System.out.println(requestJson.has("id"));
         JsonObject responsePayload = new JsonObject();
 
         if (requestJson.has("id") && requestJson.has("name") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration")) {
-            GameManagementInfoRequest request = GameManagementInfoRequest.newBuilder()
+            GameManagementAddRequest request = GameManagementAddRequest.newBuilder()
                     .setId(requestJson.get("id").getAsString())
                     .setName(requestJson.get("name").getAsString())
                     .setImage(requestJson.get("image").getAsString())
@@ -29,7 +24,7 @@ public class UpdateInfoRequestHandler implements RequestHandlerBase{
                     .setDuration(requestJson.get("duration").getAsInt())
                     .build();
 
-            GameManagementResponse response = grpcStub.updateInfo(request);
+            GameManagementResponse response = grpcStub.add(request);
             responsePayload.addProperty("finished", response.getFinished());
             responsePayload.addProperty("message", response.getMessage());
         }
@@ -43,6 +38,6 @@ public class UpdateInfoRequestHandler implements RequestHandlerBase{
 
     @Override
     public String getEndpointName() {
-        return "updateInfo";
+        return "create";
     }
 }

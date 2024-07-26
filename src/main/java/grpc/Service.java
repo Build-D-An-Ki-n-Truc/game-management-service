@@ -36,6 +36,11 @@ public final class Service {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_grpc_GameManagementInfoRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementStatusRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementStatusRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_grpc_GameManagementGetRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -51,6 +56,16 @@ public final class Service {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_grpc_GameManagementQuestion_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementAddRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementAddRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_grpc_GameManagementGetResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -60,16 +75,6 @@ public final class Service {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_grpc_GameManagementGetAllResponse_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_grpc_GameManagementStatusRequest_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_grpc_GameManagementStatusRequest_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_grpc_GameManagementResponse_descriptor;
-  static final 
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_grpc_GameManagementResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -90,29 +95,37 @@ public final class Service {
       "\004type\030\004 \001(\t\022\030\n\020allowedItemTrade\030\005 \001(\010\022\020\n" +
       "\010tutorial\030\006 \001(\t\022\021\n\tstartTime\030\007 \001(\003\022\017\n\007en" +
       "dTime\030\010 \001(\003\022\022\n\nmaxPlayers\030\t \001(\005\022\020\n\010durat" +
-      "ion\030\n \001(\005\"\032\n\030GameManagementGetRequest\"\035\n" +
-      "\033GameManagementGetAllRequest\"N\n\026GameMana" +
-      "gementQuestion\022\014\n\004text\030\001 \001(\t\022\017\n\007options\030" +
-      "\002 \003(\t\022\025\n\rcorrectAnswer\030\003 \001(\005\"\211\002\n\031GameMan" +
-      "agementGetResponse\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002" +
-      " \001(\t\022\r\n\005image\030\003 \001(\t\022\014\n\004type\030\004 \001(\t\022\030\n\020all" +
-      "owedItemTrade\030\005 \001(\010\022\020\n\010tutorial\030\006 \001(\t\022\016\n" +
-      "\006status\030\007 \001(\t\022\021\n\tstartTime\030\010 \001(\003\022\017\n\007endT" +
-      "ime\030\t \001(\003\022\022\n\nmaxPlayers\030\n \001(\005\022\020\n\010duratio" +
-      "n\030\013 \001(\005\022/\n\tquestions\030\014 \003(\0132\034.grpc.GameMa" +
-      "nagementQuestion\"N\n\034GameManagementGetAll" +
-      "Response\022.\n\005games\030\001 \003(\0132\037.grpc.GameManag" +
-      "ementGetResponse\"9\n\033GameManagementStatus" +
-      "Request\022\n\n\002id\030\001 \001(\t\022\016\n\006status\030\002 \001(\t\";\n\026G" +
-      "ameManagementResponse\022\020\n\010finished\030\001 \001(\010\022" +
-      "\017\n\007message\030\002 \001(\t2\206\002\n\025GameManagementServi" +
-      "ce\022K\n\nupdateInfo\022\037.grpc.GameManagementIn" +
-      "foRequest\032\034.grpc.GameManagementResponse\022" +
-      "O\n\014updateStatus\022!.grpc.GameManagementSta" +
-      "tusRequest\032\034.grpc.GameManagementResponse" +
-      "\022O\n\006getAll\022!.grpc.GameManagementGetAllRe" +
-      "quest\032\".grpc.GameManagementGetAllRespons" +
-      "eB\002P\001b\006proto3"
+      "ion\030\n \001(\005\"9\n\033GameManagementStatusRequest" +
+      "\022\n\n\002id\030\001 \001(\t\022\016\n\006status\030\002 \001(\t\"\032\n\030GameMana" +
+      "gementGetRequest\"\035\n\033GameManagementGetAll" +
+      "Request\"N\n\026GameManagementQuestion\022\014\n\004tex" +
+      "t\030\001 \001(\t\022\017\n\007options\030\002 \003(\t\022\025\n\rcorrectAnswe" +
+      "r\030\003 \001(\005\"\210\002\n\030GameManagementAddRequest\022\n\n\002" +
+      "id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005image\030\003 \001(\t\022\014\n" +
+      "\004type\030\004 \001(\t\022\030\n\020allowedItemTrade\030\005 \001(\010\022\020\n" +
+      "\010tutorial\030\006 \001(\t\022\016\n\006status\030\007 \001(\t\022\021\n\tstart" +
+      "Time\030\010 \001(\003\022\017\n\007endTime\030\t \001(\003\022\022\n\nmaxPlayer" +
+      "s\030\n \001(\005\022\020\n\010duration\030\013 \001(\005\022/\n\tquestions\030\014" +
+      " \003(\0132\034.grpc.GameManagementQuestion\";\n\026Ga" +
+      "meManagementResponse\022\020\n\010finished\030\001 \001(\010\022\017" +
+      "\n\007message\030\002 \001(\t\"\211\002\n\031GameManagementGetRes" +
+      "ponse\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005image" +
+      "\030\003 \001(\t\022\014\n\004type\030\004 \001(\t\022\030\n\020allowedItemTrade" +
+      "\030\005 \001(\010\022\020\n\010tutorial\030\006 \001(\t\022\016\n\006status\030\007 \001(\t" +
+      "\022\021\n\tstartTime\030\010 \001(\003\022\017\n\007endTime\030\t \001(\003\022\022\n\n" +
+      "maxPlayers\030\n \001(\005\022\020\n\010duration\030\013 \001(\005\022/\n\tqu" +
+      "estions\030\014 \003(\0132\034.grpc.GameManagementQuest" +
+      "ion\"N\n\034GameManagementGetAllResponse\022.\n\005g" +
+      "ames\030\001 \003(\0132\037.grpc.GameManagementGetRespo" +
+      "nse2\313\002\n\025GameManagementService\022K\n\nupdateI" +
+      "nfo\022\037.grpc.GameManagementInfoRequest\032\034.g" +
+      "rpc.GameManagementResponse\022O\n\014updateStat" +
+      "us\022!.grpc.GameManagementStatusRequest\032\034." +
+      "grpc.GameManagementResponse\022O\n\006getAll\022!." +
+      "grpc.GameManagementGetAllRequest\032\".grpc." +
+      "GameManagementGetAllResponse\022C\n\003add\022\036.gr" +
+      "pc.GameManagementAddRequest\032\034.grpc.GameM" +
+      "anagementResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -130,48 +143,54 @@ public final class Service {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementInfoRequest_descriptor,
         new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "StartTime", "EndTime", "MaxPlayers", "Duration", });
-    internal_static_grpc_GameManagementGetRequest_descriptor =
+    internal_static_grpc_GameManagementStatusRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_grpc_GameManagementStatusRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementStatusRequest_descriptor,
+        new java.lang.String[] { "Id", "Status", });
+    internal_static_grpc_GameManagementGetRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_grpc_GameManagementGetRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementGetRequest_descriptor,
         new java.lang.String[] { });
     internal_static_grpc_GameManagementGetAllRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_grpc_GameManagementGetAllRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementGetAllRequest_descriptor,
         new java.lang.String[] { });
     internal_static_grpc_GameManagementQuestion_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_grpc_GameManagementQuestion_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementQuestion_descriptor,
         new java.lang.String[] { "Text", "Options", "CorrectAnswer", });
+    internal_static_grpc_GameManagementAddRequest_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_grpc_GameManagementAddRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementAddRequest_descriptor,
+        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", "StartTime", "EndTime", "MaxPlayers", "Duration", "Questions", });
+    internal_static_grpc_GameManagementResponse_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_grpc_GameManagementResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementResponse_descriptor,
+        new java.lang.String[] { "Finished", "Message", });
     internal_static_grpc_GameManagementGetResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_grpc_GameManagementGetResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementGetResponse_descriptor,
         new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", "StartTime", "EndTime", "MaxPlayers", "Duration", "Questions", });
     internal_static_grpc_GameManagementGetAllResponse_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_grpc_GameManagementGetAllResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementGetAllResponse_descriptor,
         new java.lang.String[] { "Games", });
-    internal_static_grpc_GameManagementStatusRequest_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_grpc_GameManagementStatusRequest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_grpc_GameManagementStatusRequest_descriptor,
-        new java.lang.String[] { "Id", "Status", });
-    internal_static_grpc_GameManagementResponse_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_grpc_GameManagementResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-        internal_static_grpc_GameManagementResponse_descriptor,
-        new java.lang.String[] { "Finished", "Message", });
     descriptor.resolveAllFeaturesImmutable();
   }
 
