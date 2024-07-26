@@ -1,5 +1,6 @@
 package com.highman;
 
+import com.google.gson.Gson;
 import com.highman.models.DBConnectionPool;
 import com.highman.prometheus.MetricsRegisters;
 import com.mongodb.client.result.UpdateResult;
@@ -7,10 +8,7 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 import com.mongodb.reactivestreams.client.MongoCollection;
 import com.mongodb.reactivestreams.client.MongoDatabase;
-import grpc.GameManagementInfoRequest;
-import grpc.GameManagementResponse;
-import grpc.GameManagementServiceGrpc;
-import grpc.GameManagementStatusRequest;
+import grpc.*;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.bson.Document;
@@ -24,12 +22,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Objects;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static com.mongodb.client.model.Filters.all;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
@@ -45,6 +43,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             MongoDatabase mongoDatabase = mongoClient.getDatabase("game_service");
             gameColl = mongoDatabase.getCollection("games");
 
+//            printOneDocument("669a8089bf71b13349b55968");
             printAllDocuments();
             MetricsRegisters.requests.inc();
         } catch (Exception e) {
@@ -54,13 +53,70 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         }
     }
 
-    // Run at server termination
-    public void shutdown() {
-        if (mongoClient != null) mongoClient.close();
-    }
-
+    // UPDATE
     @Override
     public void updateInfo(GameManagementInfoRequest request, StreamObserver<GameManagementResponse> responseObserver) {
+        GameManagementResponse.Builder response = GameManagementResponse.newBuilder();
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+            // Find the game by its id and update its info
+            Publisher<UpdateResult> publisher = gameColl.updateOne(
+                    eq("_id", new ObjectId(request.getId())),
+                    combine(
+                            set("name", request.getName()),
+                            set("image", request.getImage()),
+                            set("type", request.getType()),
+                            set("allowedItemTrade", request.getAllowedItemTrade()),
+                            set("tutorial", request.getTutorial()),
+                            set("startTime", new Date(request.getStartTime())),
+                            set("endTime", new Date(request.getEndTime())),
+                            set("config.maxPlayers", request.getMaxPlayers()),
+                            set("config.duration", request.getDuration())
+                    )
+            );
+
+            // Perform update
+            Mono.from(publisher)
+                    .publishOn(Schedulers.boundedElastic())
+                    .subscribe(
+                            updateResult -> {
+                                String msg = "Game info update complete.";
+                                System.out.println(msg);
+
+                                response.setFinished(true);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                String msg = "Failed to update document: " + throwable;
+                                System.err.println(msg);
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        } catch (Exception e) {
+            // Error message
+            String msg = "Error while updating game info" + e.getMessage();
+            System.err.println(msg);
+            e.printStackTrace();
+
+            response.setFinished(false);
+            response.setMessage(msg);
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
+    }
+
+    // UPDATE
+    @Override
+    public void updateStatus(GameManagementStatusRequest request, StreamObserver<GameManagementResponse> responseObserver) {
         GameManagementResponse.Builder response = GameManagementResponse.newBuilder();
 
         try {
@@ -68,74 +124,116 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             Publisher<UpdateResult> publisher = gameColl.updateOne(
                     eq("_id", new ObjectId(request.getId())),
                     combine(
-                            set("type", request.getType()),
-                            set("startTime", new Date(request.getStartTime())),
-                            set("endTime", new Date(request.getEndTime())),
-                            set("config", combine(
-                                    set("maxPlayers", request.getMaxPlayers()),
-                                    set("duration", request.getDuration())
-                            ))
+                            set("status", request.getStatus())
                     )
             );
-
-            // Actions after update is complete
-            Runnable postUpdate = () -> {
-                String msg = "Game info update complete.";
-                response.setFinished(true);
-                response.setMessage(msg);
-                LOGGER.debug(msg);
-            };
 
             // Perform update
             Mono.from(publisher)
                     .publishOn(Schedulers.boundedElastic())
                     .subscribe(
-                            updateResult -> System.out.println("Update successful, modified count: " + updateResult.getModifiedCount()),
-                            throwable -> System.err.println("Failed to update document: " + throwable),
-                            postUpdate
+                            updateResult -> {
+                                String msg = "Game status update complete.";
+                                System.out.println(msg);
+
+                                response.setFinished(true);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                String msg = "Failed to update document: " + throwable;
+                                System.err.println(msg);
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
                     );
         } catch (Exception e) {
             // Error message
-            String msg = "Error while updating game info" + e.getMessage();
+            String msg = "Error while updating game status" + e.getMessage();
+            System.err.println(msg);
             e.printStackTrace();
+
             response.setFinished(false);
             response.setMessage(msg);
-            LOGGER.debug(msg);
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
         }
-
-        responseObserver.onNext(response.build());
-        responseObserver.onCompleted();
     }
 
+    // READ
     @Override
-    public void updateStatus(GameManagementStatusRequest request, StreamObserver<GameManagementResponse> responseObserver) {
-        GameManagementResponse.Builder response = GameManagementResponse.newBuilder();
+    public void getAll(GameManagementGetAllRequest request, StreamObserver<GameManagementGetAllResponse> responseObserver) {
+        // Response builder
+        GameManagementGetAllResponse.Builder response = GameManagementGetAllResponse.newBuilder();
+        // Query
+        Flux.from(gameColl.find(new Document()))
+                .publishOn(Schedulers.boundedElastic())
+                .collectList()
+                .subscribe(
+                        documents -> {
+                            // Every document holds the data of a game
+                            for (Document document : documents) {
+                                // Retrieve basic info of this game...
+                                String id = Objects.toString(document.get("_id"), "");
+                                String name = Objects.toString(document.get("name"), "");
+                                String type = Objects.toString(document.get("type"), "");
+                                Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
+                                String tutorial = Objects.toString(document.get("tutorial"), "");
+                                String status = Objects.toString(document.get("status"), "");
+                                long startTime = ((Date) document.get("startTime")).getTime();
+                                long endTime = ((Date) document.get("endTime")).getTime();
 
-        try {
-//            // Find the game by its id and update its info
-//            String sql = "UPDATE game SET status=? WHERE id=?";
-//            PreparedStatement updateStatement = conn.prepareStatement(sql);
-//            updateStatement.setInt(1, request.getStatus());
-//            updateStatement.setString(2, request.getId());
-//            updateStatement.executeUpdate();
-//            conn.commit();
-//
-//            // Response message
-//            String msg = "Game status update complete.";
-//            response.setFinished(true);
-//            response.setMessage(msg);
-//            LOGGER.debug(msg);
-        } catch (Exception e) {
-            // Error message
-            String msg = "Error while updating game status" + e.getMessage();
-            e.printStackTrace();
-            response.setFinished(false);
-            response.setMessage(msg);
-            LOGGER.debug(msg);
-        }
+                                Document config = document.get("config", new Document());
+                                Integer maxPlayers = config.getInteger("maxPlayers");
+                                Integer duration = config.getInteger("duration");
 
-        responseObserver.onNext(response.build());
-        responseObserver.onCompleted();
+                                //...and store it in the builder (single game)
+                                GameManagementGetResponse.Builder getResponseBuilder = GameManagementGetResponse.newBuilder()
+                                        .setId(id)
+                                        .setName(name)
+                                        .setType(type)
+                                        .setAllowedItemTrade(allowedItemTrade)
+                                        .setTutorial(tutorial)
+                                        .setStatus(status)
+                                        .setStartTime(startTime)
+                                        .setEndTime(endTime)
+                                        .setMaxPlayers(maxPlayers)
+                                        .setDuration(duration);
+
+                                // Get all data on questions of this game and store it in the single-game builder
+                                List<Document> questions = document.getList("questions", Document.class);
+                                for (Document question: questions) {
+                                    GameManagementQuestion.Builder questionBuilder = GameManagementQuestion.newBuilder();
+                                    questionBuilder.setText(question.getString("text"))
+                                            .setCorrectAnswer(question.getInteger("correctAnswer"))
+                                            .addAllOptions(question.getList("options", String.class))
+                                            .build();
+
+                                    getResponseBuilder.addQuestions(questionBuilder);
+                                }
+
+                                // Add the single-game builder to the main builder
+                                response.addGames(getResponseBuilder.build());
+                            }
+
+                            // Return response
+                            responseObserver.onNext(response.build());
+                            responseObserver.onCompleted();
+                        },
+                        throwable -> {
+                            System.out.println("Error: " + throwable);
+                            throwable.printStackTrace();
+
+                            // Return empty response if err
+                            responseObserver.onNext(response.build());
+                            responseObserver.onCompleted();
+                        }
+                );
     }
 
     // Debug
@@ -145,14 +243,48 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                 .collectList()
                 .subscribe(
                         documents -> {
-                            System.out.printf("| %-30s | %-10s | %-10s | %-50s | %-50s |\n", "id", "type", "status", "startTime", "endTime");
+                            System.out.printf("| %-30s | %-30s | %-10s | %-30s | %-30s | %-10s | %-50s | %-50s | %-15s | %-15s |\n", "id", "name", "type", "allowedItemTrade", "tutorial", "status", "startTime", "endTime", "maxPlayers", "duration");
                             for (Document document : documents) {
                                 String id = Objects.toString(document.get("_id"), "");
+                                String name = Objects.toString(document.get("name"), "");
                                 String type = Objects.toString(document.get("type"), "");
+                                String allowedItemTrade = Objects.toString(document.get("allowedItemTrade"), "");
+                                String tutorial = Objects.toString(document.get("tutorial"), "");
                                 String status = Objects.toString(document.get("status"), "");
                                 String startTime = Objects.toString(document.get("startTime"), "");
                                 String endTime = Objects.toString(document.get("endTime"), "");
-                                System.out.printf("| %-30s | %-10s | %-10s | %-50s | %-50s |\n", id, type, status, startTime, endTime);
+                                Document config = document.get("config", new Document());
+                                String maxPlayers = Objects.toString(config.get("maxPlayers"), "");
+                                String duration = Objects.toString(config.get("duration"), "");
+                                System.out.printf("| %-30s | %-30s | %-10s | %-30s | %-30s | %-10s | %-50s | %-50s | %-15s | %-15s |\n", id, name, type, allowedItemTrade, tutorial, status, startTime, endTime, maxPlayers, duration);
+                            }
+                        },
+                        throwable -> System.out.println("Error: " + throwable)
+                );
+    }
+    private void printOneDocument(String documentId) {
+        Flux.from(gameColl.find(new Document()))
+                .publishOn(Schedulers.boundedElastic())
+                .collectList()
+                .subscribe(
+                        documents -> {
+                            System.out.printf("| %-30s | %-30s | %-10s | %-30s | %-30s | %-10s | %-50s | %-50s | %-15s | %-15s |\n", "id", "name", "type", "allowedItemTrade", "tutorial", "status", "startTime", "endTime", "maxPlayers", "duration");
+                            for (Document document : documents) {
+                                if (Objects.equals(document.get("_id", ""), documentId)) {
+                                    String name = Objects.toString(document.get("name"), "");
+                                    String type = Objects.toString(document.get("type"), "");
+                                    String allowedItemTrade = Objects.toString(document.get("allowedItemTrade"), "");
+                                    String tutorial = Objects.toString(document.get("tutorial"), "");
+                                    String status = Objects.toString(document.get("status"), "");
+                                    String startTime = Objects.toString(document.get("startTime"), "");
+                                    String endTime = Objects.toString(document.get("endTime"), "");
+                                    Document config = document.get("config", new Document());
+                                    String maxPlayers = Objects.toString(config.get("maxPlayers"), "");
+                                    String duration = Objects.toString(config.get("duration"), "");
+                                    System.out.printf("| %-30s | %-30s | %-10s | %-30s | %-30s | %-10s | %-50s | %-50s | %-15s | %-15s |\n", documentId, name, type, allowedItemTrade, tutorial, status, startTime, endTime, maxPlayers, duration);
+
+                                    break;
+                                }
                             }
                         },
                         throwable -> System.out.println("Error: " + throwable)
