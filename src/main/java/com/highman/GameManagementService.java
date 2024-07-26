@@ -2,7 +2,6 @@ package com.highman;
 
 import com.google.gson.Gson;
 import com.highman.models.DBConnectionPool;
-import com.highman.prometheus.MetricsRegisters;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
@@ -45,7 +44,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
 //            printOneDocument("669a8089bf71b13349b55968");
             printAllDocuments();
-            MetricsRegisters.requests.inc();
         } catch (Exception e) {
             String error = "An error has occured while retrieving database connection: " + e.getMessage();
             e.printStackTrace();
