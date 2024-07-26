@@ -7,7 +7,7 @@ import grpc.GameManagementServiceGrpc;
 import grpc.GameManagementStatusRequest;
 
 public class UpdateStatusRequestHandler implements RequestHandlerBase{
-    private final String ERROR_MSG = "Response returns null or has invalid structure";
+    private final String ERROR_MSG = "Request has invalid structure";
 
     @Override
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {

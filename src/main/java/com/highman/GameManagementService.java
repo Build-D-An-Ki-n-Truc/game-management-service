@@ -2,6 +2,8 @@ package com.highman;
 
 import com.google.gson.Gson;
 import com.highman.models.DBConnectionPool;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
@@ -57,8 +59,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         GameManagementResponse.Builder response = GameManagementResponse.newBuilder();
 
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-
             // Find the game by its id and update its info
             Publisher<UpdateResult> publisher = gameColl.updateOne(
                     eq("_id", new ObjectId(request.getId())),
@@ -235,12 +235,95 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
     }
 
     // CREATE
-//    @Override
-//    public void add(GameManagementAddRequest request, StreamObserver<GameManagementResponse> responseObserver) {
-//
-//    }
+    @Override
+    public void add(GameManagementAddRequest request, StreamObserver<GameManagementResponse> responseObserver) {
+        GameManagementResponse.Builder response = GameManagementResponse.newBuilder();
+
+        try {
+            // Convert a list of gRPC objects to readable JSON array
+            ArrayList<Map<String, Object>> questionsList = new ArrayList<>();
+            for (GameManagementQuestion gameManagementQuestion: request.getQuestionsList()) {
+                Map<String, Object> questionMap = Map.of(
+                        "text", gameManagementQuestion.getText(),
+                        "options", Arrays.asList(gameManagementQuestion.getOptionsList().toArray()),
+                        "correctAnswer", gameManagementQuestion.getCorrectAnswer()
+                );
+
+                questionsList.add(questionMap);
+            }
+            // Insert new document
+            Publisher<InsertOneResult> publisher = gameColl.insertOne(new Document()
+                    .append("name", request.getName())
+                    .append("image", request.getImage())
+                    .append("type", request.getType())
+                    .append("allowedItemTrade", request.getAllowedItemTrade())
+                    .append("tutorial", request.getTutorial())
+                    .append("status", request.getStatus())
+                    .append("startTime", new Date(request.getStartTime()))
+                    .append("endTime", new Date(request.getEndTime()))
+                    .append("config", Map.of(
+                            "maxPlayers", request.getMaxPlayers(),
+                            "duration", request.getDuration()
+                    ))
+                    .append("questions", questionsList));
+
+            // Perform insertion
+            Mono.from(publisher)
+                    .publishOn(Schedulers.boundedElastic())
+                    .subscribe(
+                            insertOneResult -> {
+                                String msg = "Game info insert complete.";
+                                System.out.println(msg);
+
+                                response.setFinished(true);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                String msg = "Failed to insert document: " + throwable;
+                                System.err.println(msg);
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        } catch (Exception e) {
+            // Error message
+            String msg = "Error while updating game info" + e.getMessage();
+            System.err.println(msg);
+            e.printStackTrace();
+
+            response.setFinished(false);
+            response.setMessage(msg);
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
+    }
 
     // Debug
+    private void deleteOneDocument(String id) {
+        Publisher<DeleteResult> publisher = gameColl.deleteOne(
+                eq("_id", new ObjectId(id))
+        );
+
+        // Perform insertion
+        Mono.from(publisher)
+                .publishOn(Schedulers.boundedElastic())
+                .subscribe(
+                        deleteResult -> {
+                            String msg = "Game info delete complete.";
+                            System.out.println(msg);
+                        },
+                        throwable -> {
+                            String msg = "Failed to delete document: " + throwable;
+                            System.err.println(msg);
+                        }
+                );
+    }
     private void printAllDocuments() {
         Flux.from(gameColl.find(new Document()))
                 .publishOn(Schedulers.boundedElastic())

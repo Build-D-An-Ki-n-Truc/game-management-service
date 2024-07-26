@@ -8,7 +8,7 @@ import io.nats.client.Connection;
 import io.nats.client.Message;
 
 public class UpdateInfoRequestHandler implements RequestHandlerBase{
-    private final String ERROR_MSG = "Response returns null or request has invalid structure";
+    private final String ERROR_MSG = "Request has invalid structure";
 
     @Override
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
