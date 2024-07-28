@@ -36,7 +36,6 @@ import static com.mongodb.client.model.Updates.set;
 public class GameManagementService extends GameManagementServiceGrpc.GameManagementServiceImplBase {
     MongoClient mongoClient;
     MongoCollection<Document> gameColl;
-    private static final org.apache.logging.log4j.Logger LOGGER = LogManager.getLogger(GameManagementService.class);
 
     public GameManagementService() {
         try {
@@ -49,7 +48,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         } catch (Exception e) {
             String error = "An error has occured while retrieving database connection: " + e.getMessage();
             e.printStackTrace();
-            LOGGER.debug(error);
         }
     }
 
@@ -89,24 +87,20 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 responseObserver.onCompleted();
                             },
                             throwable -> {
-                                String msg = "Failed to update document: " + throwable;
-                                System.err.println(msg);
                                 throwable.printStackTrace();
 
                                 response.setFinished(false);
-                                response.setMessage(msg);
+                                response.setMessage("Failed to update document");
                                 responseObserver.onNext(response.build());
                                 responseObserver.onCompleted();
                             }
                     );
         } catch (Exception e) {
             // Error message
-            String msg = "Error while updating game info" + e.getMessage();
-            System.err.println(msg);
             e.printStackTrace();
 
             response.setFinished(false);
-            response.setMessage(msg);
+            response.setMessage("Error while updating game info");
             responseObserver.onNext(response.build());
             responseObserver.onCompleted();
         }
@@ -140,24 +134,20 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 responseObserver.onCompleted();
                             },
                             throwable -> {
-                                String msg = "Failed to update document: " + throwable;
-                                System.err.println(msg);
                                 throwable.printStackTrace();
 
                                 response.setFinished(false);
-                                response.setMessage(msg);
+                                response.setMessage("Failed to update game status");
                                 responseObserver.onNext(response.build());
                                 responseObserver.onCompleted();
                             }
                     );
         } catch (Exception e) {
             // Error message
-            String msg = "Error while updating game status" + e.getMessage();
-            System.err.println(msg);
             e.printStackTrace();
 
             response.setFinished(false);
-            response.setMessage(msg);
+            response.setMessage("Error while updating game status");
             responseObserver.onNext(response.build());
             responseObserver.onCompleted();
         }
@@ -183,8 +173,10 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
                                 String tutorial = Objects.toString(document.get("tutorial"), "");
                                 String status = Objects.toString(document.get("status"), "");
-                                long startTime = ((Date) document.get("startTime")).getTime();
-                                long endTime = ((Date) document.get("endTime")).getTime();
+                                long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
+                                long endTime = ((Date) document.getOrDefault("endTime", new Date(0))).getTime();
+
+                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) continue;
 
                                 Document config = document.get("config", new Document());
                                 Integer maxPlayers = config.getInteger("maxPlayers");
@@ -220,15 +212,18 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             }
 
                             // Return response
+                            response.setFinished(true);
+                            response.setMessage("Game info retrieved successfully");
                             responseObserver.onNext(response.build());
                             responseObserver.onCompleted();
                         },
                         throwable -> {
-                            System.out.println("Error: " + throwable);
                             throwable.printStackTrace();
 
                             // Return empty response if err
-                            responseObserver.onNext(response.build());
+                            response.setFinished(false);
+                            response.setMessage("Internal error");
+                            responseObserver.onNext(response.clearGames().build());
                             responseObserver.onCompleted();
                         }
                 );
@@ -281,24 +276,20 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 responseObserver.onCompleted();
                             },
                             throwable -> {
-                                String msg = "Failed to insert document: " + throwable;
-                                System.err.println(msg);
                                 throwable.printStackTrace();
 
                                 response.setFinished(false);
-                                response.setMessage(msg);
+                                response.setMessage("Failed to insert document");
                                 responseObserver.onNext(response.build());
                                 responseObserver.onCompleted();
                             }
                     );
         } catch (Exception e) {
             // Error message
-            String msg = "Error while updating game info" + e.getMessage();
-            System.err.println(msg);
             e.printStackTrace();
 
             response.setFinished(false);
-            response.setMessage(msg);
+            response.setMessage("Error while updating game info");
             responseObserver.onNext(response.build());
             responseObserver.onCompleted();
         }

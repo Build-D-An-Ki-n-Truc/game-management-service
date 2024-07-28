@@ -76,9 +76,13 @@ message GameManagementGetResponse {
   int32 maxPlayers = 10;
   int32 duration = 11;
   repeated GameManagementQuestion questions = 12;
+  bool finished = 13;
+  string message = 14;
 }
 message GameManagementGetAllResponse {
   repeated GameManagementGetResponse games = 1;
+  bool finished = 2;
+  string message = 3;
 }
 
 service GameManagementService {

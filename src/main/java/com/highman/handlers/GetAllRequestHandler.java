@@ -12,8 +12,12 @@ public class GetAllRequestHandler implements RequestHandlerBase{
         GameManagementGetAllRequest request = GameManagementGetAllRequest.newBuilder().build();
 
         GameManagementGetAllResponse response = grpcStub.getAll(request);
-        responsePayload.addProperty("finished", true);
-        responsePayload.addProperty("data", new Gson().toJson(response.getGamesList()));
+        responsePayload.addProperty("finished", response.getFinished());
+        responsePayload.addProperty("message", response.getMessage());
+        if (response.getGamesList().isEmpty())
+            responsePayload.addProperty("data", "{}");
+        else
+            responsePayload.addProperty("data", new Gson().toJson(response.getGamesList()));
 
         return responsePayload;
     }

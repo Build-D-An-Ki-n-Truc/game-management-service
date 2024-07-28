@@ -28,6 +28,7 @@ private static final long serialVersionUID = 0L;
   }
   private GameManagementGetAllResponse() {
     games_ = java.util.Collections.emptyList();
+    message_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -84,6 +85,56 @@ private static final long serialVersionUID = 0L;
     return games_.get(index);
   }
 
+  public static final int FINISHED_FIELD_NUMBER = 2;
+  private boolean finished_ = false;
+  /**
+   * <code>bool finished = 2;</code>
+   * @return The finished.
+   */
+  @java.lang.Override
+  public boolean getFinished() {
+    return finished_;
+  }
+
+  public static final int MESSAGE_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object message_ = "";
+  /**
+   * <code>string message = 3;</code>
+   * @return The message.
+   */
+  @java.lang.Override
+  public java.lang.String getMessage() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      message_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string message = 3;</code>
+   * @return The bytes for message.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getMessageBytes() {
+    java.lang.Object ref = message_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      message_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -101,6 +152,12 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < games_.size(); i++) {
       output.writeMessage(1, games_.get(i));
     }
+    if (finished_ != false) {
+      output.writeBool(2, finished_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, message_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -113,6 +170,13 @@ private static final long serialVersionUID = 0L;
     for (int i = 0; i < games_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
         .computeMessageSize(1, games_.get(i));
+    }
+    if (finished_ != false) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeBoolSize(2, finished_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, message_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -131,6 +195,10 @@ private static final long serialVersionUID = 0L;
 
     if (!getGamesList()
         .equals(other.getGamesList())) return false;
+    if (getFinished()
+        != other.getFinished()) return false;
+    if (!getMessage()
+        .equals(other.getMessage())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -146,6 +214,11 @@ private static final long serialVersionUID = 0L;
       hash = (37 * hash) + GAMES_FIELD_NUMBER;
       hash = (53 * hash) + getGamesList().hashCode();
     }
+    hash = (37 * hash) + FINISHED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+        getFinished());
+    hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getMessage().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -284,6 +357,8 @@ private static final long serialVersionUID = 0L;
         gamesBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
+      finished_ = false;
+      message_ = "";
       return this;
     }
 
@@ -330,6 +405,12 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartial0(grpc.GameManagementGetAllResponse result) {
       int from_bitField0_ = bitField0_;
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.finished_ = finished_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.message_ = message_;
+      }
     }
 
     @java.lang.Override
@@ -370,6 +451,14 @@ private static final long serialVersionUID = 0L;
           }
         }
       }
+      if (other.getFinished() != false) {
+        setFinished(other.getFinished());
+      }
+      if (!other.getMessage().isEmpty()) {
+        message_ = other.message_;
+        bitField0_ |= 0x00000004;
+        onChanged();
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -409,6 +498,16 @@ private static final long serialVersionUID = 0L;
               }
               break;
             } // case 10
+            case 16: {
+              finished_ = input.readBool();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 16
+            case 26: {
+              message_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -664,6 +763,110 @@ private static final long serialVersionUID = 0L;
         games_ = null;
       }
       return gamesBuilder_;
+    }
+
+    private boolean finished_ ;
+    /**
+     * <code>bool finished = 2;</code>
+     * @return The finished.
+     */
+    @java.lang.Override
+    public boolean getFinished() {
+      return finished_;
+    }
+    /**
+     * <code>bool finished = 2;</code>
+     * @param value The finished to set.
+     * @return This builder for chaining.
+     */
+    public Builder setFinished(boolean value) {
+
+      finished_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>bool finished = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearFinished() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      finished_ = false;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object message_ = "";
+    /**
+     * <code>string message = 3;</code>
+     * @return The message.
+     */
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string message = 3;</code>
+     * @return The bytes for message.
+     */
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string message = 3;</code>
+     * @param value The message to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMessage(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      message_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string message = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMessage() {
+      message_ = getDefaultInstance().getMessage();
+      bitField0_ = (bitField0_ & ~0x00000004);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string message = 3;</code>
+     * @param value The bytes for message to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMessageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      message_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
     }
 
     // @@protoc_insertion_point(builder_scope:grpc.GameManagementGetAllResponse)

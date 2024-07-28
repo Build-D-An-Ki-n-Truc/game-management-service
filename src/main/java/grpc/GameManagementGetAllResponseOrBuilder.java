@@ -32,4 +32,22 @@ public interface GameManagementGetAllResponseOrBuilder extends
    */
   grpc.GameManagementGetResponseOrBuilder getGamesOrBuilder(
       int index);
+
+  /**
+   * <code>bool finished = 2;</code>
+   * @return The finished.
+   */
+  boolean getFinished();
+
+  /**
+   * <code>string message = 3;</code>
+   * @return The message.
+   */
+  java.lang.String getMessage();
+  /**
+   * <code>string message = 3;</code>
+   * @return The bytes for message.
+   */
+  com.google.protobuf.ByteString
+      getMessageBytes();
 }
