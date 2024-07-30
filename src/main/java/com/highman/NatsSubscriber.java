@@ -46,6 +46,9 @@ public class NatsSubscriber {
 
         MessagePattern addMP = new MessagePattern("gameManage", "add", "POST");
         subscribe(addMP, grpcStub);
+
+        MessagePattern shakeMP = new MessagePattern("gameManage", "shake", "GET");
+        subscribe(shakeMP, grpcStub);
     }
 
     private static void subscribe(MessagePattern messagePattern, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {

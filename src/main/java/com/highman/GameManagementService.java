@@ -1,6 +1,7 @@
 package com.highman;
 
 import com.google.gson.Gson;
+import com.highman.cron.GameStatusUpdateScheduler;
 import com.highman.models.DBConnectionPool;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
@@ -14,6 +15,7 @@ import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import org.quartz.SchedulerException;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -45,6 +47,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
 //            printOneDocument("669a8089bf71b13349b55968");
             printAllDocuments();
+            setUpGameScheduler();
         } catch (Exception e) {
             String error = "An error has occured while retrieving database connection: " + e.getMessage();
             e.printStackTrace();
@@ -292,6 +295,75 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             response.setMessage("Error while updating game info");
             responseObserver.onNext(response.build());
             responseObserver.onCompleted();
+        }
+    }
+
+    // Shake + UPDATE
+    private int shakeRandom(int max) {
+        Random rand = new Random();
+        return rand.nextInt(max + 1);
+    }
+    private int shakeRandom(int min, int max) {
+        Random rand = new Random();
+        return rand.nextInt(min, max + 1);
+    }
+    public void shake(GameManagementShakeRequest request, StreamObserver<GameManagementShakeResponse> responseObserver) {
+        int shakeResult = shakeRandom(100);
+
+        GameManagementShakeResponse.Builder response = GameManagementShakeResponse.newBuilder();
+
+        try {
+            // Find the game by its id and update its shake result
+            // CHANGE LATER
+            Publisher<UpdateResult> publisher = gameColl.updateOne(
+                    eq("_id", new ObjectId(request.getId())),
+                    combine(
+                            set("shake", shakeResult)
+                    )
+            );;
+
+            // Perform update
+            Mono.from(publisher)
+                    .publishOn(Schedulers.boundedElastic())
+                    .subscribe(
+                            updateResult -> {
+                                String msg = "Shake result update complete.";
+                                System.out.println(msg);
+
+                                response.setFinished(true);
+                                response.setMessage(msg);
+                                response.setShakeResult(shakeResult);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage("Failed to update shake result");
+                                response.setShakeResult(-1);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        } catch (Exception e) {
+            // Error message
+            e.printStackTrace();
+
+            response.setFinished(false);
+            response.setMessage("Error while updating shake result");
+            response.setShakeResult(-1);
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
+    }
+
+    // CRON JOB: GAME STATUS UPDATE SCHEDULER
+    private void setUpGameScheduler() {
+        try {
+            GameStatusUpdateScheduler.setSchedule();
+        } catch (SchedulerException e) {
+            throw new RuntimeException(e);
         }
     }
 

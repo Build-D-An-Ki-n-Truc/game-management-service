@@ -85,9 +85,19 @@ message GameManagementGetAllResponse {
   string message = 3;
 }
 
+message GameManagementShakeRequest {
+  string id = 1;
+}
+message GameManagementShakeResponse {
+  bool finished = 1;
+  string message = 2;
+  int64 shakeResult = 3;
+}
+
 service GameManagementService {
   rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
   rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
   rpc getAll(GameManagementGetAllRequest) returns (GameManagementGetAllResponse);
   rpc add(GameManagementAddRequest) returns (GameManagementResponse);
+  rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
 }
