@@ -26,6 +26,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -45,9 +46,11 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             MongoDatabase mongoDatabase = mongoClient.getDatabase("game_service");
             gameColl = mongoDatabase.getCollection("games");
 
+            // Start cron job for updating game's status
+            setUpGameScheduler();
+
 //            printOneDocument("669a8089bf71b13349b55968");
             printAllDocuments();
-            setUpGameScheduler();
         } catch (Exception e) {
             String error = "An error has occured while retrieving database connection: " + e.getMessage();
             e.printStackTrace();
@@ -360,11 +363,34 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
     // CRON JOB: GAME STATUS UPDATE SCHEDULER
     private void setUpGameScheduler() {
-        try {
-            GameStatusUpdateScheduler.setSchedule();
-        } catch (SchedulerException e) {
-            throw new RuntimeException(e);
-        }
+        // Query
+        Flux.from(gameColl.find(new Document()))
+                .publishOn(Schedulers.boundedElastic())
+                .collectList()
+                .subscribe(
+                        documents -> {
+                            List<List<Object>> schedule = new ArrayList<>();
+                            // Every document holds the data of a game
+                            for (Document document : documents) {
+                                // Retrieve id and dates of this game...
+                                String id = Objects.toString(document.get("_id"), "");
+                                Date startDateTime = (Date) document.getOrDefault("startTime", new Date(0));
+                                Date endDateTime = (Date) document.getOrDefault("endTime", new Date(0));
+
+                                // ...then store id + startTime in a list that represents a Start job, and id + endTime in another list that represents an End job
+                                List<Object> startJobData = List.of(id, "start", startDateTime);
+                                List<Object> endJobData = List.of(id, "end", endDateTime);
+
+                                schedule.add(startJobData);
+                                schedule.add(endJobData);
+                            }
+
+                            GameStatusUpdateScheduler.setSchedule(schedule);
+                        },
+                        throwable -> {
+                            throwable.printStackTrace();
+                        }
+                );
     }
 
     // Debug
