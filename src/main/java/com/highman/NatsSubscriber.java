@@ -27,10 +27,12 @@ import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 public class NatsSubscriber {
-    final static String natsUrl = "nats://localhost:4222";
-    final static String grpcHost = "localhost";
+    final static String localhost = System.getenv("LOCALHOST");
+    final static String natsUrl = "nats://" + localhost + ":4222";
+    final static String grpcHost = localhost;
     final static int grpcPort = 4010;
-    public static void main(String[] args) {
+
+    public static void start() {
         // Create connection to gRPC server
         ManagedChannel channel = ManagedChannelBuilder.forAddress(grpcHost, grpcPort).usePlaintext().build();
         GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub = GameManagementServiceGrpc.newBlockingStub(channel);

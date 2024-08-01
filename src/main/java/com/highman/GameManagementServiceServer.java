@@ -21,6 +21,7 @@ public class GameManagementServiceServer {
 
         HTTPServer prometheusServer = new HTTPServer(4011);
 
+        NatsSubscriber.start();
         server.start();
         server.awaitTermination();
 
