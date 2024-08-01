@@ -22,8 +22,14 @@ public interface GameManagementStatusRequestOrBuilder extends
       getIdBytes();
 
   /**
-   * <code>int32 status = 2;</code>
+   * <code>string status = 2;</code>
    * @return The status.
    */
-  int getStatus();
+  java.lang.String getStatus();
+  /**
+   * <code>string status = 2;</code>
+   * @return The bytes for status.
+   */
+  com.google.protobuf.ByteString
+      getStatusBytes();
 }

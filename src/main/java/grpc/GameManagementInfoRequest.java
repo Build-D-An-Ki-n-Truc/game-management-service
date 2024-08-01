@@ -253,6 +253,50 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int STARTTIME_FIELD_NUMBER = 7;
+  private long startTime_ = 0L;
+  /**
+   * <code>int64 startTime = 7;</code>
+   * @return The startTime.
+   */
+  @java.lang.Override
+  public long getStartTime() {
+    return startTime_;
+  }
+
+  public static final int ENDTIME_FIELD_NUMBER = 8;
+  private long endTime_ = 0L;
+  /**
+   * <code>int64 endTime = 8;</code>
+   * @return The endTime.
+   */
+  @java.lang.Override
+  public long getEndTime() {
+    return endTime_;
+  }
+
+  public static final int MAXPLAYERS_FIELD_NUMBER = 9;
+  private int maxPlayers_ = 0;
+  /**
+   * <code>int32 maxPlayers = 9;</code>
+   * @return The maxPlayers.
+   */
+  @java.lang.Override
+  public int getMaxPlayers() {
+    return maxPlayers_;
+  }
+
+  public static final int DURATION_FIELD_NUMBER = 10;
+  private int duration_ = 0;
+  /**
+   * <code>int32 duration = 10;</code>
+   * @return The duration.
+   */
+  @java.lang.Override
+  public int getDuration() {
+    return duration_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -285,6 +329,18 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(tutorial_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 6, tutorial_);
     }
+    if (startTime_ != 0L) {
+      output.writeInt64(7, startTime_);
+    }
+    if (endTime_ != 0L) {
+      output.writeInt64(8, endTime_);
+    }
+    if (maxPlayers_ != 0) {
+      output.writeInt32(9, maxPlayers_);
+    }
+    if (duration_ != 0) {
+      output.writeInt32(10, duration_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -313,6 +369,22 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(tutorial_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(6, tutorial_);
     }
+    if (startTime_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(7, startTime_);
+    }
+    if (endTime_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(8, endTime_);
+    }
+    if (maxPlayers_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(9, maxPlayers_);
+    }
+    if (duration_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(10, duration_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -340,6 +412,14 @@ private static final long serialVersionUID = 0L;
         != other.getAllowedItemTrade()) return false;
     if (!getTutorial()
         .equals(other.getTutorial())) return false;
+    if (getStartTime()
+        != other.getStartTime()) return false;
+    if (getEndTime()
+        != other.getEndTime()) return false;
+    if (getMaxPlayers()
+        != other.getMaxPlayers()) return false;
+    if (getDuration()
+        != other.getDuration()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -364,6 +444,16 @@ private static final long serialVersionUID = 0L;
         getAllowedItemTrade());
     hash = (37 * hash) + TUTORIAL_FIELD_NUMBER;
     hash = (53 * hash) + getTutorial().hashCode();
+    hash = (37 * hash) + STARTTIME_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getStartTime());
+    hash = (37 * hash) + ENDTIME_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getEndTime());
+    hash = (37 * hash) + MAXPLAYERS_FIELD_NUMBER;
+    hash = (53 * hash) + getMaxPlayers();
+    hash = (37 * hash) + DURATION_FIELD_NUMBER;
+    hash = (53 * hash) + getDuration();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -501,6 +591,10 @@ private static final long serialVersionUID = 0L;
       type_ = "";
       allowedItemTrade_ = false;
       tutorial_ = "";
+      startTime_ = 0L;
+      endTime_ = 0L;
+      maxPlayers_ = 0;
+      duration_ = 0;
       return this;
     }
 
@@ -552,6 +646,18 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000020) != 0)) {
         result.tutorial_ = tutorial_;
       }
+      if (((from_bitField0_ & 0x00000040) != 0)) {
+        result.startTime_ = startTime_;
+      }
+      if (((from_bitField0_ & 0x00000080) != 0)) {
+        result.endTime_ = endTime_;
+      }
+      if (((from_bitField0_ & 0x00000100) != 0)) {
+        result.maxPlayers_ = maxPlayers_;
+      }
+      if (((from_bitField0_ & 0x00000200) != 0)) {
+        result.duration_ = duration_;
+      }
     }
 
     @java.lang.Override
@@ -593,6 +699,18 @@ private static final long serialVersionUID = 0L;
         tutorial_ = other.tutorial_;
         bitField0_ |= 0x00000020;
         onChanged();
+      }
+      if (other.getStartTime() != 0L) {
+        setStartTime(other.getStartTime());
+      }
+      if (other.getEndTime() != 0L) {
+        setEndTime(other.getEndTime());
+      }
+      if (other.getMaxPlayers() != 0) {
+        setMaxPlayers(other.getMaxPlayers());
+      }
+      if (other.getDuration() != 0) {
+        setDuration(other.getDuration());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -650,6 +768,26 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000020;
               break;
             } // case 50
+            case 56: {
+              startTime_ = input.readInt64();
+              bitField0_ |= 0x00000040;
+              break;
+            } // case 56
+            case 64: {
+              endTime_ = input.readInt64();
+              bitField0_ |= 0x00000080;
+              break;
+            } // case 64
+            case 72: {
+              maxPlayers_ = input.readInt32();
+              bitField0_ |= 0x00000100;
+              break;
+            } // case 72
+            case 80: {
+              duration_ = input.readInt32();
+              bitField0_ |= 0x00000200;
+              break;
+            } // case 80
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1055,6 +1193,134 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       tutorial_ = value;
       bitField0_ |= 0x00000020;
+      onChanged();
+      return this;
+    }
+
+    private long startTime_ ;
+    /**
+     * <code>int64 startTime = 7;</code>
+     * @return The startTime.
+     */
+    @java.lang.Override
+    public long getStartTime() {
+      return startTime_;
+    }
+    /**
+     * <code>int64 startTime = 7;</code>
+     * @param value The startTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStartTime(long value) {
+
+      startTime_ = value;
+      bitField0_ |= 0x00000040;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 startTime = 7;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStartTime() {
+      bitField0_ = (bitField0_ & ~0x00000040);
+      startTime_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long endTime_ ;
+    /**
+     * <code>int64 endTime = 8;</code>
+     * @return The endTime.
+     */
+    @java.lang.Override
+    public long getEndTime() {
+      return endTime_;
+    }
+    /**
+     * <code>int64 endTime = 8;</code>
+     * @param value The endTime to set.
+     * @return This builder for chaining.
+     */
+    public Builder setEndTime(long value) {
+
+      endTime_ = value;
+      bitField0_ |= 0x00000080;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 endTime = 8;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearEndTime() {
+      bitField0_ = (bitField0_ & ~0x00000080);
+      endTime_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private int maxPlayers_ ;
+    /**
+     * <code>int32 maxPlayers = 9;</code>
+     * @return The maxPlayers.
+     */
+    @java.lang.Override
+    public int getMaxPlayers() {
+      return maxPlayers_;
+    }
+    /**
+     * <code>int32 maxPlayers = 9;</code>
+     * @param value The maxPlayers to set.
+     * @return This builder for chaining.
+     */
+    public Builder setMaxPlayers(int value) {
+
+      maxPlayers_ = value;
+      bitField0_ |= 0x00000100;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 maxPlayers = 9;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearMaxPlayers() {
+      bitField0_ = (bitField0_ & ~0x00000100);
+      maxPlayers_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int duration_ ;
+    /**
+     * <code>int32 duration = 10;</code>
+     * @return The duration.
+     */
+    @java.lang.Override
+    public int getDuration() {
+      return duration_;
+    }
+    /**
+     * <code>int32 duration = 10;</code>
+     * @param value The duration to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDuration(int value) {
+
+      duration_ = value;
+      bitField0_ |= 0x00000200;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 duration = 10;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDuration() {
+      bitField0_ = (bitField0_ & ~0x00000200);
+      duration_ = 0;
       onChanged();
       return this;
     }

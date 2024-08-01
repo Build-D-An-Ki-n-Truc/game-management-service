@@ -77,6 +77,99 @@ public final class GameManagementServiceGrpc {
     return getUpdateStatusMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementGetAllRequest,
+      grpc.GameManagementGetAllResponse> getGetAllMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getAll",
+      requestType = grpc.GameManagementGetAllRequest.class,
+      responseType = grpc.GameManagementGetAllResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementGetAllRequest,
+      grpc.GameManagementGetAllResponse> getGetAllMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementGetAllRequest, grpc.GameManagementGetAllResponse> getGetAllMethod;
+    if ((getGetAllMethod = GameManagementServiceGrpc.getGetAllMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getGetAllMethod = GameManagementServiceGrpc.getGetAllMethod) == null) {
+          GameManagementServiceGrpc.getGetAllMethod = getGetAllMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementGetAllRequest, grpc.GameManagementGetAllResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getAll"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetAllRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetAllResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("getAll"))
+              .build();
+        }
+      }
+    }
+    return getGetAllMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementAddRequest,
+      grpc.GameManagementResponse> getAddMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "add",
+      requestType = grpc.GameManagementAddRequest.class,
+      responseType = grpc.GameManagementResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementAddRequest,
+      grpc.GameManagementResponse> getAddMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementAddRequest, grpc.GameManagementResponse> getAddMethod;
+    if ((getAddMethod = GameManagementServiceGrpc.getAddMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getAddMethod = GameManagementServiceGrpc.getAddMethod) == null) {
+          GameManagementServiceGrpc.getAddMethod = getAddMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementAddRequest, grpc.GameManagementResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "add"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementAddRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("add"))
+              .build();
+        }
+      }
+    }
+    return getAddMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementShakeRequest,
+      grpc.GameManagementShakeResponse> getShakeMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "shake",
+      requestType = grpc.GameManagementShakeRequest.class,
+      responseType = grpc.GameManagementShakeResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementShakeRequest,
+      grpc.GameManagementShakeResponse> getShakeMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementShakeRequest, grpc.GameManagementShakeResponse> getShakeMethod;
+    if ((getShakeMethod = GameManagementServiceGrpc.getShakeMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getShakeMethod = GameManagementServiceGrpc.getShakeMethod) == null) {
+          GameManagementServiceGrpc.getShakeMethod = getShakeMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementShakeRequest, grpc.GameManagementShakeResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "shake"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementShakeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementShakeResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("shake"))
+              .build();
+        }
+      }
+    }
+    return getShakeMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -138,6 +231,27 @@ public final class GameManagementServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateStatusMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void getAll(grpc.GameManagementGetAllRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void add(grpc.GameManagementAddRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void shake(grpc.GameManagementShakeRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementShakeResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getShakeMethod(), responseObserver);
+    }
   }
 
   /**
@@ -182,6 +296,30 @@ public final class GameManagementServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getUpdateStatusMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void getAll(grpc.GameManagementGetAllRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetAllMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void add(grpc.GameManagementAddRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void shake(grpc.GameManagementShakeRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementShakeResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getShakeMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -212,6 +350,27 @@ public final class GameManagementServiceGrpc {
     public grpc.GameManagementResponse updateStatus(grpc.GameManagementStatusRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getUpdateStatusMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementGetAllResponse getAll(grpc.GameManagementGetAllRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementResponse add(grpc.GameManagementAddRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementShakeResponse shake(grpc.GameManagementShakeRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getShakeMethod(), getCallOptions(), request);
     }
   }
 
@@ -246,10 +405,37 @@ public final class GameManagementServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getUpdateStatusMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementGetAllResponse> getAll(
+        grpc.GameManagementGetAllRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetAllMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementResponse> add(
+        grpc.GameManagementAddRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementShakeResponse> shake(
+        grpc.GameManagementShakeRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getShakeMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_UPDATE_INFO = 0;
   private static final int METHODID_UPDATE_STATUS = 1;
+  private static final int METHODID_GET_ALL = 2;
+  private static final int METHODID_ADD = 3;
+  private static final int METHODID_SHAKE = 4;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -275,6 +461,18 @@ public final class GameManagementServiceGrpc {
         case METHODID_UPDATE_STATUS:
           serviceImpl.updateStatus((grpc.GameManagementStatusRequest) request,
               (io.grpc.stub.StreamObserver<grpc.GameManagementResponse>) responseObserver);
+          break;
+        case METHODID_GET_ALL:
+          serviceImpl.getAll((grpc.GameManagementGetAllRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse>) responseObserver);
+          break;
+        case METHODID_ADD:
+          serviceImpl.add((grpc.GameManagementAddRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementResponse>) responseObserver);
+          break;
+        case METHODID_SHAKE:
+          serviceImpl.shake((grpc.GameManagementShakeRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementShakeResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -308,6 +506,27 @@ public final class GameManagementServiceGrpc {
               grpc.GameManagementStatusRequest,
               grpc.GameManagementResponse>(
                 service, METHODID_UPDATE_STATUS)))
+        .addMethod(
+          getGetAllMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementGetAllRequest,
+              grpc.GameManagementGetAllResponse>(
+                service, METHODID_GET_ALL)))
+        .addMethod(
+          getAddMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementAddRequest,
+              grpc.GameManagementResponse>(
+                service, METHODID_ADD)))
+        .addMethod(
+          getShakeMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementShakeRequest,
+              grpc.GameManagementShakeResponse>(
+                service, METHODID_SHAKE)))
         .build();
   }
 
@@ -358,6 +577,9 @@ public final class GameManagementServiceGrpc {
               .setSchemaDescriptor(new GameManagementServiceFileDescriptorSupplier())
               .addMethod(getUpdateInfoMethod())
               .addMethod(getUpdateStatusMethod())
+              .addMethod(getGetAllMethod())
+              .addMethod(getAddMethod())
+              .addMethod(getShakeMethod())
               .build();
         }
       }

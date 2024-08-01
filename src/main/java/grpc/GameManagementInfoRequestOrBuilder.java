@@ -74,4 +74,28 @@ public interface GameManagementInfoRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTutorialBytes();
+
+  /**
+   * <code>int64 startTime = 7;</code>
+   * @return The startTime.
+   */
+  long getStartTime();
+
+  /**
+   * <code>int64 endTime = 8;</code>
+   * @return The endTime.
+   */
+  long getEndTime();
+
+  /**
+   * <code>int32 maxPlayers = 9;</code>
+   * @return The maxPlayers.
+   */
+  int getMaxPlayers();
+
+  /**
+   * <code>int32 duration = 10;</code>
+   * @return The duration.
+   */
+  int getDuration();
 }

@@ -4,12 +4,17 @@ package grpc;
 
 message GameManagement {
   string id = 1;
-  string name = 2;
-  string image = 3;
-  string type = 4;
-  bool allowedItemTrade = 5;
-  string tutorial = 6;
-  int32 status = 7;
+  string eventId = 2;
+  string name = 3;
+  string image = 4;
+  string type = 5;
+  bool allowedItemTrade = 6;
+  string tutorial = 7;
+  string status = 8;
+  int64 startTime = 9;
+  int64 endTime = 10;
+  int32 maxPlayers = 11;
+  int32 duration = 12;
 }
 
 message GameManagementInfoRequest {
@@ -19,11 +24,38 @@ message GameManagementInfoRequest {
   string type = 4;
   bool allowedItemTrade = 5;
   string tutorial = 6;
+  int64 startTime = 7;
+  int64 endTime = 8;
+  int32 maxPlayers = 9;
+  int32 duration = 10;
 }
 
 message GameManagementStatusRequest {
   string id = 1;
-  int32 status = 2;
+  string status = 2;
+}
+
+message GameManagementGetRequest {}
+message GameManagementGetAllRequest {}
+message GameManagementQuestion {
+  string text = 1;
+  repeated string options = 2;
+  int32 correctAnswer = 3;
+}
+
+message GameManagementAddRequest {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string type = 4;
+  bool allowedItemTrade = 5;
+  string tutorial = 6;
+  string status = 7;
+  int64 startTime = 8;
+  int64 endTime = 9;
+  int32 maxPlayers = 10;
+  int32 duration = 11;
+  repeated GameManagementQuestion questions = 12;
 }
 
 message GameManagementResponse {
@@ -31,7 +63,41 @@ message GameManagementResponse {
   string message = 2;
 }
 
+message GameManagementGetResponse {
+  string id = 1;
+  string name = 2;
+  string image = 3;
+  string type = 4;
+  bool allowedItemTrade = 5;
+  string tutorial = 6;
+  string status = 7;
+  int64 startTime = 8;
+  int64 endTime = 9;
+  int32 maxPlayers = 10;
+  int32 duration = 11;
+  repeated GameManagementQuestion questions = 12;
+  bool finished = 13;
+  string message = 14;
+}
+message GameManagementGetAllResponse {
+  repeated GameManagementGetResponse games = 1;
+  bool finished = 2;
+  string message = 3;
+}
+
+message GameManagementShakeRequest {
+  string id = 1;
+}
+message GameManagementShakeResponse {
+  bool finished = 1;
+  string message = 2;
+  int64 shakeResult = 3;
+}
+
 service GameManagementService {
   rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
   rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
+  rpc getAll(GameManagementGetAllRequest) returns (GameManagementGetAllResponse);
+  rpc add(GameManagementAddRequest) returns (GameManagementResponse);
+  rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
 }
