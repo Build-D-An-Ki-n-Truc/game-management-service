@@ -1,10 +1,8 @@
-FROM maven
+FROM maven as build
 COPY pom.xml .
-RUN mvn dependency:go-offline
-
 COPY src ./src
-RUN mvn package
+RUN mvn -f pom.xml clean package
 
 FROM eclipse-temurin
-COPY target/game-management-service-1.0-SNAPSHOT.jar /game-management-server.jar
-ENTRYPOINT ["java","-jar","game-management-server.jar"]
+COPY --from=build target/service.jar /game-management-service.jar
+ENTRYPOINT ["java","-jar","game-management-service.jar"]

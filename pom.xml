@@ -126,12 +126,12 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <finalName>service</finalName>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>my.Application</mainClass>
+                                    <mainClass>com.highman.GameManagementServiceServer</mainClass>
                                     <manifestEntries>
-                                        <Implementation-Version>${version}</Implementation-Version>
                                         <Main-Class>com.highman.GameManagementServiceServer</Main-Class>
                                     </manifestEntries>
                                 </transformer>
