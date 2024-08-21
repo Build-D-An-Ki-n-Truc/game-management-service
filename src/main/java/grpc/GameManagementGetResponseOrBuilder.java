@@ -112,42 +112,18 @@ public interface GameManagementGetResponseOrBuilder extends
   int getDuration();
 
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
-   */
-  java.util.List<grpc.GameManagementQuestion> 
-      getQuestionsList();
-  /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
-   */
-  grpc.GameManagementQuestion getQuestions(int index);
-  /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
-   */
-  int getQuestionsCount();
-  /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
-   */
-  java.util.List<? extends grpc.GameManagementQuestionOrBuilder> 
-      getQuestionsOrBuilderList();
-  /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
-   */
-  grpc.GameManagementQuestionOrBuilder getQuestionsOrBuilder(
-      int index);
-
-  /**
-   * <code>bool finished = 13;</code>
+   * <code>bool finished = 12;</code>
    * @return The finished.
    */
   boolean getFinished();
 
   /**
-   * <code>string message = 14;</code>
+   * <code>string message = 13;</code>
    * @return The message.
    */
   java.lang.String getMessage();
   /**
-   * <code>string message = 14;</code>
+   * <code>string message = 13;</code>
    * @return The bytes for message.
    */
   com.google.protobuf.ByteString

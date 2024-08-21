@@ -118,31 +118,30 @@ public final class Service {
       "s\030\n \001(\005\022\020\n\010duration\030\013 \001(\005\022/\n\tquestions\030\014" +
       " \003(\0132\034.grpc.GameManagementQuestion\";\n\026Ga" +
       "meManagementResponse\022\020\n\010finished\030\001 \001(\010\022\017" +
-      "\n\007message\030\002 \001(\t\"\254\002\n\031GameManagementGetRes" +
+      "\n\007message\030\002 \001(\t\"\373\001\n\031GameManagementGetRes" +
       "ponse\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\r\n\005image" +
       "\030\003 \001(\t\022\014\n\004type\030\004 \001(\t\022\030\n\020allowedItemTrade" +
       "\030\005 \001(\010\022\020\n\010tutorial\030\006 \001(\t\022\016\n\006status\030\007 \001(\t" +
       "\022\021\n\tstartTime\030\010 \001(\003\022\017\n\007endTime\030\t \001(\003\022\022\n\n" +
-      "maxPlayers\030\n \001(\005\022\020\n\010duration\030\013 \001(\005\022/\n\tqu" +
-      "estions\030\014 \003(\0132\034.grpc.GameManagementQuest" +
-      "ion\022\020\n\010finished\030\r \001(\010\022\017\n\007message\030\016 \001(\t\"q" +
-      "\n\034GameManagementGetAllResponse\022.\n\005games\030" +
-      "\001 \003(\0132\037.grpc.GameManagementGetResponse\022\020" +
-      "\n\010finished\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\"(\n\032Gam" +
-      "eManagementShakeRequest\022\n\n\002id\030\001 \001(\t\"U\n\033G" +
-      "ameManagementShakeResponse\022\020\n\010finished\030\001" +
-      " \001(\010\022\017\n\007message\030\002 \001(\t\022\023\n\013shakeResult\030\003 \001" +
-      "(\0032\231\003\n\025GameManagementService\022K\n\nupdateIn" +
-      "fo\022\037.grpc.GameManagementInfoRequest\032\034.gr" +
-      "pc.GameManagementResponse\022O\n\014updateStatu" +
-      "s\022!.grpc.GameManagementStatusRequest\032\034.g" +
-      "rpc.GameManagementResponse\022O\n\006getAll\022!.g" +
-      "rpc.GameManagementGetAllRequest\032\".grpc.G" +
-      "ameManagementGetAllResponse\022C\n\003add\022\036.grp" +
-      "c.GameManagementAddRequest\032\034.grpc.GameMa" +
-      "nagementResponse\022L\n\005shake\022 .grpc.GameMan" +
-      "agementShakeRequest\032!.grpc.GameManagemen" +
-      "tShakeResponseB\002P\001b\006proto3"
+      "maxPlayers\030\n \001(\005\022\020\n\010duration\030\013 \001(\005\022\020\n\010fi" +
+      "nished\030\014 \001(\010\022\017\n\007message\030\r \001(\t\"q\n\034GameMan" +
+      "agementGetAllResponse\022.\n\005games\030\001 \003(\0132\037.g" +
+      "rpc.GameManagementGetResponse\022\020\n\010finishe" +
+      "d\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\"(\n\032GameManageme" +
+      "ntShakeRequest\022\n\n\002id\030\001 \001(\t\"U\n\033GameManage" +
+      "mentShakeResponse\022\020\n\010finished\030\001 \001(\010\022\017\n\007m" +
+      "essage\030\002 \001(\t\022\023\n\013shakeResult\030\003 \001(\0032\231\003\n\025Ga" +
+      "meManagementService\022K\n\nupdateInfo\022\037.grpc" +
+      ".GameManagementInfoRequest\032\034.grpc.GameMa" +
+      "nagementResponse\022O\n\014updateStatus\022!.grpc." +
+      "GameManagementStatusRequest\032\034.grpc.GameM" +
+      "anagementResponse\022O\n\006getAll\022!.grpc.GameM" +
+      "anagementGetAllRequest\032\".grpc.GameManage" +
+      "mentGetAllResponse\022C\n\003add\022\036.grpc.GameMan" +
+      "agementAddRequest\032\034.grpc.GameManagementR" +
+      "esponse\022L\n\005shake\022 .grpc.GameManagementSh" +
+      "akeRequest\032!.grpc.GameManagementShakeRes" +
+      "ponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -201,7 +200,7 @@ public final class Service {
     internal_static_grpc_GameManagementGetResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementGetResponse_descriptor,
-        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", "StartTime", "EndTime", "MaxPlayers", "Duration", "Questions", "Finished", "Message", });
+        new java.lang.String[] { "Id", "Name", "Image", "Type", "AllowedItemTrade", "Tutorial", "Status", "StartTime", "EndTime", "MaxPlayers", "Duration", "Finished", "Message", });
     internal_static_grpc_GameManagementGetAllResponse_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_grpc_GameManagementGetAllResponse_fieldAccessorTable = new

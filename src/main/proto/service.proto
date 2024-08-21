@@ -75,9 +75,8 @@ message GameManagementGetResponse {
   int64 endTime = 9;
   int32 maxPlayers = 10;
   int32 duration = 11;
-  repeated GameManagementQuestion questions = 12;
-  bool finished = 13;
-  string message = 14;
+  bool finished = 12;
+  string message = 13;
 }
 message GameManagementGetAllResponse {
   repeated GameManagementGetResponse games = 1;

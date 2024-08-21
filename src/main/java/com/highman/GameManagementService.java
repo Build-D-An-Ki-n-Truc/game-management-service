@@ -180,7 +180,8 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 String tutorial = Objects.toString(document.get("tutorial"), "");
                                 String status = Objects.toString(document.get("status"), "");
                                 long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
-                                long endTime = ((Date) document.getOrDefault("endTime", new Date(0))).getTime();
+                                Date endTimeDate = (Date) document.getOrDefault("endTime", new Date(0));
+                                long endTime = endTimeDate != null ? endTimeDate.getTime() : new Date(0).getTime();
 
                                 if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) continue;
 
@@ -200,18 +201,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                         .setEndTime(endTime)
                                         .setMaxPlayers(maxPlayers)
                                         .setDuration(duration);
-
-                                // Get all data on questions of this game and store it in the single-game builder
-                                List<Document> questions = document.getList("questions", Document.class);
-                                for (Document question: questions) {
-                                    GameManagementQuestion.Builder questionBuilder = GameManagementQuestion.newBuilder();
-                                    questionBuilder.setText(question.getString("text"))
-                                            .setCorrectAnswer(question.getInteger("correctAnswer"))
-                                            .addAllOptions(question.getList("options", String.class))
-                                            .build();
-
-                                    getResponseBuilder.addQuestions(questionBuilder);
-                                }
 
                                 // Add the single-game builder to the main builder
                                 response.addGames(getResponseBuilder.build());
@@ -379,10 +368,11 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
                                 // ...then store id + startTime in a list that represents a Start job, and id + endTime in another list that represents an End job
                                 List<Object> startJobData = List.of(id, "start", startDateTime);
-                                List<Object> endJobData = List.of(id, "end", endDateTime);
-
                                 schedule.add(startJobData);
-                                schedule.add(endJobData);
+                                if (endDateTime != null) {
+                                    List<Object> endJobData = List.of(id, "end", endDateTime);
+                                    schedule.add(endJobData);
+                                }
                             }
 
                             GameStatusUpdateScheduler.setSchedule(schedule);
