@@ -34,6 +34,7 @@ private static final long serialVersionUID = 0L;
     tutorial_ = "";
     status_ = "";
     message_ = "";
+    eventId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
@@ -388,6 +389,45 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int EVENTID_FIELD_NUMBER = 14;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object eventId_ = "";
+  /**
+   * <code>string eventId = 14;</code>
+   * @return The eventId.
+   */
+  @java.lang.Override
+  public java.lang.String getEventId() {
+    java.lang.Object ref = eventId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      eventId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string eventId = 14;</code>
+   * @return The bytes for eventId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getEventIdBytes() {
+    java.lang.Object ref = eventId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      eventId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -440,6 +480,9 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 13, message_);
+    }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 14, eventId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -495,6 +538,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(message_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(13, message_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(14, eventId_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -536,6 +582,8 @@ private static final long serialVersionUID = 0L;
         != other.getFinished()) return false;
     if (!getMessage()
         .equals(other.getMessage())) return false;
+    if (!getEventId()
+        .equals(other.getEventId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -577,6 +625,8 @@ private static final long serialVersionUID = 0L;
         getFinished());
     hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
     hash = (53 * hash) + getMessage().hashCode();
+    hash = (37 * hash) + EVENTID_FIELD_NUMBER;
+    hash = (53 * hash) + getEventId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -721,6 +771,7 @@ private static final long serialVersionUID = 0L;
       duration_ = 0;
       finished_ = false;
       message_ = "";
+      eventId_ = "";
       return this;
     }
 
@@ -793,6 +844,9 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00001000) != 0)) {
         result.message_ = message_;
       }
+      if (((from_bitField0_ & 0x00002000) != 0)) {
+        result.eventId_ = eventId_;
+      }
     }
 
     @java.lang.Override
@@ -858,6 +912,11 @@ private static final long serialVersionUID = 0L;
       if (!other.getMessage().isEmpty()) {
         message_ = other.message_;
         bitField0_ |= 0x00001000;
+        onChanged();
+      }
+      if (!other.getEventId().isEmpty()) {
+        eventId_ = other.eventId_;
+        bitField0_ |= 0x00002000;
         onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
@@ -951,6 +1010,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00001000;
               break;
             } // case 106
+            case 114: {
+              eventId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00002000;
+              break;
+            } // case 114
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1660,6 +1724,78 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       message_ = value;
       bitField0_ |= 0x00001000;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object eventId_ = "";
+    /**
+     * <code>string eventId = 14;</code>
+     * @return The eventId.
+     */
+    public java.lang.String getEventId() {
+      java.lang.Object ref = eventId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        eventId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string eventId = 14;</code>
+     * @return The bytes for eventId.
+     */
+    public com.google.protobuf.ByteString
+        getEventIdBytes() {
+      java.lang.Object ref = eventId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        eventId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string eventId = 14;</code>
+     * @param value The eventId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setEventId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      eventId_ = value;
+      bitField0_ |= 0x00002000;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string eventId = 14;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearEventId() {
+      eventId_ = getDefaultInstance().getEventId();
+      bitField0_ = (bitField0_ & ~0x00002000);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string eventId = 14;</code>
+     * @param value The bytes for eventId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setEventIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      eventId_ = value;
+      bitField0_ |= 0x00002000;
       onChanged();
       return this;
     }

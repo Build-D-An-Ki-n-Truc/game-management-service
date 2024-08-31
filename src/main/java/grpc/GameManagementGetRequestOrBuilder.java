@@ -8,4 +8,16 @@ package grpc;
 public interface GameManagementGetRequestOrBuilder extends
     // @@protoc_insertion_point(interface_extends:grpc.GameManagementGetRequest)
     com.google.protobuf.MessageOrBuilder {
+
+  /**
+   * <code>string gameId = 1;</code>
+   * @return The gameId.
+   */
+  java.lang.String getGameId();
+  /**
+   * <code>string gameId = 1;</code>
+   * @return The bytes for gameId.
+   */
+  com.google.protobuf.ByteString
+      getGameIdBytes();
 }

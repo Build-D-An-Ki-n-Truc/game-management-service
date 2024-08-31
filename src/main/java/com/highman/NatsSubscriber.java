@@ -22,6 +22,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
@@ -46,6 +47,12 @@ public class NatsSubscriber {
         MessagePattern getAllMP = new MessagePattern("gameManage", "getAll", "GET");
         subscribe(getAllMP, grpcStub);
 
+        MessagePattern getListByEventMP = new MessagePattern("gameManage", "getListByEvent", "GET");
+        subscribe(getListByEventMP, grpcStub);
+
+        MessagePattern getOneMP = new MessagePattern("gameManage", "getOne", "GET");
+        subscribe(getOneMP, grpcStub);
+
         MessagePattern addMP = new MessagePattern("gameManage", "add", "POST");
         subscribe(addMP, grpcStub);
 
@@ -68,7 +75,12 @@ public class NatsSubscriber {
                         JsonObject jsonObject = JsonParser.parseString(resp).getAsJsonObject();
                         JsonObject pattern = jsonObject.getAsJsonObject("pattern");
                         String endpoint = pattern.get("endpoint").getAsString();
-                        JsonObject payload = jsonObject.getAsJsonObject("data").getAsJsonObject("payload");
+
+                        JsonObject payload;
+                        if (Objects.equals(pattern.get("method").getAsString(), "POST"))
+                            payload = jsonObject.getAsJsonObject("data").getAsJsonObject("payload");
+                        else
+                            payload = jsonObject.getAsJsonObject("data").getAsJsonObject("params");
 
                         RequestHandlerBase requestHandlerBase = RequestHandlerFactory.getHandler(endpoint);
                         JsonObject responsePayload = requestHandlerBase.handle(payload, grpcStub);

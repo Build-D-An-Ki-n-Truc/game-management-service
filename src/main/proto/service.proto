@@ -35,8 +35,13 @@ message GameManagementStatusRequest {
   string status = 2;
 }
 
-message GameManagementGetRequest {}
+message GameManagementGetRequest {
+  string gameId = 1;
+}
 message GameManagementGetAllRequest {}
+message GameManagementGetListByEventRequest {
+  string eventId = 1;
+}
 message GameManagementQuestion {
   string text = 1;
   repeated string options = 2;
@@ -77,6 +82,7 @@ message GameManagementGetResponse {
   int32 duration = 11;
   bool finished = 12;
   string message = 13;
+  string eventId = 14;
 }
 message GameManagementGetAllResponse {
   repeated GameManagementGetResponse games = 1;
@@ -97,6 +103,8 @@ service GameManagementService {
   rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
   rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
   rpc getAll(GameManagementGetAllRequest) returns (GameManagementGetAllResponse);
+  rpc getListByEvent(GameManagementGetListByEventRequest) returns (GameManagementGetAllResponse);
+  rpc getOne(GameManagementGetRequest) returns (GameManagementGetResponse);
   rpc add(GameManagementAddRequest) returns (GameManagementResponse);
   rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
 }

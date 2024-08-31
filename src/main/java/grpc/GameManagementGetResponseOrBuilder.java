@@ -128,4 +128,16 @@ public interface GameManagementGetResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
+
+  /**
+   * <code>string eventId = 14;</code>
+   * @return The eventId.
+   */
+  java.lang.String getEventId();
+  /**
+   * <code>string eventId = 14;</code>
+   * @return The bytes for eventId.
+   */
+  com.google.protobuf.ByteString
+      getEventIdBytes();
 }

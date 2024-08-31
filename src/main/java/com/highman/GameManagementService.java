@@ -6,10 +6,7 @@ import com.highman.models.DBConnectionPool;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
-import com.mongodb.reactivestreams.client.MongoClient;
-import com.mongodb.reactivestreams.client.MongoClients;
-import com.mongodb.reactivestreams.client.MongoCollection;
-import com.mongodb.reactivestreams.client.MongoDatabase;
+import com.mongodb.reactivestreams.client.*;
 import grpc.*;
 import io.grpc.stub.StreamObserver;
 import org.apache.logging.log4j.LogManager;
@@ -222,6 +219,138 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             responseObserver.onCompleted();
                         }
                 );
+    }
+
+    // READ
+    @Override
+    public void getListByEvent(GameManagementGetListByEventRequest request, StreamObserver<GameManagementGetAllResponse> responseObserver) {
+        // Response builder
+        GameManagementGetAllResponse.Builder response = GameManagementGetAllResponse.newBuilder();
+
+        // Query
+        Flux.from(gameColl.find(eq("eventId", request.getEventId())))
+                .publishOn(Schedulers.boundedElastic())
+                .collectList()
+                .subscribe(
+                        documents -> {
+                            // Every document holds the data of a game
+                            for (Document document : documents) {
+                                // Retrieve basic info of this game...
+                                String id = Objects.toString(document.get("_id"), "");
+                                String name = Objects.toString(document.get("name"), "");
+                                String type = Objects.toString(document.get("type"), "");
+                                Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
+                                String tutorial = Objects.toString(document.get("tutorial"), "");
+                                String status = Objects.toString(document.get("status"), "");
+                                long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
+                                Date endTimeDate = (Date) document.getOrDefault("endTime", new Date(0));
+                                long endTime = endTimeDate != null ? endTimeDate.getTime() : new Date(0).getTime();
+
+                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) continue;
+
+                                Document config = document.get("config", new Document());
+                                Integer maxPlayers = config.getInteger("maxPlayers");
+                                Integer duration = config.getInteger("duration");
+
+                                //...and store it in the builder (single game)
+                                GameManagementGetResponse.Builder getResponseBuilder = GameManagementGetResponse.newBuilder()
+                                        .setId(id)
+                                        .setName(name)
+                                        .setType(type)
+                                        .setAllowedItemTrade(allowedItemTrade)
+                                        .setTutorial(tutorial)
+                                        .setStatus(status)
+                                        .setStartTime(startTime)
+                                        .setEndTime(endTime)
+                                        .setMaxPlayers(maxPlayers)
+                                        .setDuration(duration);
+
+                                // Add the single-game builder to the main builder
+                                response.addGames(getResponseBuilder.build());
+                            }
+
+                            // Return response
+                            response.setFinished(true);
+                            response.setMessage("Game info retrieved successfully");
+                            responseObserver.onNext(response.build());
+                            responseObserver.onCompleted();
+                        },
+                        throwable -> {
+                            throwable.printStackTrace();
+
+                            // Return empty response if err
+                            response.setFinished(false);
+                            response.setMessage("Internal error");
+                            responseObserver.onNext(response.clearGames().build());
+                            responseObserver.onCompleted();
+                        }
+                );
+    }// READ
+
+    @Override
+    public void getOne(GameManagementGetRequest request, StreamObserver<GameManagementGetResponse> responseObserver) {
+        // Response builder
+        GameManagementGetResponse.Builder response = GameManagementGetResponse.newBuilder();
+
+        if (request.getGameId().length() == 24)
+            // Query
+            Mono.from(gameColl.find(eq("_id", new ObjectId(request.getGameId()))))
+                    .publishOn(Schedulers.boundedElastic())
+                    .single()
+                    .subscribe(
+                            document -> {
+                                // Retrieve basic info of this game...
+                                String id = Objects.toString(document.get("_id"), "");
+                                String name = Objects.toString(document.get("name"), "");
+                                String type = Objects.toString(document.get("type"), "");
+                                Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
+                                String tutorial = Objects.toString(document.get("tutorial"), "");
+                                String status = Objects.toString(document.get("status"), "");
+                                long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
+                                Date endTimeDate = (Date) document.getOrDefault("endTime", new Date(0));
+                                long endTime = endTimeDate != null ? endTimeDate.getTime() : new Date(0).getTime();
+
+                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) throw new RuntimeException();
+
+                                Document config = document.get("config", new Document());
+                                Integer maxPlayers = config.getInteger("maxPlayers");
+                                Integer duration = config.getInteger("duration");
+
+                                //...and store it in the builder (single game)
+                                response.setId(id)
+                                        .setName(name)
+                                        .setType(type)
+                                        .setAllowedItemTrade(allowedItemTrade)
+                                        .setTutorial(tutorial)
+                                        .setStatus(status)
+                                        .setStartTime(startTime)
+                                        .setEndTime(endTime)
+                                        .setMaxPlayers(maxPlayers)
+                                        .setDuration(duration);
+
+                                // Return response
+                                response.setFinished(true);
+                                response.setMessage("Game info retrieved successfully");
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                throwable.printStackTrace();
+
+                                // Return empty response if err
+                                response.setFinished(false);
+                                response.setMessage("Internal error");
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        else {
+            // Return empty response if err
+            response.setFinished(false);
+            response.setMessage("Internal error");
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
     }
 
     // CREATE

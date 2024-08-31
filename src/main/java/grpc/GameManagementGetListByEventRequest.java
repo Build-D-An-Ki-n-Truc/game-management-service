@@ -6,12 +6,12 @@
 package grpc;
 
 /**
- * Protobuf type {@code grpc.GameManagementGetRequest}
+ * Protobuf type {@code grpc.GameManagementGetListByEventRequest}
  */
-public final class GameManagementGetRequest extends
+public final class GameManagementGetListByEventRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:grpc.GameManagementGetRequest)
-    GameManagementGetRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:grpc.GameManagementGetListByEventRequest)
+    GameManagementGetListByEventRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -20,62 +20,62 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 27,
       /* patch= */ 2,
       /* suffix= */ "",
-      GameManagementGetRequest.class.getName());
+      GameManagementGetListByEventRequest.class.getName());
   }
-  // Use GameManagementGetRequest.newBuilder() to construct.
-  private GameManagementGetRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use GameManagementGetListByEventRequest.newBuilder() to construct.
+  private GameManagementGetListByEventRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GameManagementGetRequest() {
-    gameId_ = "";
+  private GameManagementGetListByEventRequest() {
+    eventId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return grpc.Service.internal_static_grpc_GameManagementGetRequest_descriptor;
+    return grpc.Service.internal_static_grpc_GameManagementGetListByEventRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return grpc.Service.internal_static_grpc_GameManagementGetRequest_fieldAccessorTable
+    return grpc.Service.internal_static_grpc_GameManagementGetListByEventRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            grpc.GameManagementGetRequest.class, grpc.GameManagementGetRequest.Builder.class);
+            grpc.GameManagementGetListByEventRequest.class, grpc.GameManagementGetListByEventRequest.Builder.class);
   }
 
-  public static final int GAMEID_FIELD_NUMBER = 1;
+  public static final int EVENTID_FIELD_NUMBER = 1;
   @SuppressWarnings("serial")
-  private volatile java.lang.Object gameId_ = "";
+  private volatile java.lang.Object eventId_ = "";
   /**
-   * <code>string gameId = 1;</code>
-   * @return The gameId.
+   * <code>string eventId = 1;</code>
+   * @return The eventId.
    */
   @java.lang.Override
-  public java.lang.String getGameId() {
-    java.lang.Object ref = gameId_;
+  public java.lang.String getEventId() {
+    java.lang.Object ref = eventId_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      gameId_ = s;
+      eventId_ = s;
       return s;
     }
   }
   /**
-   * <code>string gameId = 1;</code>
-   * @return The bytes for gameId.
+   * <code>string eventId = 1;</code>
+   * @return The bytes for eventId.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getGameIdBytes() {
-    java.lang.Object ref = gameId_;
+      getEventIdBytes() {
+    java.lang.Object ref = eventId_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      gameId_ = b;
+      eventId_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -96,8 +96,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 1, gameId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 1, eventId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -108,8 +108,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, gameId_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(1, eventId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -121,13 +121,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof grpc.GameManagementGetRequest)) {
+    if (!(obj instanceof grpc.GameManagementGetListByEventRequest)) {
       return super.equals(obj);
     }
-    grpc.GameManagementGetRequest other = (grpc.GameManagementGetRequest) obj;
+    grpc.GameManagementGetListByEventRequest other = (grpc.GameManagementGetListByEventRequest) obj;
 
-    if (!getGameId()
-        .equals(other.getGameId())) return false;
+    if (!getEventId()
+        .equals(other.getEventId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -139,51 +139,51 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + GAMEID_FIELD_NUMBER;
-    hash = (53 * hash) + getGameId().hashCode();
+    hash = (37 * hash) + EVENTID_FIELD_NUMBER;
+    hash = (53 * hash) + getEventId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementGetRequest parseFrom(byte[] data)
+  public static grpc.GameManagementGetListByEventRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementGetRequest parseFrom(java.io.InputStream input)
+  public static grpc.GameManagementGetListByEventRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -191,26 +191,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static grpc.GameManagementGetRequest parseDelimitedFrom(java.io.InputStream input)
+  public static grpc.GameManagementGetListByEventRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static grpc.GameManagementGetRequest parseDelimitedFrom(
+  public static grpc.GameManagementGetListByEventRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementGetRequest parseFrom(
+  public static grpc.GameManagementGetListByEventRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -223,7 +223,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(grpc.GameManagementGetRequest prototype) {
+  public static Builder newBuilder(grpc.GameManagementGetListByEventRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -239,26 +239,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code grpc.GameManagementGetRequest}
+   * Protobuf type {@code grpc.GameManagementGetListByEventRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:grpc.GameManagementGetRequest)
-      grpc.GameManagementGetRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:grpc.GameManagementGetListByEventRequest)
+      grpc.GameManagementGetListByEventRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return grpc.Service.internal_static_grpc_GameManagementGetRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementGetListByEventRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return grpc.Service.internal_static_grpc_GameManagementGetRequest_fieldAccessorTable
+      return grpc.Service.internal_static_grpc_GameManagementGetListByEventRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              grpc.GameManagementGetRequest.class, grpc.GameManagementGetRequest.Builder.class);
+              grpc.GameManagementGetListByEventRequest.class, grpc.GameManagementGetListByEventRequest.Builder.class);
     }
 
-    // Construct using grpc.GameManagementGetRequest.newBuilder()
+    // Construct using grpc.GameManagementGetListByEventRequest.newBuilder()
     private Builder() {
 
     }
@@ -272,24 +272,24 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      gameId_ = "";
+      eventId_ = "";
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return grpc.Service.internal_static_grpc_GameManagementGetRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementGetListByEventRequest_descriptor;
     }
 
     @java.lang.Override
-    public grpc.GameManagementGetRequest getDefaultInstanceForType() {
-      return grpc.GameManagementGetRequest.getDefaultInstance();
+    public grpc.GameManagementGetListByEventRequest getDefaultInstanceForType() {
+      return grpc.GameManagementGetListByEventRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public grpc.GameManagementGetRequest build() {
-      grpc.GameManagementGetRequest result = buildPartial();
+    public grpc.GameManagementGetListByEventRequest build() {
+      grpc.GameManagementGetListByEventRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -297,34 +297,34 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public grpc.GameManagementGetRequest buildPartial() {
-      grpc.GameManagementGetRequest result = new grpc.GameManagementGetRequest(this);
+    public grpc.GameManagementGetListByEventRequest buildPartial() {
+      grpc.GameManagementGetListByEventRequest result = new grpc.GameManagementGetListByEventRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(grpc.GameManagementGetRequest result) {
+    private void buildPartial0(grpc.GameManagementGetListByEventRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.gameId_ = gameId_;
+        result.eventId_ = eventId_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof grpc.GameManagementGetRequest) {
-        return mergeFrom((grpc.GameManagementGetRequest)other);
+      if (other instanceof grpc.GameManagementGetListByEventRequest) {
+        return mergeFrom((grpc.GameManagementGetListByEventRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(grpc.GameManagementGetRequest other) {
-      if (other == grpc.GameManagementGetRequest.getDefaultInstance()) return this;
-      if (!other.getGameId().isEmpty()) {
-        gameId_ = other.gameId_;
+    public Builder mergeFrom(grpc.GameManagementGetListByEventRequest other) {
+      if (other == grpc.GameManagementGetListByEventRequest.getDefaultInstance()) return this;
+      if (!other.getEventId().isEmpty()) {
+        eventId_ = other.eventId_;
         bitField0_ |= 0x00000001;
         onChanged();
       }
@@ -355,7 +355,7 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 10: {
-              gameId_ = input.readStringRequireUtf8();
+              eventId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000001;
               break;
             } // case 10
@@ -376,95 +376,95 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private java.lang.Object gameId_ = "";
+    private java.lang.Object eventId_ = "";
     /**
-     * <code>string gameId = 1;</code>
-     * @return The gameId.
+     * <code>string eventId = 1;</code>
+     * @return The eventId.
      */
-    public java.lang.String getGameId() {
-      java.lang.Object ref = gameId_;
+    public java.lang.String getEventId() {
+      java.lang.Object ref = eventId_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        gameId_ = s;
+        eventId_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string gameId = 1;</code>
-     * @return The bytes for gameId.
+     * <code>string eventId = 1;</code>
+     * @return The bytes for eventId.
      */
     public com.google.protobuf.ByteString
-        getGameIdBytes() {
-      java.lang.Object ref = gameId_;
+        getEventIdBytes() {
+      java.lang.Object ref = eventId_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        gameId_ = b;
+        eventId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string gameId = 1;</code>
-     * @param value The gameId to set.
+     * <code>string eventId = 1;</code>
+     * @param value The eventId to set.
      * @return This builder for chaining.
      */
-    public Builder setGameId(
+    public Builder setEventId(
         java.lang.String value) {
       if (value == null) { throw new NullPointerException(); }
-      gameId_ = value;
+      eventId_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>string gameId = 1;</code>
+     * <code>string eventId = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearGameId() {
-      gameId_ = getDefaultInstance().getGameId();
+    public Builder clearEventId() {
+      eventId_ = getDefaultInstance().getEventId();
       bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
     /**
-     * <code>string gameId = 1;</code>
-     * @param value The bytes for gameId to set.
+     * <code>string eventId = 1;</code>
+     * @param value The bytes for eventId to set.
      * @return This builder for chaining.
      */
-    public Builder setGameIdBytes(
+    public Builder setEventIdBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) { throw new NullPointerException(); }
       checkByteStringIsUtf8(value);
-      gameId_ = value;
+      eventId_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:grpc.GameManagementGetRequest)
+    // @@protoc_insertion_point(builder_scope:grpc.GameManagementGetListByEventRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:grpc.GameManagementGetRequest)
-  private static final grpc.GameManagementGetRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:grpc.GameManagementGetListByEventRequest)
+  private static final grpc.GameManagementGetListByEventRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new grpc.GameManagementGetRequest();
+    DEFAULT_INSTANCE = new grpc.GameManagementGetListByEventRequest();
   }
 
-  public static grpc.GameManagementGetRequest getDefaultInstance() {
+  public static grpc.GameManagementGetListByEventRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GameManagementGetRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GameManagementGetRequest>() {
+  private static final com.google.protobuf.Parser<GameManagementGetListByEventRequest>
+      PARSER = new com.google.protobuf.AbstractParser<GameManagementGetListByEventRequest>() {
     @java.lang.Override
-    public GameManagementGetRequest parsePartialFrom(
+    public GameManagementGetListByEventRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -483,17 +483,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GameManagementGetRequest> parser() {
+  public static com.google.protobuf.Parser<GameManagementGetListByEventRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GameManagementGetRequest> getParserForType() {
+  public com.google.protobuf.Parser<GameManagementGetListByEventRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public grpc.GameManagementGetRequest getDefaultInstanceForType() {
+  public grpc.GameManagementGetListByEventRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

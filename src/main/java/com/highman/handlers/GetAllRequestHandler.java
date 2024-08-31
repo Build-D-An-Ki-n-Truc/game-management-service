@@ -1,9 +1,12 @@
 package com.highman.handlers;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import grpc.*;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class GetAllRequestHandler implements RequestHandlerBase{
     @Override
@@ -15,9 +18,23 @@ public class GetAllRequestHandler implements RequestHandlerBase{
         responsePayload.addProperty("finished", response.getFinished());
         responsePayload.addProperty("message", response.getMessage());
         if (response.getGamesList().isEmpty())
-            responsePayload.addProperty("data", "{}");
-        else
-            responsePayload.add("data", JsonParser.parseString(new Gson().toJson(response.getGamesList())));
+            responsePayload.add("data", JsonParser.parseString(new Gson().toJson(new ArrayList<>())));
+        else {
+            Gson gson = new GsonBuilder().setFieldNamingStrategy(new FieldNamingStrategy() {
+                @Override
+                public String translateName(Field f) {
+                    String fieldName =
+                            FieldNamingPolicy.IDENTITY.translateName(f);
+                    if (fieldName.endsWith("_"))
+                    {
+                        fieldName = fieldName.substring(0, fieldName.length() - 1);
+                    }
+                    return fieldName;
+                }
+            }).create();
+
+            responsePayload.add("data", JsonParser.parseString(gson.toJson(response.getGamesList())));
+        }
 
         return responsePayload;
     }

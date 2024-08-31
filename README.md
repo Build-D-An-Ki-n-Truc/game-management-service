@@ -59,6 +59,10 @@ Send a POST request to **/gameManage/updateInfo** with the following payload:
 ```
 ### Getting all game's info
 Send a GET request to **/gameManage/getAll**
+### Getting a list of games based on their eventId
+Send a GET request to **/gameManage/getListByEvent?eventId=${eventId}**
+### Getting the detail of a single game
+Send a GET request to **/gameManage/getOne?gameId=${gameId}**
 ### Adding a new game
 Send a POST request to **/gameManage/add** with the following payload:
 ```json

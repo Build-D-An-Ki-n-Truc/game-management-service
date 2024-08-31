@@ -108,6 +108,68 @@ public final class GameManagementServiceGrpc {
     return getGetAllMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementGetListByEventRequest,
+      grpc.GameManagementGetAllResponse> getGetListByEventMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getListByEvent",
+      requestType = grpc.GameManagementGetListByEventRequest.class,
+      responseType = grpc.GameManagementGetAllResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementGetListByEventRequest,
+      grpc.GameManagementGetAllResponse> getGetListByEventMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementGetListByEventRequest, grpc.GameManagementGetAllResponse> getGetListByEventMethod;
+    if ((getGetListByEventMethod = GameManagementServiceGrpc.getGetListByEventMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getGetListByEventMethod = GameManagementServiceGrpc.getGetListByEventMethod) == null) {
+          GameManagementServiceGrpc.getGetListByEventMethod = getGetListByEventMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementGetListByEventRequest, grpc.GameManagementGetAllResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getListByEvent"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetListByEventRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetAllResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("getListByEvent"))
+              .build();
+        }
+      }
+    }
+    return getGetListByEventMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementGetRequest,
+      grpc.GameManagementGetResponse> getGetOneMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "getOne",
+      requestType = grpc.GameManagementGetRequest.class,
+      responseType = grpc.GameManagementGetResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementGetRequest,
+      grpc.GameManagementGetResponse> getGetOneMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementGetRequest, grpc.GameManagementGetResponse> getGetOneMethod;
+    if ((getGetOneMethod = GameManagementServiceGrpc.getGetOneMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getGetOneMethod = GameManagementServiceGrpc.getGetOneMethod) == null) {
+          GameManagementServiceGrpc.getGetOneMethod = getGetOneMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementGetRequest, grpc.GameManagementGetResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getOne"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementGetResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("getOne"))
+              .build();
+        }
+      }
+    }
+    return getGetOneMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<grpc.GameManagementAddRequest,
       grpc.GameManagementResponse> getAddMethod;
 
@@ -241,6 +303,20 @@ public final class GameManagementServiceGrpc {
 
     /**
      */
+    default void getListByEvent(grpc.GameManagementGetListByEventRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetListByEventMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void getOne(grpc.GameManagementGetRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetOneMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void add(grpc.GameManagementAddRequest request,
         io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddMethod(), responseObserver);
@@ -307,6 +383,22 @@ public final class GameManagementServiceGrpc {
 
     /**
      */
+    public void getListByEvent(grpc.GameManagementGetListByEventRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetListByEventMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getOne(grpc.GameManagementGetRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementGetResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetOneMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void add(grpc.GameManagementAddRequest request,
         io.grpc.stub.StreamObserver<grpc.GameManagementResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -357,6 +449,20 @@ public final class GameManagementServiceGrpc {
     public grpc.GameManagementGetAllResponse getAll(grpc.GameManagementGetAllRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetAllMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementGetAllResponse getListByEvent(grpc.GameManagementGetListByEventRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetListByEventMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementGetResponse getOne(grpc.GameManagementGetRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetOneMethod(), getCallOptions(), request);
     }
 
     /**
@@ -416,6 +522,22 @@ public final class GameManagementServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementGetAllResponse> getListByEvent(
+        grpc.GameManagementGetListByEventRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetListByEventMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementGetResponse> getOne(
+        grpc.GameManagementGetRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetOneMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementResponse> add(
         grpc.GameManagementAddRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -434,8 +556,10 @@ public final class GameManagementServiceGrpc {
   private static final int METHODID_UPDATE_INFO = 0;
   private static final int METHODID_UPDATE_STATUS = 1;
   private static final int METHODID_GET_ALL = 2;
-  private static final int METHODID_ADD = 3;
-  private static final int METHODID_SHAKE = 4;
+  private static final int METHODID_GET_LIST_BY_EVENT = 3;
+  private static final int METHODID_GET_ONE = 4;
+  private static final int METHODID_ADD = 5;
+  private static final int METHODID_SHAKE = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -465,6 +589,14 @@ public final class GameManagementServiceGrpc {
         case METHODID_GET_ALL:
           serviceImpl.getAll((grpc.GameManagementGetAllRequest) request,
               (io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse>) responseObserver);
+          break;
+        case METHODID_GET_LIST_BY_EVENT:
+          serviceImpl.getListByEvent((grpc.GameManagementGetListByEventRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementGetAllResponse>) responseObserver);
+          break;
+        case METHODID_GET_ONE:
+          serviceImpl.getOne((grpc.GameManagementGetRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementGetResponse>) responseObserver);
           break;
         case METHODID_ADD:
           serviceImpl.add((grpc.GameManagementAddRequest) request,
@@ -513,6 +645,20 @@ public final class GameManagementServiceGrpc {
               grpc.GameManagementGetAllRequest,
               grpc.GameManagementGetAllResponse>(
                 service, METHODID_GET_ALL)))
+        .addMethod(
+          getGetListByEventMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementGetListByEventRequest,
+              grpc.GameManagementGetAllResponse>(
+                service, METHODID_GET_LIST_BY_EVENT)))
+        .addMethod(
+          getGetOneMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementGetRequest,
+              grpc.GameManagementGetResponse>(
+                service, METHODID_GET_ONE)))
         .addMethod(
           getAddMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -578,6 +724,8 @@ public final class GameManagementServiceGrpc {
               .addMethod(getUpdateInfoMethod())
               .addMethod(getUpdateStatusMethod())
               .addMethod(getGetAllMethod())
+              .addMethod(getGetListByEventMethod())
+              .addMethod(getGetOneMethod())
               .addMethod(getAddMethod())
               .addMethod(getShakeMethod())
               .build();
