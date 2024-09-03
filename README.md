@@ -89,6 +89,25 @@ Send a POST request to **/gameManage/add** with the following payload:
     "correctAnswer": ${questionCorrectAnswer}
     }
     ...
-  ]
+}
+```
+### Performing a shake
+Send a POST request to **/gameManage/shake** with the following payload:
+```json
+{
+    "gameId": ${gameID},
+    "userId": ${playerID},
+    "shakeRand": "${shakeRand}",
+    "shakeAccumulate": ${shakeAccumulate}
+}
+```
+with **shakeRand** being a randomly generated number between 1 and 100, and **shakeAccumulate** being a sum of 4 randomly generated numbers, each between 1 and 1000.
+### Updating shake rewards
+Send a POST request to **/gameManage/updateShakeReward** with the following payload:
+```json
+{
+    "gameId": ${gameID},
+    "userId": ${playerID},
+    "rewardId": "${rewardID}"
 }
 ```

@@ -434,7 +434,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
     // Shake + UPDATE
     private int shakeRandom(int max) {
         Random rand = new Random();
-        return rand.nextInt(max + 1);
+        return rand.nextInt(1, max + 1);
     }
     private int shakeRandom(int min, int max) {
         Random rand = new Random();
