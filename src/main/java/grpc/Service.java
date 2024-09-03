@@ -90,6 +90,16 @@ public final class Service {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_grpc_GameManagementShakeResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementShakeRewardRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementShakeRewardRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementShakeRewardResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementShakeRewardResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -135,25 +145,33 @@ public final class Service {
       "\n\007message\030\r \001(\t\022\017\n\007eventId\030\016 \001(\t\"q\n\034Game" +
       "ManagementGetAllResponse\022.\n\005games\030\001 \003(\0132" +
       "\037.grpc.GameManagementGetResponse\022\020\n\010fini" +
-      "shed\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\"(\n\032GameManag" +
-      "ementShakeRequest\022\n\n\002id\030\001 \001(\t\"U\n\033GameMan" +
-      "agementShakeResponse\022\020\n\010finished\030\001 \001(\010\022\017" +
-      "\n\007message\030\002 \001(\t\022\023\n\013shakeResult\030\003 \001(\0032\305\004\n" +
-      "\025GameManagementService\022K\n\nupdateInfo\022\037.g" +
-      "rpc.GameManagementInfoRequest\032\034.grpc.Gam" +
-      "eManagementResponse\022O\n\014updateStatus\022!.gr" +
-      "pc.GameManagementStatusRequest\032\034.grpc.Ga" +
-      "meManagementResponse\022O\n\006getAll\022!.grpc.Ga" +
-      "meManagementGetAllRequest\032\".grpc.GameMan" +
-      "agementGetAllResponse\022_\n\016getListByEvent\022" +
-      ").grpc.GameManagementGetListByEventReque" +
-      "st\032\".grpc.GameManagementGetAllResponse\022I" +
-      "\n\006getOne\022\036.grpc.GameManagementGetRequest" +
-      "\032\037.grpc.GameManagementGetResponse\022C\n\003add" +
-      "\022\036.grpc.GameManagementAddRequest\032\034.grpc." +
-      "GameManagementResponse\022L\n\005shake\022 .grpc.G" +
-      "ameManagementShakeRequest\032!.grpc.GameMan" +
-      "agementShakeResponseB\002P\001b\006proto3"
+      "shed\030\002 \001(\010\022\017\n\007message\030\003 \001(\t\"h\n\032GameManag" +
+      "ementShakeRequest\022\016\n\006userId\030\001 \001(\t\022\016\n\006gam" +
+      "eId\030\002 \001(\t\022\021\n\tshakeRand\030\003 \001(\005\022\027\n\017shakeAcc" +
+      "umulate\030\004 \001(\003\"U\n\033GameManagementShakeResp" +
+      "onse\022\020\n\010finished\030\001 \001(\010\022\017\n\007message\030\002 \001(\t\022" +
+      "\023\n\013finalResult\030\003 \001(\005\"T\n GameManagementSh" +
+      "akeRewardRequest\022\016\n\006userId\030\001 \001(\t\022\016\n\006game" +
+      "Id\030\002 \001(\t\022\020\n\010rewardId\030\003 \001(\t\"F\n!GameManage" +
+      "mentShakeRewardResponse\022\020\n\010finished\030\001 \001(" +
+      "\010\022\017\n\007message\030\002 \001(\t2\253\005\n\025GameManagementSer" +
+      "vice\022K\n\nupdateInfo\022\037.grpc.GameManagement" +
+      "InfoRequest\032\034.grpc.GameManagementRespons" +
+      "e\022O\n\014updateStatus\022!.grpc.GameManagementS" +
+      "tatusRequest\032\034.grpc.GameManagementRespon" +
+      "se\022O\n\006getAll\022!.grpc.GameManagementGetAll" +
+      "Request\032\".grpc.GameManagementGetAllRespo" +
+      "nse\022_\n\016getListByEvent\022).grpc.GameManagem" +
+      "entGetListByEventRequest\032\".grpc.GameMana" +
+      "gementGetAllResponse\022I\n\006getOne\022\036.grpc.Ga" +
+      "meManagementGetRequest\032\037.grpc.GameManage" +
+      "mentGetResponse\022C\n\003add\022\036.grpc.GameManage" +
+      "mentAddRequest\032\034.grpc.GameManagementResp" +
+      "onse\022L\n\005shake\022 .grpc.GameManagementShake" +
+      "Request\032!.grpc.GameManagementShakeRespon" +
+      "se\022d\n\021updateShakeReward\022&.grpc.GameManag" +
+      "ementShakeRewardRequest\032\'.grpc.GameManag" +
+      "ementShakeRewardResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -230,13 +248,25 @@ public final class Service {
     internal_static_grpc_GameManagementShakeRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementShakeRequest_descriptor,
-        new java.lang.String[] { "Id", });
+        new java.lang.String[] { "UserId", "GameId", "ShakeRand", "ShakeAccumulate", });
     internal_static_grpc_GameManagementShakeResponse_descriptor =
       getDescriptor().getMessageTypes().get(12);
     internal_static_grpc_GameManagementShakeResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementShakeResponse_descriptor,
-        new java.lang.String[] { "Finished", "Message", "ShakeResult", });
+        new java.lang.String[] { "Finished", "Message", "FinalResult", });
+    internal_static_grpc_GameManagementShakeRewardRequest_descriptor =
+      getDescriptor().getMessageTypes().get(13);
+    internal_static_grpc_GameManagementShakeRewardRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementShakeRewardRequest_descriptor,
+        new java.lang.String[] { "UserId", "GameId", "RewardId", });
+    internal_static_grpc_GameManagementShakeRewardResponse_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_grpc_GameManagementShakeRewardResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementShakeRewardResponse_descriptor,
+        new java.lang.String[] { "Finished", "Message", });
     descriptor.resolveAllFeaturesImmutable();
   }
 

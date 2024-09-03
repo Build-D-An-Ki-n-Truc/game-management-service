@@ -93,12 +93,24 @@ message GameManagementGetAllResponse {
 }
 
 message GameManagementShakeRequest {
-  string id = 1;
+  string userId = 1;
+  string gameId = 2;
+  int32 shakeRand = 3;
+  int64 shakeAccumulate = 4;
 }
 message GameManagementShakeResponse {
   bool finished = 1;
   string message = 2;
-  int64 shakeResult = 3;
+  int32 finalResult = 3;
+}
+message GameManagementShakeRewardRequest {
+  string userId = 1;
+  string gameId = 2;
+  string rewardId = 3;
+}
+message GameManagementShakeRewardResponse {
+  bool finished = 1;
+  string message = 2;
 }
 
 service GameManagementService {
@@ -109,4 +121,5 @@ service GameManagementService {
   rpc getOne(GameManagementGetRequest) returns (GameManagementGetResponse);
   rpc add(GameManagementAddRequest) returns (GameManagementResponse);
   rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
+  rpc updateShakeReward(GameManagementShakeRewardRequest) returns (GameManagementShakeRewardResponse);
 }

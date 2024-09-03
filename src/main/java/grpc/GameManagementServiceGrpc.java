@@ -232,6 +232,37 @@ public final class GameManagementServiceGrpc {
     return getShakeMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementShakeRewardRequest,
+      grpc.GameManagementShakeRewardResponse> getUpdateShakeRewardMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "updateShakeReward",
+      requestType = grpc.GameManagementShakeRewardRequest.class,
+      responseType = grpc.GameManagementShakeRewardResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementShakeRewardRequest,
+      grpc.GameManagementShakeRewardResponse> getUpdateShakeRewardMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementShakeRewardRequest, grpc.GameManagementShakeRewardResponse> getUpdateShakeRewardMethod;
+    if ((getUpdateShakeRewardMethod = GameManagementServiceGrpc.getUpdateShakeRewardMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getUpdateShakeRewardMethod = GameManagementServiceGrpc.getUpdateShakeRewardMethod) == null) {
+          GameManagementServiceGrpc.getUpdateShakeRewardMethod = getUpdateShakeRewardMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementShakeRewardRequest, grpc.GameManagementShakeRewardResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "updateShakeReward"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementShakeRewardRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementShakeRewardResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("updateShakeReward"))
+              .build();
+        }
+      }
+    }
+    return getUpdateShakeRewardMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -328,6 +359,13 @@ public final class GameManagementServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.GameManagementShakeResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getShakeMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void updateShakeReward(grpc.GameManagementShakeRewardRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementShakeRewardResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateShakeRewardMethod(), responseObserver);
+    }
   }
 
   /**
@@ -412,6 +450,14 @@ public final class GameManagementServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getShakeMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void updateShakeReward(grpc.GameManagementShakeRewardRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementShakeRewardResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateShakeRewardMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -477,6 +523,13 @@ public final class GameManagementServiceGrpc {
     public grpc.GameManagementShakeResponse shake(grpc.GameManagementShakeRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getShakeMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementShakeRewardResponse updateShakeReward(grpc.GameManagementShakeRewardRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateShakeRewardMethod(), getCallOptions(), request);
     }
   }
 
@@ -551,6 +604,14 @@ public final class GameManagementServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getShakeMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementShakeRewardResponse> updateShakeReward(
+        grpc.GameManagementShakeRewardRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateShakeRewardMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_UPDATE_INFO = 0;
@@ -560,6 +621,7 @@ public final class GameManagementServiceGrpc {
   private static final int METHODID_GET_ONE = 4;
   private static final int METHODID_ADD = 5;
   private static final int METHODID_SHAKE = 6;
+  private static final int METHODID_UPDATE_SHAKE_REWARD = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -605,6 +667,10 @@ public final class GameManagementServiceGrpc {
         case METHODID_SHAKE:
           serviceImpl.shake((grpc.GameManagementShakeRequest) request,
               (io.grpc.stub.StreamObserver<grpc.GameManagementShakeResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_SHAKE_REWARD:
+          serviceImpl.updateShakeReward((grpc.GameManagementShakeRewardRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementShakeRewardResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -673,6 +739,13 @@ public final class GameManagementServiceGrpc {
               grpc.GameManagementShakeRequest,
               grpc.GameManagementShakeResponse>(
                 service, METHODID_SHAKE)))
+        .addMethod(
+          getUpdateShakeRewardMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementShakeRewardRequest,
+              grpc.GameManagementShakeRewardResponse>(
+                service, METHODID_UPDATE_SHAKE_REWARD)))
         .build();
   }
 
@@ -728,6 +801,7 @@ public final class GameManagementServiceGrpc {
               .addMethod(getGetOneMethod())
               .addMethod(getAddMethod())
               .addMethod(getShakeMethod())
+              .addMethod(getUpdateShakeRewardMethod())
               .build();
         }
       }

@@ -1,34 +1,29 @@
 package com.highman.handlers;
 
 import com.google.gson.JsonObject;
-import grpc.GameManagementServiceGrpc;
-import grpc.GameManagementShakeRequest;
-import grpc.GameManagementShakeResponse;
+import grpc.*;
 
-public class ShakeRequestHandler implements RequestHandlerBase{
+public class UpdateShakeRewardRequestHandler implements RequestHandlerBase{
     private final String ERROR_MSG = "Request has invalid structure";
 
     @Override
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
         JsonObject responsePayload = new JsonObject();
 
-        if (requestJson.has("gameId") && requestJson.has("userId") && requestJson.has("shakeRand") && requestJson.has("shakeAccumulate")) {
-            GameManagementShakeRequest request = GameManagementShakeRequest.newBuilder()
+        if (requestJson.has("gameId") && requestJson.has("userId") && requestJson.has("rewardId")) {
+            GameManagementShakeRewardRequest request = GameManagementShakeRewardRequest.newBuilder()
                     .setGameId(requestJson.get("gameId").getAsString())
                     .setUserId(requestJson.get("userId").getAsString())
-                    .setShakeRand(requestJson.get("shakeRand").getAsInt())
-                    .setShakeAccumulate(requestJson.get("shakeAccumulate").getAsInt())
+                    .setRewardId(requestJson.get("rewardId").getAsString())
                     .build();
 
-            GameManagementShakeResponse response = grpcStub.shake(request);
+            GameManagementShakeRewardResponse response = grpcStub.updateShakeReward(request);
             responsePayload.addProperty("finished", response.getFinished());
             responsePayload.addProperty("message", response.getMessage());
-            responsePayload.addProperty("finalResult", response.getFinalResult());
         }
         else {
             responsePayload.addProperty("finished", false);
             responsePayload.addProperty("message", ERROR_MSG);
-            responsePayload.addProperty("finalResult", -1);
         }
 
         return responsePayload;
@@ -36,6 +31,6 @@ public class ShakeRequestHandler implements RequestHandlerBase{
 
     @Override
     public String getEndpointName() {
-        return "shake";
+        return "updateShakeReward";
     }
 }

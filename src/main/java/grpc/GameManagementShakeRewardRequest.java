@@ -6,12 +6,12 @@
 package grpc;
 
 /**
- * Protobuf type {@code grpc.GameManagementShakeRequest}
+ * Protobuf type {@code grpc.GameManagementShakeRewardRequest}
  */
-public final class GameManagementShakeRequest extends
+public final class GameManagementShakeRewardRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:grpc.GameManagementShakeRequest)
-    GameManagementShakeRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:grpc.GameManagementShakeRewardRequest)
+    GameManagementShakeRewardRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -20,28 +20,29 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 27,
       /* patch= */ 2,
       /* suffix= */ "",
-      GameManagementShakeRequest.class.getName());
+      GameManagementShakeRewardRequest.class.getName());
   }
-  // Use GameManagementShakeRequest.newBuilder() to construct.
-  private GameManagementShakeRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use GameManagementShakeRewardRequest.newBuilder() to construct.
+  private GameManagementShakeRewardRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GameManagementShakeRequest() {
+  private GameManagementShakeRewardRequest() {
     userId_ = "";
     gameId_ = "";
+    rewardId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return grpc.Service.internal_static_grpc_GameManagementShakeRequest_descriptor;
+    return grpc.Service.internal_static_grpc_GameManagementShakeRewardRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return grpc.Service.internal_static_grpc_GameManagementShakeRequest_fieldAccessorTable
+    return grpc.Service.internal_static_grpc_GameManagementShakeRewardRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            grpc.GameManagementShakeRequest.class, grpc.GameManagementShakeRequest.Builder.class);
+            grpc.GameManagementShakeRewardRequest.class, grpc.GameManagementShakeRewardRequest.Builder.class);
   }
 
   public static final int USERID_FIELD_NUMBER = 1;
@@ -122,26 +123,43 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int SHAKERAND_FIELD_NUMBER = 3;
-  private int shakeRand_ = 0;
+  public static final int REWARDID_FIELD_NUMBER = 3;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object rewardId_ = "";
   /**
-   * <code>int32 shakeRand = 3;</code>
-   * @return The shakeRand.
+   * <code>string rewardId = 3;</code>
+   * @return The rewardId.
    */
   @java.lang.Override
-  public int getShakeRand() {
-    return shakeRand_;
+  public java.lang.String getRewardId() {
+    java.lang.Object ref = rewardId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      rewardId_ = s;
+      return s;
+    }
   }
-
-  public static final int SHAKEACCUMULATE_FIELD_NUMBER = 4;
-  private long shakeAccumulate_ = 0L;
   /**
-   * <code>int64 shakeAccumulate = 4;</code>
-   * @return The shakeAccumulate.
+   * <code>string rewardId = 3;</code>
+   * @return The bytes for rewardId.
    */
   @java.lang.Override
-  public long getShakeAccumulate() {
-    return shakeAccumulate_;
+  public com.google.protobuf.ByteString
+      getRewardIdBytes() {
+    java.lang.Object ref = rewardId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      rewardId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -164,11 +182,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 2, gameId_);
     }
-    if (shakeRand_ != 0) {
-      output.writeInt32(3, shakeRand_);
-    }
-    if (shakeAccumulate_ != 0L) {
-      output.writeInt64(4, shakeAccumulate_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(rewardId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 3, rewardId_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -185,13 +200,8 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(2, gameId_);
     }
-    if (shakeRand_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(3, shakeRand_);
-    }
-    if (shakeAccumulate_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(4, shakeAccumulate_);
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(rewardId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(3, rewardId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -203,19 +213,17 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof grpc.GameManagementShakeRequest)) {
+    if (!(obj instanceof grpc.GameManagementShakeRewardRequest)) {
       return super.equals(obj);
     }
-    grpc.GameManagementShakeRequest other = (grpc.GameManagementShakeRequest) obj;
+    grpc.GameManagementShakeRewardRequest other = (grpc.GameManagementShakeRewardRequest) obj;
 
     if (!getUserId()
         .equals(other.getUserId())) return false;
     if (!getGameId()
         .equals(other.getGameId())) return false;
-    if (getShakeRand()
-        != other.getShakeRand()) return false;
-    if (getShakeAccumulate()
-        != other.getShakeAccumulate()) return false;
+    if (!getRewardId()
+        .equals(other.getRewardId())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -231,54 +239,51 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getUserId().hashCode();
     hash = (37 * hash) + GAMEID_FIELD_NUMBER;
     hash = (53 * hash) + getGameId().hashCode();
-    hash = (37 * hash) + SHAKERAND_FIELD_NUMBER;
-    hash = (53 * hash) + getShakeRand();
-    hash = (37 * hash) + SHAKEACCUMULATE_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getShakeAccumulate());
+    hash = (37 * hash) + REWARDID_FIELD_NUMBER;
+    hash = (53 * hash) + getRewardId().hashCode();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(byte[] data)
+  public static grpc.GameManagementShakeRewardRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(java.io.InputStream input)
+  public static grpc.GameManagementShakeRewardRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -286,26 +291,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static grpc.GameManagementShakeRequest parseDelimitedFrom(java.io.InputStream input)
+  public static grpc.GameManagementShakeRewardRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static grpc.GameManagementShakeRequest parseDelimitedFrom(
+  public static grpc.GameManagementShakeRewardRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementShakeRequest parseFrom(
+  public static grpc.GameManagementShakeRewardRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -318,7 +323,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(grpc.GameManagementShakeRequest prototype) {
+  public static Builder newBuilder(grpc.GameManagementShakeRewardRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -334,26 +339,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code grpc.GameManagementShakeRequest}
+   * Protobuf type {@code grpc.GameManagementShakeRewardRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:grpc.GameManagementShakeRequest)
-      grpc.GameManagementShakeRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:grpc.GameManagementShakeRewardRequest)
+      grpc.GameManagementShakeRewardRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return grpc.Service.internal_static_grpc_GameManagementShakeRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementShakeRewardRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return grpc.Service.internal_static_grpc_GameManagementShakeRequest_fieldAccessorTable
+      return grpc.Service.internal_static_grpc_GameManagementShakeRewardRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              grpc.GameManagementShakeRequest.class, grpc.GameManagementShakeRequest.Builder.class);
+              grpc.GameManagementShakeRewardRequest.class, grpc.GameManagementShakeRewardRequest.Builder.class);
     }
 
-    // Construct using grpc.GameManagementShakeRequest.newBuilder()
+    // Construct using grpc.GameManagementShakeRewardRequest.newBuilder()
     private Builder() {
 
     }
@@ -369,25 +374,24 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       userId_ = "";
       gameId_ = "";
-      shakeRand_ = 0;
-      shakeAccumulate_ = 0L;
+      rewardId_ = "";
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return grpc.Service.internal_static_grpc_GameManagementShakeRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementShakeRewardRequest_descriptor;
     }
 
     @java.lang.Override
-    public grpc.GameManagementShakeRequest getDefaultInstanceForType() {
-      return grpc.GameManagementShakeRequest.getDefaultInstance();
+    public grpc.GameManagementShakeRewardRequest getDefaultInstanceForType() {
+      return grpc.GameManagementShakeRewardRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public grpc.GameManagementShakeRequest build() {
-      grpc.GameManagementShakeRequest result = buildPartial();
+    public grpc.GameManagementShakeRewardRequest build() {
+      grpc.GameManagementShakeRewardRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -395,14 +399,14 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public grpc.GameManagementShakeRequest buildPartial() {
-      grpc.GameManagementShakeRequest result = new grpc.GameManagementShakeRequest(this);
+    public grpc.GameManagementShakeRewardRequest buildPartial() {
+      grpc.GameManagementShakeRewardRequest result = new grpc.GameManagementShakeRewardRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(grpc.GameManagementShakeRequest result) {
+    private void buildPartial0(grpc.GameManagementShakeRewardRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.userId_ = userId_;
@@ -411,25 +415,22 @@ private static final long serialVersionUID = 0L;
         result.gameId_ = gameId_;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.shakeRand_ = shakeRand_;
-      }
-      if (((from_bitField0_ & 0x00000008) != 0)) {
-        result.shakeAccumulate_ = shakeAccumulate_;
+        result.rewardId_ = rewardId_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof grpc.GameManagementShakeRequest) {
-        return mergeFrom((grpc.GameManagementShakeRequest)other);
+      if (other instanceof grpc.GameManagementShakeRewardRequest) {
+        return mergeFrom((grpc.GameManagementShakeRewardRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(grpc.GameManagementShakeRequest other) {
-      if (other == grpc.GameManagementShakeRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(grpc.GameManagementShakeRewardRequest other) {
+      if (other == grpc.GameManagementShakeRewardRequest.getDefaultInstance()) return this;
       if (!other.getUserId().isEmpty()) {
         userId_ = other.userId_;
         bitField0_ |= 0x00000001;
@@ -440,11 +441,10 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000002;
         onChanged();
       }
-      if (other.getShakeRand() != 0) {
-        setShakeRand(other.getShakeRand());
-      }
-      if (other.getShakeAccumulate() != 0L) {
-        setShakeAccumulate(other.getShakeAccumulate());
+      if (!other.getRewardId().isEmpty()) {
+        rewardId_ = other.rewardId_;
+        bitField0_ |= 0x00000004;
+        onChanged();
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -482,16 +482,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 18
-            case 24: {
-              shakeRand_ = input.readInt32();
+            case 26: {
+              rewardId_ = input.readStringRequireUtf8();
               bitField0_ |= 0x00000004;
               break;
-            } // case 24
-            case 32: {
-              shakeAccumulate_ = input.readInt64();
-              bitField0_ |= 0x00000008;
-              break;
-            } // case 32
+            } // case 26
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -653,87 +648,95 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int shakeRand_ ;
+    private java.lang.Object rewardId_ = "";
     /**
-     * <code>int32 shakeRand = 3;</code>
-     * @return The shakeRand.
+     * <code>string rewardId = 3;</code>
+     * @return The rewardId.
      */
-    @java.lang.Override
-    public int getShakeRand() {
-      return shakeRand_;
+    public java.lang.String getRewardId() {
+      java.lang.Object ref = rewardId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        rewardId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
-     * <code>int32 shakeRand = 3;</code>
-     * @param value The shakeRand to set.
+     * <code>string rewardId = 3;</code>
+     * @return The bytes for rewardId.
+     */
+    public com.google.protobuf.ByteString
+        getRewardIdBytes() {
+      java.lang.Object ref = rewardId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        rewardId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string rewardId = 3;</code>
+     * @param value The rewardId to set.
      * @return This builder for chaining.
      */
-    public Builder setShakeRand(int value) {
-
-      shakeRand_ = value;
+    public Builder setRewardId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      rewardId_ = value;
       bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 shakeRand = 3;</code>
+     * <code>string rewardId = 3;</code>
      * @return This builder for chaining.
      */
-    public Builder clearShakeRand() {
+    public Builder clearRewardId() {
+      rewardId_ = getDefaultInstance().getRewardId();
       bitField0_ = (bitField0_ & ~0x00000004);
-      shakeRand_ = 0;
       onChanged();
       return this;
     }
-
-    private long shakeAccumulate_ ;
     /**
-     * <code>int64 shakeAccumulate = 4;</code>
-     * @return The shakeAccumulate.
-     */
-    @java.lang.Override
-    public long getShakeAccumulate() {
-      return shakeAccumulate_;
-    }
-    /**
-     * <code>int64 shakeAccumulate = 4;</code>
-     * @param value The shakeAccumulate to set.
+     * <code>string rewardId = 3;</code>
+     * @param value The bytes for rewardId to set.
      * @return This builder for chaining.
      */
-    public Builder setShakeAccumulate(long value) {
-
-      shakeAccumulate_ = value;
-      bitField0_ |= 0x00000008;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int64 shakeAccumulate = 4;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearShakeAccumulate() {
-      bitField0_ = (bitField0_ & ~0x00000008);
-      shakeAccumulate_ = 0L;
+    public Builder setRewardIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      rewardId_ = value;
+      bitField0_ |= 0x00000004;
       onChanged();
       return this;
     }
 
-    // @@protoc_insertion_point(builder_scope:grpc.GameManagementShakeRequest)
+    // @@protoc_insertion_point(builder_scope:grpc.GameManagementShakeRewardRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:grpc.GameManagementShakeRequest)
-  private static final grpc.GameManagementShakeRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:grpc.GameManagementShakeRewardRequest)
+  private static final grpc.GameManagementShakeRewardRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new grpc.GameManagementShakeRequest();
+    DEFAULT_INSTANCE = new grpc.GameManagementShakeRewardRequest();
   }
 
-  public static grpc.GameManagementShakeRequest getDefaultInstance() {
+  public static grpc.GameManagementShakeRewardRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GameManagementShakeRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GameManagementShakeRequest>() {
+  private static final com.google.protobuf.Parser<GameManagementShakeRewardRequest>
+      PARSER = new com.google.protobuf.AbstractParser<GameManagementShakeRewardRequest>() {
     @java.lang.Override
-    public GameManagementShakeRequest parsePartialFrom(
+    public GameManagementShakeRewardRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -752,17 +755,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GameManagementShakeRequest> parser() {
+  public static com.google.protobuf.Parser<GameManagementShakeRewardRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GameManagementShakeRequest> getParserForType() {
+  public com.google.protobuf.Parser<GameManagementShakeRewardRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public grpc.GameManagementShakeRequest getDefaultInstanceForType() {
+  public grpc.GameManagementShakeRewardRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -5,8 +5,8 @@
 
 package grpc;
 
-public interface GameManagementShakeRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:grpc.GameManagementShakeRequest)
+public interface GameManagementShakeRewardRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:grpc.GameManagementShakeRewardRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -34,14 +34,14 @@ public interface GameManagementShakeRequestOrBuilder extends
       getGameIdBytes();
 
   /**
-   * <code>int32 shakeRand = 3;</code>
-   * @return The shakeRand.
+   * <code>string rewardId = 3;</code>
+   * @return The rewardId.
    */
-  int getShakeRand();
-
+  java.lang.String getRewardId();
   /**
-   * <code>int64 shakeAccumulate = 4;</code>
-   * @return The shakeAccumulate.
+   * <code>string rewardId = 3;</code>
+   * @return The bytes for rewardId.
    */
-  long getShakeAccumulate();
+  com.google.protobuf.ByteString
+      getRewardIdBytes();
 }

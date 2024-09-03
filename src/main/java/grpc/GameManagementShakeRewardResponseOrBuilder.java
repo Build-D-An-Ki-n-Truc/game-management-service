@@ -5,8 +5,8 @@
 
 package grpc;
 
-public interface GameManagementShakeResponseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:grpc.GameManagementShakeResponse)
+public interface GameManagementShakeRewardResponseOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:grpc.GameManagementShakeRewardResponse)
     com.google.protobuf.MessageOrBuilder {
 
   /**
@@ -26,10 +26,4 @@ public interface GameManagementShakeResponseOrBuilder extends
    */
   com.google.protobuf.ByteString
       getMessageBytes();
-
-  /**
-   * <code>int32 finalResult = 3;</code>
-   * @return The finalResult.
-   */
-  int getFinalResult();
 }

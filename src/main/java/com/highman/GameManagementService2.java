@@ -1,50 +1,38 @@
 package com.highman;
 
-import com.google.gson.Gson;
 import com.highman.cron.GameStatusUpdateScheduler;
-import com.highman.models.DBConnectionPool;
-import com.mongodb.client.model.FindOneAndUpdateOptions;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.result.UpdateResult;
-import com.mongodb.reactivestreams.client.*;
+import com.mongodb.reactivestreams.client.MongoClient;
+import com.mongodb.reactivestreams.client.MongoClients;
+import com.mongodb.reactivestreams.client.MongoCollection;
+import com.mongodb.reactivestreams.client.MongoDatabase;
 import grpc.*;
 import io.grpc.stub.StreamObserver;
-import org.apache.logging.log4j.LogManager;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import org.quartz.SchedulerException;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import javax.print.Doc;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
-import static com.mongodb.client.model.Aggregates.match;
-import static com.mongodb.client.model.Filters.*;
+import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.*;
 
-public class GameManagementService extends GameManagementServiceGrpc.GameManagementServiceImplBase {
+public class GameManagementService2 extends GameManagementServiceGrpc.GameManagementServiceImplBase {
     MongoClient mongoClient;
     MongoCollection<Document> gameColl;
     MongoCollection<Document> participantColl;
 
-    public GameManagementService() {
+    public GameManagementService2() {
         try {
             mongoClient = MongoClients.create(System.getenv("MONGO_URI"));
             MongoDatabase mongoDatabase = mongoClient.getDatabase("game_service");
             gameColl = mongoDatabase.getCollection("games");
-            participantColl = mongoDatabase.getCollection("player_game_participations");
+            participantColl = mongoDatabase.getCollection("player_game_participants");
 
             // Start cron job for updating game's status
             setUpGameScheduler();
@@ -440,7 +428,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         Random rand = new Random();
         return rand.nextInt(min, max + 1);
     }
-    @Override
     public void shake(GameManagementShakeRequest request, StreamObserver<GameManagementShakeResponse> responseObserver) {
         GameManagementShakeResponse.Builder response = GameManagementShakeResponse.newBuilder();
 
@@ -461,7 +448,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         } else {
             finalResult = -1;
         }
-        System.out.println("Role res:" + finalResult);
 
         try {
             // Perform update
@@ -522,12 +508,11 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                             .publishOn(Schedulers.boundedElastic())
                                             .subscribe(
                                                     updateResult -> {
-                                                        String msg = "Shake result update complete.";
+                                                        String msg = "Game status update complete.";
                                                         System.out.println(msg);
 
                                                         response.setFinished(true);
                                                         response.setMessage(msg);
-                                                        response.setFinalResult(finalResult);
                                                         responseObserver.onNext(response.build());
                                                         responseObserver.onCompleted();
                                                     },
@@ -535,8 +520,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                                         throwable.printStackTrace();
 
                                                         response.setFinished(false);
-                                                        response.setMessage("Failed to update shake result");
-                                                        response.setFinalResult(finalResult);
+                                                        response.setMessage("Failed to update game status");
                                                         responseObserver.onNext(response.build());
                                                         responseObserver.onCompleted();
                                                     }
@@ -560,78 +544,6 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             response.setFinished(false);
             response.setMessage("Error while updating shake result");
             response.setFinalResult(finalResult);
-            responseObserver.onNext(response.build());
-            responseObserver.onCompleted();
-        }
-    }
-
-    // UPDATE
-    @Override
-    public void updateShakeReward(GameManagementShakeRewardRequest request, StreamObserver<GameManagementShakeRewardResponse> responseObserver) {
-        GameManagementShakeRewardResponse.Builder response = GameManagementShakeRewardResponse.newBuilder();
-
-        try {
-            // Perform update
-            // Find the game by its id and update its shake result
-            Flux.from(participantColl.find(eq("gameId", request.getGameId())))
-                    .publishOn(Schedulers.boundedElastic())
-                    .collectList()
-                    .subscribe(
-                            documents -> {
-                                if (!documents.isEmpty()) {
-                                    System.out.println(documents.isEmpty());
-                                    Publisher<UpdateResult> updatePublisher = participantColl.updateOne(
-                                            eq("gameId", request.getGameId()),
-                                            combine(
-                                                    push("players." + request.getUserId() + ".shakeRewards", request.getRewardId())
-                                            )
-                                    );
-
-                                    // Perform update
-                                    Mono.from(updatePublisher)
-                                            .publishOn(Schedulers.boundedElastic())
-                                            .subscribe(
-                                                    updateResult -> {
-                                                        String msg = "Shake reward update complete.";
-                                                        System.out.println(msg);
-
-                                                        response.setFinished(true);
-                                                        response.setMessage(msg);
-                                                        responseObserver.onNext(response.build());
-                                                        responseObserver.onCompleted();
-                                                    },
-                                                    throwable -> {
-                                                        throwable.printStackTrace();
-
-                                                        response.setFinished(false);
-                                                        response.setMessage("Failed to update shake reward");
-                                                        responseObserver.onNext(response.build());
-                                                        responseObserver.onCompleted();
-                                                    }
-                                            );
-                                }
-                                else {
-                                    response.setFinished(false);
-                                    response.setMessage("Failed to update shake reward");
-                                    responseObserver.onNext(response.build());
-                                    responseObserver.onCompleted();
-                                }
-                            },
-                            throwable -> {
-                                throwable.printStackTrace();
-
-                                response.setFinished(false);
-                                response.setMessage("Failed to update shake reward");
-                                responseObserver.onNext(response.build());
-                                responseObserver.onCompleted();
-                            }
-                    );
-        } catch (Exception e) {
-            // Error message
-            e.printStackTrace();
-
-            response.setFinished(false);
-            response.setMessage("Error while updating shake result");
             responseObserver.onNext(response.build());
             responseObserver.onCompleted();
         }
