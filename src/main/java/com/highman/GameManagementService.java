@@ -315,9 +315,9 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 String status = Objects.toString(document.get("status"), "");
                                 long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
                                 Date endTimeDate = (Date) document.getOrDefault("endTime", new Date(0));
-                                long endTime = endTimeDate != null ? endTimeDate.getTime() : new Date(0).getTime();
+                                long endTime = endTimeDate != null ? endTimeDate.getTime() : -1;
 
-                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) throw new RuntimeException();
+                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty()) throw new RuntimeException();
 
                                 Document config = document.get("config", new Document());
                                 Integer maxPlayers = config.getInteger("maxPlayers");
