@@ -46,6 +46,7 @@ Send a POST request to **/gameManage/updateInfo** with the following payload:
 ```json
 {
     "id": ${gameID},
+    "eventId": ${eventID},
     "name": ${gameName},
     "image": ${gameImageURL},
     "type": "Quiz"/"Shake",
@@ -68,6 +69,7 @@ Send a POST request to **/gameManage/add** with the following payload:
 ```json
 {
     "name": ${gameName},
+    "eventId": ${eventID},
     "image": ${gameImageURL},
     "type": "Quiz"/"Shake",
     "tutorial": ${gameTutorial},

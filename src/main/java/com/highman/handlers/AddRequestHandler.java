@@ -16,7 +16,7 @@ public class AddRequestHandler implements RequestHandlerBase{
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
         JsonObject responsePayload = new JsonObject();
 
-        if (requestJson.has("name") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration") && requestJson.has("questions")) {
+        if (requestJson.has("name") && requestJson.has("eventId") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration") && requestJson.has("questions")) {
 
             ArrayList<GameManagementQuestion> gameManagementQuestions = new ArrayList<>();
             for (JsonElement questionJsonElement: requestJson.getAsJsonArray("questions")) {
@@ -37,6 +37,7 @@ public class AddRequestHandler implements RequestHandlerBase{
 
             GameManagementAddRequest request = GameManagementAddRequest.newBuilder()
                     .setName(requestJson.get("name").getAsString())
+                    .setEventId(requestJson.get("eventId").getAsString())
                     .setImage(requestJson.get("image").getAsString())
                     .setType(requestJson.get("type").getAsString())
                     .setStatus("NotStarted")

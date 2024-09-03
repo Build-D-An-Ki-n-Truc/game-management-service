@@ -98,4 +98,16 @@ public interface GameManagementInfoRequestOrBuilder extends
    * @return The duration.
    */
   int getDuration();
+
+  /**
+   * <code>string eventId = 11;</code>
+   * @return The eventId.
+   */
+  java.lang.String getEventId();
+  /**
+   * <code>string eventId = 11;</code>
+   * @return The bytes for eventId.
+   */
+  com.google.protobuf.ByteString
+      getEventIdBytes();
 }

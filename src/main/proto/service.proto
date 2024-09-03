@@ -28,6 +28,7 @@ message GameManagementInfoRequest {
   int64 endTime = 8;
   int32 maxPlayers = 9;
   int32 duration = 10;
+  string eventId = 11;
 }
 
 message GameManagementStatusRequest {
@@ -60,7 +61,8 @@ message GameManagementAddRequest {
   int64 endTime = 9;
   int32 maxPlayers = 10;
   int32 duration = 11;
-  repeated GameManagementQuestion questions = 12;
+  string eventId = 12;
+  repeated GameManagementQuestion questions = 13;
 }
 
 message GameManagementResponse {

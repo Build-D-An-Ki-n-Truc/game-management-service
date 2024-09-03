@@ -33,6 +33,7 @@ private static final long serialVersionUID = 0L;
     type_ = "";
     tutorial_ = "";
     status_ = "";
+    eventId_ = "";
     questions_ = java.util.Collections.emptyList();
   }
 
@@ -338,18 +339,57 @@ private static final long serialVersionUID = 0L;
     return duration_;
   }
 
-  public static final int QUESTIONS_FIELD_NUMBER = 12;
+  public static final int EVENTID_FIELD_NUMBER = 12;
+  @SuppressWarnings("serial")
+  private volatile java.lang.Object eventId_ = "";
+  /**
+   * <code>string eventId = 12;</code>
+   * @return The eventId.
+   */
+  @java.lang.Override
+  public java.lang.String getEventId() {
+    java.lang.Object ref = eventId_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      eventId_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string eventId = 12;</code>
+   * @return The bytes for eventId.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getEventIdBytes() {
+    java.lang.Object ref = eventId_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      eventId_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int QUESTIONS_FIELD_NUMBER = 13;
   @SuppressWarnings("serial")
   private java.util.List<grpc.GameManagementQuestion> questions_;
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   @java.lang.Override
   public java.util.List<grpc.GameManagementQuestion> getQuestionsList() {
     return questions_;
   }
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   @java.lang.Override
   public java.util.List<? extends grpc.GameManagementQuestionOrBuilder> 
@@ -357,21 +397,21 @@ private static final long serialVersionUID = 0L;
     return questions_;
   }
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   @java.lang.Override
   public int getQuestionsCount() {
     return questions_.size();
   }
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   @java.lang.Override
   public grpc.GameManagementQuestion getQuestions(int index) {
     return questions_.get(index);
   }
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   @java.lang.Override
   public grpc.GameManagementQuestionOrBuilder getQuestionsOrBuilder(
@@ -426,8 +466,11 @@ private static final long serialVersionUID = 0L;
     if (duration_ != 0) {
       output.writeInt32(11, duration_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      com.google.protobuf.GeneratedMessage.writeString(output, 12, eventId_);
+    }
     for (int i = 0; i < questions_.size(); i++) {
-      output.writeMessage(12, questions_.get(i));
+      output.writeMessage(13, questions_.get(i));
     }
     getUnknownFields().writeTo(output);
   }
@@ -476,9 +519,12 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(11, duration_);
     }
+    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(eventId_)) {
+      size += com.google.protobuf.GeneratedMessage.computeStringSize(12, eventId_);
+    }
     for (int i = 0; i < questions_.size(); i++) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(12, questions_.get(i));
+        .computeMessageSize(13, questions_.get(i));
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -517,6 +563,8 @@ private static final long serialVersionUID = 0L;
         != other.getMaxPlayers()) return false;
     if (getDuration()
         != other.getDuration()) return false;
+    if (!getEventId()
+        .equals(other.getEventId())) return false;
     if (!getQuestionsList()
         .equals(other.getQuestionsList())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
@@ -555,6 +603,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getMaxPlayers();
     hash = (37 * hash) + DURATION_FIELD_NUMBER;
     hash = (53 * hash) + getDuration();
+    hash = (37 * hash) + EVENTID_FIELD_NUMBER;
+    hash = (53 * hash) + getEventId().hashCode();
     if (getQuestionsCount() > 0) {
       hash = (37 * hash) + QUESTIONS_FIELD_NUMBER;
       hash = (53 * hash) + getQuestionsList().hashCode();
@@ -701,13 +751,14 @@ private static final long serialVersionUID = 0L;
       endTime_ = 0L;
       maxPlayers_ = 0;
       duration_ = 0;
+      eventId_ = "";
       if (questionsBuilder_ == null) {
         questions_ = java.util.Collections.emptyList();
       } else {
         questions_ = null;
         questionsBuilder_.clear();
       }
-      bitField0_ = (bitField0_ & ~0x00000800);
+      bitField0_ = (bitField0_ & ~0x00001000);
       return this;
     }
 
@@ -742,9 +793,9 @@ private static final long serialVersionUID = 0L;
 
     private void buildPartialRepeatedFields(grpc.GameManagementAddRequest result) {
       if (questionsBuilder_ == null) {
-        if (((bitField0_ & 0x00000800) != 0)) {
+        if (((bitField0_ & 0x00001000) != 0)) {
           questions_ = java.util.Collections.unmodifiableList(questions_);
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00001000);
         }
         result.questions_ = questions_;
       } else {
@@ -786,6 +837,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000400) != 0)) {
         result.duration_ = duration_;
+      }
+      if (((from_bitField0_ & 0x00000800) != 0)) {
+        result.eventId_ = eventId_;
       }
     }
 
@@ -846,11 +900,16 @@ private static final long serialVersionUID = 0L;
       if (other.getDuration() != 0) {
         setDuration(other.getDuration());
       }
+      if (!other.getEventId().isEmpty()) {
+        eventId_ = other.eventId_;
+        bitField0_ |= 0x00000800;
+        onChanged();
+      }
       if (questionsBuilder_ == null) {
         if (!other.questions_.isEmpty()) {
           if (questions_.isEmpty()) {
             questions_ = other.questions_;
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00001000);
           } else {
             ensureQuestionsIsMutable();
             questions_.addAll(other.questions_);
@@ -863,7 +922,7 @@ private static final long serialVersionUID = 0L;
             questionsBuilder_.dispose();
             questionsBuilder_ = null;
             questions_ = other.questions_;
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00001000);
             questionsBuilder_ = 
               com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                  getQuestionsFieldBuilder() : null;
@@ -954,6 +1013,11 @@ private static final long serialVersionUID = 0L;
               break;
             } // case 88
             case 98: {
+              eventId_ = input.readStringRequireUtf8();
+              bitField0_ |= 0x00000800;
+              break;
+            } // case 98
+            case 106: {
               grpc.GameManagementQuestion m =
                   input.readMessage(
                       grpc.GameManagementQuestion.parser(),
@@ -965,7 +1029,7 @@ private static final long serialVersionUID = 0L;
                 questionsBuilder_.addMessage(m);
               }
               break;
-            } // case 98
+            } // case 106
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -1575,12 +1639,84 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    private java.lang.Object eventId_ = "";
+    /**
+     * <code>string eventId = 12;</code>
+     * @return The eventId.
+     */
+    public java.lang.String getEventId() {
+      java.lang.Object ref = eventId_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        eventId_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string eventId = 12;</code>
+     * @return The bytes for eventId.
+     */
+    public com.google.protobuf.ByteString
+        getEventIdBytes() {
+      java.lang.Object ref = eventId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        eventId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string eventId = 12;</code>
+     * @param value The eventId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setEventId(
+        java.lang.String value) {
+      if (value == null) { throw new NullPointerException(); }
+      eventId_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string eventId = 12;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearEventId() {
+      eventId_ = getDefaultInstance().getEventId();
+      bitField0_ = (bitField0_ & ~0x00000800);
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string eventId = 12;</code>
+     * @param value The bytes for eventId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setEventIdBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) { throw new NullPointerException(); }
+      checkByteStringIsUtf8(value);
+      eventId_ = value;
+      bitField0_ |= 0x00000800;
+      onChanged();
+      return this;
+    }
+
     private java.util.List<grpc.GameManagementQuestion> questions_ =
       java.util.Collections.emptyList();
     private void ensureQuestionsIsMutable() {
-      if (!((bitField0_ & 0x00000800) != 0)) {
+      if (!((bitField0_ & 0x00001000) != 0)) {
         questions_ = new java.util.ArrayList<grpc.GameManagementQuestion>(questions_);
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
        }
     }
 
@@ -1588,7 +1724,7 @@ private static final long serialVersionUID = 0L;
         grpc.GameManagementQuestion, grpc.GameManagementQuestion.Builder, grpc.GameManagementQuestionOrBuilder> questionsBuilder_;
 
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public java.util.List<grpc.GameManagementQuestion> getQuestionsList() {
       if (questionsBuilder_ == null) {
@@ -1598,7 +1734,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public int getQuestionsCount() {
       if (questionsBuilder_ == null) {
@@ -1608,7 +1744,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public grpc.GameManagementQuestion getQuestions(int index) {
       if (questionsBuilder_ == null) {
@@ -1618,7 +1754,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder setQuestions(
         int index, grpc.GameManagementQuestion value) {
@@ -1635,7 +1771,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder setQuestions(
         int index, grpc.GameManagementQuestion.Builder builderForValue) {
@@ -1649,7 +1785,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder addQuestions(grpc.GameManagementQuestion value) {
       if (questionsBuilder_ == null) {
@@ -1665,7 +1801,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder addQuestions(
         int index, grpc.GameManagementQuestion value) {
@@ -1682,7 +1818,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder addQuestions(
         grpc.GameManagementQuestion.Builder builderForValue) {
@@ -1696,7 +1832,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder addQuestions(
         int index, grpc.GameManagementQuestion.Builder builderForValue) {
@@ -1710,7 +1846,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder addAllQuestions(
         java.lang.Iterable<? extends grpc.GameManagementQuestion> values) {
@@ -1725,12 +1861,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder clearQuestions() {
       if (questionsBuilder_ == null) {
         questions_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         onChanged();
       } else {
         questionsBuilder_.clear();
@@ -1738,7 +1874,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public Builder removeQuestions(int index) {
       if (questionsBuilder_ == null) {
@@ -1751,14 +1887,14 @@ private static final long serialVersionUID = 0L;
       return this;
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public grpc.GameManagementQuestion.Builder getQuestionsBuilder(
         int index) {
       return getQuestionsFieldBuilder().getBuilder(index);
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public grpc.GameManagementQuestionOrBuilder getQuestionsOrBuilder(
         int index) {
@@ -1768,7 +1904,7 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public java.util.List<? extends grpc.GameManagementQuestionOrBuilder> 
          getQuestionsOrBuilderList() {
@@ -1779,14 +1915,14 @@ private static final long serialVersionUID = 0L;
       }
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public grpc.GameManagementQuestion.Builder addQuestionsBuilder() {
       return getQuestionsFieldBuilder().addBuilder(
           grpc.GameManagementQuestion.getDefaultInstance());
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public grpc.GameManagementQuestion.Builder addQuestionsBuilder(
         int index) {
@@ -1794,7 +1930,7 @@ private static final long serialVersionUID = 0L;
           index, grpc.GameManagementQuestion.getDefaultInstance());
     }
     /**
-     * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+     * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
      */
     public java.util.List<grpc.GameManagementQuestion.Builder> 
          getQuestionsBuilderList() {
@@ -1807,7 +1943,7 @@ private static final long serialVersionUID = 0L;
         questionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
             grpc.GameManagementQuestion, grpc.GameManagementQuestion.Builder, grpc.GameManagementQuestionOrBuilder>(
                 questions_,
-                ((bitField0_ & 0x00000800) != 0),
+                ((bitField0_ & 0x00001000) != 0),
                 getParentForChildren(),
                 isClean());
         questions_ = null;

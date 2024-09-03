@@ -112,25 +112,37 @@ public interface GameManagementAddRequestOrBuilder extends
   int getDuration();
 
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>string eventId = 12;</code>
+   * @return The eventId.
+   */
+  java.lang.String getEventId();
+  /**
+   * <code>string eventId = 12;</code>
+   * @return The bytes for eventId.
+   */
+  com.google.protobuf.ByteString
+      getEventIdBytes();
+
+  /**
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   java.util.List<grpc.GameManagementQuestion> 
       getQuestionsList();
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   grpc.GameManagementQuestion getQuestions(int index);
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   int getQuestionsCount();
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   java.util.List<? extends grpc.GameManagementQuestionOrBuilder> 
       getQuestionsOrBuilderList();
   /**
-   * <code>repeated .grpc.GameManagementQuestion questions = 12;</code>
+   * <code>repeated .grpc.GameManagementQuestion questions = 13;</code>
    */
   grpc.GameManagementQuestionOrBuilder getQuestionsOrBuilder(
       int index);

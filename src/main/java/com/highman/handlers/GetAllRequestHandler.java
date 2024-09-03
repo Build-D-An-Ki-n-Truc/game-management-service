@@ -20,17 +20,14 @@ public class GetAllRequestHandler implements RequestHandlerBase{
         if (response.getGamesList().isEmpty())
             responsePayload.add("data", JsonParser.parseString(new Gson().toJson(new ArrayList<>())));
         else {
-            Gson gson = new GsonBuilder().setFieldNamingStrategy(new FieldNamingStrategy() {
-                @Override
-                public String translateName(Field f) {
-                    String fieldName =
-                            FieldNamingPolicy.IDENTITY.translateName(f);
-                    if (fieldName.endsWith("_"))
-                    {
-                        fieldName = fieldName.substring(0, fieldName.length() - 1);
-                    }
-                    return fieldName;
+            Gson gson = new GsonBuilder().setFieldNamingStrategy(f -> {
+                String fieldName =
+                        FieldNamingPolicy.IDENTITY.translateName(f);
+                if (fieldName.endsWith("_"))
+                {
+                    fieldName = fieldName.substring(0, fieldName.length() - 1);
                 }
+                return fieldName;
             }).create();
 
             responsePayload.add("data", JsonParser.parseString(gson.toJson(response.getGamesList())));

@@ -15,9 +15,10 @@ public class UpdateInfoRequestHandler implements RequestHandlerBase{
         System.out.println(requestJson.has("id"));
         JsonObject responsePayload = new JsonObject();
 
-        if (requestJson.has("id") && requestJson.has("name") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration")) {
+        if (requestJson.has("id") && requestJson.has("name") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration") && requestJson.has("eventId")) {
             GameManagementInfoRequest request = GameManagementInfoRequest.newBuilder()
                     .setId(requestJson.get("id").getAsString())
+                    .setEventId(requestJson.get("eventId").getAsString())
                     .setName(requestJson.get("name").getAsString())
                     .setImage(requestJson.get("image").getAsString())
                     .setType(requestJson.get("type").getAsString())

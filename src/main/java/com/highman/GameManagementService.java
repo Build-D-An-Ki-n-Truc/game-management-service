@@ -72,7 +72,8 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             set("startTime", new Date(request.getStartTime())),
                             set("endTime", new Date(request.getEndTime())),
                             set("config.maxPlayers", request.getMaxPlayers()),
-                            set("config.duration", request.getDuration())
+                            set("config.duration", request.getDuration()),
+                            set("eventId", request.getEventId())
                     )
             );
 
@@ -171,6 +172,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             for (Document document : documents) {
                                 // Retrieve basic info of this game...
                                 String id = Objects.toString(document.get("_id"), "");
+                                String eventId = Objects.toString(document.get("eventId"), "");
                                 String name = Objects.toString(document.get("name"), "");
                                 String type = Objects.toString(document.get("type"), "");
                                 Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
@@ -178,9 +180,9 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 String status = Objects.toString(document.get("status"), "");
                                 long startTime = ((Date) document.getOrDefault("startTime", new Date(0))).getTime();
                                 Date endTimeDate = (Date) document.getOrDefault("endTime", new Date(0));
-                                long endTime = endTimeDate != null ? endTimeDate.getTime() : new Date(0).getTime();
+                                long endTime = endTimeDate != null ? endTimeDate.getTime() : -1;
 
-                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty() || endTime == 0) continue;
+                                if (id.isEmpty() || name.isEmpty() || type.isEmpty() || allowedItemTrade == null || status.isEmpty()) continue;
 
                                 Document config = document.get("config", new Document());
                                 Integer maxPlayers = config.getInteger("maxPlayers");
@@ -189,6 +191,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 //...and store it in the builder (single game)
                                 GameManagementGetResponse.Builder getResponseBuilder = GameManagementGetResponse.newBuilder()
                                         .setId(id)
+                                        .setEventId(eventId)
                                         .setName(name)
                                         .setType(type)
                                         .setAllowedItemTrade(allowedItemTrade)
@@ -237,6 +240,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             for (Document document : documents) {
                                 // Retrieve basic info of this game...
                                 String id = Objects.toString(document.get("_id"), "");
+                                String eventId = Objects.toString(document.get("eventId"), "");
                                 String name = Objects.toString(document.get("name"), "");
                                 String type = Objects.toString(document.get("type"), "");
                                 Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
@@ -255,6 +259,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                 //...and store it in the builder (single game)
                                 GameManagementGetResponse.Builder getResponseBuilder = GameManagementGetResponse.newBuilder()
                                         .setId(id)
+                                        .setEventId(eventId)
                                         .setName(name)
                                         .setType(type)
                                         .setAllowedItemTrade(allowedItemTrade)
@@ -285,8 +290,9 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             responseObserver.onCompleted();
                         }
                 );
-    }// READ
+    }
 
+    // READ
     @Override
     public void getOne(GameManagementGetRequest request, StreamObserver<GameManagementGetResponse> responseObserver) {
         // Response builder
@@ -301,6 +307,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             document -> {
                                 // Retrieve basic info of this game...
                                 String id = Objects.toString(document.get("_id"), "");
+                                String eventId = Objects.toString(document.get("eventId"), "");
                                 String name = Objects.toString(document.get("name"), "");
                                 String type = Objects.toString(document.get("type"), "");
                                 Boolean allowedItemTrade = (Boolean) document.get("allowedItemTrade");
@@ -318,6 +325,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
 
                                 //...and store it in the builder (single game)
                                 response.setId(id)
+                                        .setEventId(eventId)
                                         .setName(name)
                                         .setType(type)
                                         .setAllowedItemTrade(allowedItemTrade)
@@ -373,6 +381,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
             // Insert new document
             Publisher<InsertOneResult> publisher = gameColl.insertOne(new Document()
                     .append("name", request.getName())
+                    .append("eventId", request.getEventId())
                     .append("image", request.getImage())
                     .append("type", request.getType())
                     .append("allowedItemTrade", request.getAllowedItemTrade())
