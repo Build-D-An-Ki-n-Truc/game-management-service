@@ -113,6 +113,26 @@ message GameManagementShakeRewardResponse {
   string message = 2;
 }
 
+message GameManagementQuizQuestionsRequest {
+  string gameId = 1;
+}
+message GameManagementQuizQuestionsResponse {
+  bool finished = 1;
+  string message = 2;
+  repeated GameManagementQuestion questions = 3;
+}
+
+message GameManagementQuizAnswerRequest {
+  string gameId = 1;
+  string userId = 2;
+  repeated int32 answers = 3;
+  int32 score = 4;
+}
+message GameManagementQuizAnswerResponse {
+  bool finished = 1;
+  string message = 2;
+}
+
 service GameManagementService {
   rpc updateInfo(GameManagementInfoRequest) returns (GameManagementResponse);
   rpc updateStatus(GameManagementStatusRequest) returns (GameManagementResponse);
@@ -122,4 +142,6 @@ service GameManagementService {
   rpc add(GameManagementAddRequest) returns (GameManagementResponse);
   rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
   rpc updateShakeReward(GameManagementShakeRewardRequest) returns (GameManagementShakeRewardResponse);
+  rpc getQuizQuestions(GameManagementQuizQuestionsRequest) returns (GameManagementQuizQuestionsResponse);
+  rpc updateQuizAnswers(GameManagementQuizAnswerRequest) returns (GameManagementQuizQuestionsResponse);
 }

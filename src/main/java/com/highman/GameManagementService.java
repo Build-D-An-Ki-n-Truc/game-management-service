@@ -637,6 +637,48 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         }
     }
 
+    // READ
+    @Override
+    public void getQuizQuestions(GameManagementQuizQuestionsRequest request, StreamObserver<GameManagementQuizQuestionsResponse> responseObserver) {
+        // Response builder
+        GameManagementQuizQuestionsResponse.Builder response = GameManagementQuizQuestionsResponse.newBuilder();
+
+        // Query
+        Mono.from(gameColl.find(eq("_id", new ObjectId(request.getGameId()))))
+                .publishOn(Schedulers.boundedElastic())
+                .single()
+                .subscribe(
+                        document -> {
+                            // Get all data on questions of this game and store it in the single-game builder
+                            List<Document> questions = document.getList("questions", Document.class);
+                            for (Document question: questions) {
+                                GameManagementQuestion.Builder questionBuilder = GameManagementQuestion.newBuilder();
+                                questionBuilder.setText(question.getString("text"))
+                                        .setCorrectAnswer(question.getInteger("correctAnswer"))
+                                        .addAllOptions(question.getList("options", String.class))
+                                        .build();
+
+                                response.addQuestions(questionBuilder);
+                            }
+
+                            // Return empty response if err
+                            response.setFinished(true);
+                            response.setMessage("Game info retrieved successfully");
+                            responseObserver.onNext(response.build());
+                            responseObserver.onCompleted();
+                        },
+                        throwable -> {
+                            throwable.printStackTrace();
+
+                            // Return empty response if err
+                            response.setFinished(false);
+                            response.setMessage("Internal error");
+                            responseObserver.onNext(response.build());
+                            responseObserver.onCompleted();
+                        }
+                );
+    }
+
     // CRON JOB: GAME STATUS UPDATE SCHEDULER
     private void setUpGameScheduler() {
         // Query
