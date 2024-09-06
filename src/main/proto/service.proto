@@ -47,6 +47,7 @@ message GameManagementQuestion {
   string text = 1;
   repeated string options = 2;
   int32 correctAnswer = 3;
+  int32 timeLimit = 4;
 }
 
 message GameManagementAddRequest {
@@ -122,6 +123,15 @@ message GameManagementQuizQuestionsResponse {
   repeated GameManagementQuestion questions = 3;
 }
 
+message GameManagementAddQuizQuestionsRequest {
+  string gameId = 1;
+  repeated GameManagementQuestion questions = 2;
+}
+message GameManagementAddQuizQuestionsResponse {
+  bool finished = 1;
+  string message = 2;
+}
+
 message GameManagementQuizAnswerRequest {
   string gameId = 1;
   string userId = 2;
@@ -143,5 +153,6 @@ service GameManagementService {
   rpc shake(GameManagementShakeRequest) returns (GameManagementShakeResponse);
   rpc updateShakeReward(GameManagementShakeRewardRequest) returns (GameManagementShakeRewardResponse);
   rpc getQuizQuestions(GameManagementQuizQuestionsRequest) returns (GameManagementQuizQuestionsResponse);
+  rpc addQuizQuestions(GameManagementAddQuizQuestionsRequest) returns (GameManagementAddQuizQuestionsResponse);
   rpc updateQuizAnswers(GameManagementQuizAnswerRequest) returns (GameManagementQuizQuestionsResponse);
 }

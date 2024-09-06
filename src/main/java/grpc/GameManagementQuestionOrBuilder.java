@@ -51,4 +51,10 @@ public interface GameManagementQuestionOrBuilder extends
    * @return The correctAnswer.
    */
   int getCorrectAnswer();
+
+  /**
+   * <code>int32 timeLimit = 4;</code>
+   * @return The timeLimit.
+   */
+  int getTimeLimit();
 }

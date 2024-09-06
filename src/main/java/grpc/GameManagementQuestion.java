@@ -132,6 +132,17 @@ private static final long serialVersionUID = 0L;
     return correctAnswer_;
   }
 
+  public static final int TIMELIMIT_FIELD_NUMBER = 4;
+  private int timeLimit_ = 0;
+  /**
+   * <code>int32 timeLimit = 4;</code>
+   * @return The timeLimit.
+   */
+  @java.lang.Override
+  public int getTimeLimit() {
+    return timeLimit_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -154,6 +165,9 @@ private static final long serialVersionUID = 0L;
     }
     if (correctAnswer_ != 0) {
       output.writeInt32(3, correctAnswer_);
+    }
+    if (timeLimit_ != 0) {
+      output.writeInt32(4, timeLimit_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -179,6 +193,10 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(3, correctAnswer_);
     }
+    if (timeLimit_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, timeLimit_);
+    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -200,6 +218,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getOptionsList())) return false;
     if (getCorrectAnswer()
         != other.getCorrectAnswer()) return false;
+    if (getTimeLimit()
+        != other.getTimeLimit()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -219,6 +239,8 @@ private static final long serialVersionUID = 0L;
     }
     hash = (37 * hash) + CORRECTANSWER_FIELD_NUMBER;
     hash = (53 * hash) + getCorrectAnswer();
+    hash = (37 * hash) + TIMELIMIT_FIELD_NUMBER;
+    hash = (53 * hash) + getTimeLimit();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -354,6 +376,7 @@ private static final long serialVersionUID = 0L;
       options_ =
           com.google.protobuf.LazyStringArrayList.emptyList();
       correctAnswer_ = 0;
+      timeLimit_ = 0;
       return this;
     }
 
@@ -397,6 +420,9 @@ private static final long serialVersionUID = 0L;
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.correctAnswer_ = correctAnswer_;
       }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.timeLimit_ = timeLimit_;
+      }
     }
 
     @java.lang.Override
@@ -428,6 +454,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getCorrectAnswer() != 0) {
         setCorrectAnswer(other.getCorrectAnswer());
+      }
+      if (other.getTimeLimit() != 0) {
+        setTimeLimit(other.getTimeLimit());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -471,6 +500,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 24
+            case 32: {
+              timeLimit_ = input.readInt32();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 32
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -699,6 +733,38 @@ private static final long serialVersionUID = 0L;
     public Builder clearCorrectAnswer() {
       bitField0_ = (bitField0_ & ~0x00000004);
       correctAnswer_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int timeLimit_ ;
+    /**
+     * <code>int32 timeLimit = 4;</code>
+     * @return The timeLimit.
+     */
+    @java.lang.Override
+    public int getTimeLimit() {
+      return timeLimit_;
+    }
+    /**
+     * <code>int32 timeLimit = 4;</code>
+     * @param value The timeLimit to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTimeLimit(int value) {
+
+      timeLimit_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 timeLimit = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTimeLimit() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      timeLimit_ = 0;
       onChanged();
       return this;
     }

@@ -294,6 +294,68 @@ public final class GameManagementServiceGrpc {
     return getGetQuizQuestionsMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementAddQuizQuestionsRequest,
+      grpc.GameManagementAddQuizQuestionsResponse> getAddQuizQuestionsMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "addQuizQuestions",
+      requestType = grpc.GameManagementAddQuizQuestionsRequest.class,
+      responseType = grpc.GameManagementAddQuizQuestionsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementAddQuizQuestionsRequest,
+      grpc.GameManagementAddQuizQuestionsResponse> getAddQuizQuestionsMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementAddQuizQuestionsRequest, grpc.GameManagementAddQuizQuestionsResponse> getAddQuizQuestionsMethod;
+    if ((getAddQuizQuestionsMethod = GameManagementServiceGrpc.getAddQuizQuestionsMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getAddQuizQuestionsMethod = GameManagementServiceGrpc.getAddQuizQuestionsMethod) == null) {
+          GameManagementServiceGrpc.getAddQuizQuestionsMethod = getAddQuizQuestionsMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementAddQuizQuestionsRequest, grpc.GameManagementAddQuizQuestionsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "addQuizQuestions"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementAddQuizQuestionsRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementAddQuizQuestionsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("addQuizQuestions"))
+              .build();
+        }
+      }
+    }
+    return getAddQuizQuestionsMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<grpc.GameManagementQuizAnswerRequest,
+      grpc.GameManagementQuizQuestionsResponse> getUpdateQuizAnswersMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "updateQuizAnswers",
+      requestType = grpc.GameManagementQuizAnswerRequest.class,
+      responseType = grpc.GameManagementQuizQuestionsResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<grpc.GameManagementQuizAnswerRequest,
+      grpc.GameManagementQuizQuestionsResponse> getUpdateQuizAnswersMethod() {
+    io.grpc.MethodDescriptor<grpc.GameManagementQuizAnswerRequest, grpc.GameManagementQuizQuestionsResponse> getUpdateQuizAnswersMethod;
+    if ((getUpdateQuizAnswersMethod = GameManagementServiceGrpc.getUpdateQuizAnswersMethod) == null) {
+      synchronized (GameManagementServiceGrpc.class) {
+        if ((getUpdateQuizAnswersMethod = GameManagementServiceGrpc.getUpdateQuizAnswersMethod) == null) {
+          GameManagementServiceGrpc.getUpdateQuizAnswersMethod = getUpdateQuizAnswersMethod =
+              io.grpc.MethodDescriptor.<grpc.GameManagementQuizAnswerRequest, grpc.GameManagementQuizQuestionsResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "updateQuizAnswers"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementQuizAnswerRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  grpc.GameManagementQuizQuestionsResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new GameManagementServiceMethodDescriptorSupplier("updateQuizAnswers"))
+              .build();
+        }
+      }
+    }
+    return getUpdateQuizAnswersMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -404,6 +466,20 @@ public final class GameManagementServiceGrpc {
         io.grpc.stub.StreamObserver<grpc.GameManagementQuizQuestionsResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetQuizQuestionsMethod(), responseObserver);
     }
+
+    /**
+     */
+    default void addQuizQuestions(grpc.GameManagementAddQuizQuestionsRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementAddQuizQuestionsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getAddQuizQuestionsMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void updateQuizAnswers(grpc.GameManagementQuizAnswerRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementQuizQuestionsResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateQuizAnswersMethod(), responseObserver);
+    }
   }
 
   /**
@@ -504,6 +580,22 @@ public final class GameManagementServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetQuizQuestionsMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void addQuizQuestions(grpc.GameManagementAddQuizQuestionsRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementAddQuizQuestionsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getAddQuizQuestionsMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void updateQuizAnswers(grpc.GameManagementQuizAnswerRequest request,
+        io.grpc.stub.StreamObserver<grpc.GameManagementQuizQuestionsResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateQuizAnswersMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -583,6 +675,20 @@ public final class GameManagementServiceGrpc {
     public grpc.GameManagementQuizQuestionsResponse getQuizQuestions(grpc.GameManagementQuizQuestionsRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetQuizQuestionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementAddQuizQuestionsResponse addQuizQuestions(grpc.GameManagementAddQuizQuestionsRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getAddQuizQuestionsMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public grpc.GameManagementQuizQuestionsResponse updateQuizAnswers(grpc.GameManagementQuizAnswerRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateQuizAnswersMethod(), getCallOptions(), request);
     }
   }
 
@@ -673,6 +779,22 @@ public final class GameManagementServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetQuizQuestionsMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementAddQuizQuestionsResponse> addQuizQuestions(
+        grpc.GameManagementAddQuizQuestionsRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getAddQuizQuestionsMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<grpc.GameManagementQuizQuestionsResponse> updateQuizAnswers(
+        grpc.GameManagementQuizAnswerRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateQuizAnswersMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_UPDATE_INFO = 0;
@@ -684,6 +806,8 @@ public final class GameManagementServiceGrpc {
   private static final int METHODID_SHAKE = 6;
   private static final int METHODID_UPDATE_SHAKE_REWARD = 7;
   private static final int METHODID_GET_QUIZ_QUESTIONS = 8;
+  private static final int METHODID_ADD_QUIZ_QUESTIONS = 9;
+  private static final int METHODID_UPDATE_QUIZ_ANSWERS = 10;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -736,6 +860,14 @@ public final class GameManagementServiceGrpc {
           break;
         case METHODID_GET_QUIZ_QUESTIONS:
           serviceImpl.getQuizQuestions((grpc.GameManagementQuizQuestionsRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementQuizQuestionsResponse>) responseObserver);
+          break;
+        case METHODID_ADD_QUIZ_QUESTIONS:
+          serviceImpl.addQuizQuestions((grpc.GameManagementAddQuizQuestionsRequest) request,
+              (io.grpc.stub.StreamObserver<grpc.GameManagementAddQuizQuestionsResponse>) responseObserver);
+          break;
+        case METHODID_UPDATE_QUIZ_ANSWERS:
+          serviceImpl.updateQuizAnswers((grpc.GameManagementQuizAnswerRequest) request,
               (io.grpc.stub.StreamObserver<grpc.GameManagementQuizQuestionsResponse>) responseObserver);
           break;
         default:
@@ -819,6 +951,20 @@ public final class GameManagementServiceGrpc {
               grpc.GameManagementQuizQuestionsRequest,
               grpc.GameManagementQuizQuestionsResponse>(
                 service, METHODID_GET_QUIZ_QUESTIONS)))
+        .addMethod(
+          getAddQuizQuestionsMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementAddQuizQuestionsRequest,
+              grpc.GameManagementAddQuizQuestionsResponse>(
+                service, METHODID_ADD_QUIZ_QUESTIONS)))
+        .addMethod(
+          getUpdateQuizAnswersMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              grpc.GameManagementQuizAnswerRequest,
+              grpc.GameManagementQuizQuestionsResponse>(
+                service, METHODID_UPDATE_QUIZ_ANSWERS)))
         .build();
   }
 
@@ -876,6 +1022,8 @@ public final class GameManagementServiceGrpc {
               .addMethod(getShakeMethod())
               .addMethod(getUpdateShakeRewardMethod())
               .addMethod(getGetQuizQuestionsMethod())
+              .addMethod(getAddQuizQuestionsMethod())
+              .addMethod(getUpdateQuizAnswersMethod())
               .build();
         }
       }

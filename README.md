@@ -64,6 +64,13 @@ Send a GET request to **/gameManage/getAll**
 Send a GET request to **/gameManage/getListByEvent?eventId=${eventId}**
 ### Getting the detail of a single game
 Send a GET request to **/gameManage/getOne?gameId=${gameId}**
+### Getting questions of an existing game
+Send a POST request to **/gameManage/getQuizQuestions** with the following payload:
+```json
+{
+    "gameId": ${gameId}
+}
+```
 ### Adding a new game
 Send a POST request to **/gameManage/add** with the following payload:
 ```json
@@ -76,19 +83,40 @@ Send a POST request to **/gameManage/add** with the following payload:
     "startTime": ${millisecSinceUnixEpoch},
     "endTime": ${millisecSinceUnixEpoch},
     "maxPlayers": ${gameMaxPlayers},
-    "duration": ${gameDuration}
+    "duration": ${gameDuration},
     "questions": [
-    {
-      "text": ${questionText},
-      "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-      "correctAnswer": ${questionCorrectAnswer}
-    },
-    {
-    "text": ${questionText},
-    "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-    "correctAnswer": ${questionCorrectAnswer}
-    }
-    ...
+        {
+          "text": ${questionText},
+          "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+          "correctAnswer": ${questionCorrectAnswer}
+        },
+        {
+        "text": ${questionText},
+        "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+        "correctAnswer": ${questionCorrectAnswer}
+        }
+        ...
+    ]
+}
+```
+### Adding questions to an existing game
+Send a POST request to **/gameManage/addQuizQuestions** with the following payload:
+```json
+{
+    "gameId": ${gameId},
+    "questions": [
+        {
+          "text": ${questionText},
+          "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+          "correctAnswer": ${questionCorrectAnswer}
+        },
+        {
+        "text": ${questionText},
+        "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+        "correctAnswer": ${questionCorrectAnswer}
+        }
+        ...
+    ]
 }
 ```
 ### Performing a shake

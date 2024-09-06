@@ -30,6 +30,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static com.mongodb.client.model.Aggregates.group;
 import static com.mongodb.client.model.Aggregates.match;
 import static com.mongodb.client.model.Filters.*;
 import static com.mongodb.client.model.Updates.*;
@@ -376,7 +377,8 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                 Map<String, Object> questionMap = Map.of(
                         "text", gameManagementQuestion.getText(),
                         "options", Arrays.asList(gameManagementQuestion.getOptionsList().toArray()),
-                        "correctAnswer", gameManagementQuestion.getCorrectAnswer()
+                        "correctAnswer", gameManagementQuestion.getCorrectAnswer(),
+                        "timeLimit", gameManagementQuestion.getTimeLimit()
                 );
 
                 questionsList.add(questionMap);
@@ -677,6 +679,68 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             responseObserver.onCompleted();
                         }
                 );
+    }
+
+    // UPDATE
+
+
+    @Override
+    public void addQuizQuestions(GameManagementAddQuizQuestionsRequest request, StreamObserver<GameManagementAddQuizQuestionsResponse> responseObserver) {
+        // Response builder
+        GameManagementAddQuizQuestionsResponse.Builder response = GameManagementAddQuizQuestionsResponse.newBuilder();
+
+        // Convert a list of gRPC objects to readable JSON array
+        ArrayList<Map<String, Object>> questionsList = new ArrayList<>();
+        for (GameManagementQuestion gameManagementQuestion: request.getQuestionsList()) {
+            Map<String, Object> questionMap = Map.of(
+                    "text", gameManagementQuestion.getText(),
+                    "options", Arrays.asList(gameManagementQuestion.getOptionsList().toArray()),
+                    "correctAnswer", gameManagementQuestion.getCorrectAnswer(),
+                    "timeLimit", gameManagementQuestion.getTimeLimit()
+            );
+
+            questionsList.add(questionMap);
+        }
+        try {
+            // Perform update
+            Publisher<UpdateResult> updatePublisher = gameColl.updateOne(
+                    eq("_id", new ObjectId(request.getGameId())),
+                    combine(
+                            pushEach("questions", questionsList)
+                    )
+            );
+
+            // Perform update
+            Mono.from(updatePublisher)
+                    .publishOn(Schedulers.boundedElastic())
+                    .subscribe(
+                            updateResult -> {
+                                String msg = "Questions add complete.";
+                                System.out.println(msg);
+
+                                response.setFinished(true);
+                                response.setMessage(msg);
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            },
+                            throwable -> {
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage("Failed to add questions");
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        } catch (Exception e) {
+            // Error message
+            e.printStackTrace();
+
+            response.setFinished(false);
+            response.setMessage("Error while updating shake result");
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
     }
 
     // CRON JOB: GAME STATUS UPDATE SCHEDULER

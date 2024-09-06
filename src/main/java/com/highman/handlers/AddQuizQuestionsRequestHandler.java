@@ -9,15 +9,14 @@ import grpc.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class AddRequestHandler implements RequestHandlerBase{
+public class AddQuizQuestionsRequestHandler implements RequestHandlerBase{
     private final String ERROR_MSG = "Request has invalid structure";
 
     @Override
     public JsonObject handle(JsonObject requestJson, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
         JsonObject responsePayload = new JsonObject();
 
-        if (requestJson.has("name") && requestJson.has("eventId") && requestJson.has("image") && requestJson.has("type") && requestJson.has("alloweditemtrade") && requestJson.has("tutorial") && requestJson.has("startTime") && requestJson.has("endTime") && requestJson.has("maxPlayers") && requestJson.has("duration") && requestJson.has("questions")) {
-
+        if (requestJson.has("gameId") && requestJson.has("questions")) {
             ArrayList<GameManagementQuestion> gameManagementQuestions = new ArrayList<>();
             for (JsonElement questionJsonElement: requestJson.getAsJsonArray("questions")) {
                 GameManagementQuestion.Builder gameManagementQuestion = GameManagementQuestion.newBuilder();
@@ -37,22 +36,12 @@ public class AddRequestHandler implements RequestHandlerBase{
                         .build());
             }
 
-            GameManagementAddRequest request = GameManagementAddRequest.newBuilder()
-                    .setName(requestJson.get("name").getAsString())
-                    .setEventId(requestJson.get("eventId").getAsString())
-                    .setImage(requestJson.get("image").getAsString())
-                    .setType(requestJson.get("type").getAsString())
-                    .setStatus("NotStarted")
-                    .setAllowedItemTrade(requestJson.get("alloweditemtrade").getAsBoolean())
-                    .setTutorial(requestJson.get("tutorial").getAsString())
-                    .setStartTime(requestJson.get("startTime").getAsLong())
-                    .setEndTime(requestJson.get("endTime").getAsLong())
-                    .setMaxPlayers(requestJson.get("maxPlayers").getAsInt())
-                    .setDuration(requestJson.get("duration").getAsInt())
+            GameManagementAddQuizQuestionsRequest request = GameManagementAddQuizQuestionsRequest.newBuilder()
+                    .setGameId(requestJson.get("gameId").getAsString())
                     .addAllQuestions(gameManagementQuestions)
                     .build();
 
-            GameManagementResponse response = grpcStub.add(request);
+            GameManagementAddQuizQuestionsResponse response = grpcStub.addQuizQuestions(request);
             responsePayload.addProperty("finished", response.getFinished());
             responsePayload.addProperty("message", response.getMessage());
         }
@@ -66,6 +55,6 @@ public class AddRequestHandler implements RequestHandlerBase{
 
     @Override
     public String getEndpointName() {
-        return "add";
+        return "addQuizQuestions";
     }
 }
