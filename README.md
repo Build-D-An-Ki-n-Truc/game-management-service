@@ -64,7 +64,7 @@ Send a GET request to **/gameManage/getAll**
 Send a GET request to **/gameManage/getListByEvent?eventId=${eventId}**
 ### Getting the detail of a single game
 Send a GET request to **/gameManage/getOne?gameId=${gameId}**
-### Getting questions of an existing game
+### Getting questions of an existing quiz game
 Send a POST request to **/gameManage/getQuizQuestions** with the following payload:
 ```json
 {
@@ -99,7 +99,7 @@ Send a POST request to **/gameManage/add** with the following payload:
     ]
 }
 ```
-### Adding questions to an existing game
+### Adding questions to an existing quiz game
 Send a POST request to **/gameManage/addQuizQuestions** with the following payload:
 ```json
 {

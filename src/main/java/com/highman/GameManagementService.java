@@ -480,8 +480,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                             .append("gameId", request.getGameId())
                                             .append("players", Map.of(
                                                     request.getUserId(), Map.of(
-                                                            "shakeNumbers", List.of(finalResult),
-                                                            "shakeRewards", List.of()
+                                                            "result", List.of(finalResult)
                                                     )
                                             )));
 
@@ -515,7 +514,7 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                                     Publisher<UpdateResult> updatePublisher = participantColl.updateOne(
                                             eq("gameId", request.getGameId()),
                                             combine(
-                                                    push("players." + request.getUserId() + ".shakeNumbers", finalResult)
+                                                    push("players." + request.getUserId() + ".result", finalResult)
                                             )
                                     );
 
