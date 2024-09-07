@@ -755,14 +755,15 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
                             for (Document document : documents) {
                                 // Retrieve id and dates of this game...
                                 String id = Objects.toString(document.get("_id"), "");
+                                String type = Objects.toString(document.get("type"), "");
                                 Date startDateTime = (Date) document.getOrDefault("startTime", new Date(0));
                                 Date endDateTime = (Date) document.getOrDefault("endTime", new Date(0));
 
                                 // ...then store id + startTime in a list that represents a Start job, and id + endTime in another list that represents an End job
-                                List<Object> startJobData = List.of(id, "start", startDateTime);
+                                List<Object> startJobData = List.of(id, "start", startDateTime, type);
                                 schedule.add(startJobData);
                                 if (endDateTime != null) {
-                                    List<Object> endJobData = List.of(id, "end", endDateTime);
+                                    List<Object> endJobData = List.of(id, "end", endDateTime, type);
                                     schedule.add(endJobData);
                                 }
                             }

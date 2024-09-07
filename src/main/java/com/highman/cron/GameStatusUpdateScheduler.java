@@ -1,10 +1,16 @@
 package com.highman.cron;
 
 import com.mongodb.reactivestreams.client.MongoCollection;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import io.socket.engineio.client.transports.Polling;
+import io.socket.engineio.client.transports.WebSocket;
 import org.bson.Document;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -29,6 +35,25 @@ public class GameStatusUpdateScheduler {
             try {
                 JobDataMap jobDataMap = new JobDataMap();
                 jobDataMap.put("id", job.get(0));
+                jobDataMap.put("type", job.get(3));
+
+                if (job.get(3).equals("Quiz")) {
+                    // Create a Socket
+                    URI uri = URI.create("http://" + System.getenv("LOCALHOST") + ":3000");
+                    IO.Options options = IO.Options.builder()
+                            .setPath("/game")
+                            .setTransports(new String[] { WebSocket.NAME })
+                            .build();
+                    Socket socket = IO.socket(uri, options).connect();
+                    socket.on("connect", new Emitter.Listener() {
+                        @Override
+                        public void call(Object... args) {
+                            System.out.println("\"" + job.get(1) + "\" socket of " + job.get(3) + " game " + job.get(0) + " has connected to the server");
+                        }
+                    });
+
+                    jobDataMap.put("socket", socket);
+                }
 
                 if (job.get(1).equals("start")) {
                     JobDetail jobDetail = JobBuilder.newJob(GameStatusStartJob.class).setJobData(jobDataMap).build();
