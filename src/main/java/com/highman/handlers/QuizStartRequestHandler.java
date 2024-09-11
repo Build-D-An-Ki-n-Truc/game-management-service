@@ -34,19 +34,14 @@ public class QuizStartRequestHandler implements RequestHandlerBase{
                 @Override
                 public void call(Object... args) {
                     System.out.println("Emergency start socket of game \"" + gameId + "\" has connected to the server");
+
+                    socket.emit("startGame", new JSONObject(Map.of("gameId", gameId)));
                 }
             });
 
-            if (socket.connected()) {
-                socket.emit("startGame", new JSONObject(Map.of("gameId", gameId)));
 
-                responsePayload.addProperty("finished", true);
-                responsePayload.addProperty("message", "Game \"" + gameId + "\" has started");
-            }
-            else {
-                responsePayload.addProperty("finished", false);
-                responsePayload.addProperty("message", "Failure to start socket");
-            }
+            responsePayload.addProperty("finished", true);
+            responsePayload.addProperty("message", "Game \"" + gameId + "\" has started");
         }
         else {
             responsePayload.addProperty("finished", false);
