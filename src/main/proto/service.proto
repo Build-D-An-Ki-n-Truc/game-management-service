@@ -132,6 +132,16 @@ message GameManagementAddQuizQuestionsResponse {
   string message = 2;
 }
 
+message GameManagementUpdateQuizQuestionsRequest {
+  string gameId = 1;
+  repeated int32 questionIndex = 2;
+  repeated GameManagementQuestion newQuestionInfo = 3;
+}
+message GameManagementUpdateQuizQuestionsResponse {
+  bool finished = 1;
+  string message = 2;
+}
+
 message GameManagementQuizAnswerRequest {
   string gameId = 1;
   string userId = 2;
@@ -154,5 +164,6 @@ service GameManagementService {
   rpc updateShakeReward(GameManagementShakeRewardRequest) returns (GameManagementShakeRewardResponse);
   rpc getQuizQuestions(GameManagementQuizQuestionsRequest) returns (GameManagementQuizQuestionsResponse);
   rpc addQuizQuestions(GameManagementAddQuizQuestionsRequest) returns (GameManagementAddQuizQuestionsResponse);
+  rpc updateQuizQuestions(GameManagementUpdateQuizQuestionsRequest) returns (GameManagementUpdateQuizQuestionsResponse);
   rpc updateQuizAnswers(GameManagementQuizAnswerRequest) returns (GameManagementQuizQuestionsResponse);
 }

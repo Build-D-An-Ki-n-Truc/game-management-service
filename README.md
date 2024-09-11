@@ -86,14 +86,16 @@ Send a POST request to **/gameManage/add** with the following payload:
     "duration": ${gameDuration},
     "questions": [
         {
-          "text": ${questionText},
-          "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-          "correctAnswer": ${questionCorrectAnswer}
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
         },
         {
-        "text": ${questionText},
-        "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-        "correctAnswer": ${questionCorrectAnswer}
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
         }
         ...
     ]
@@ -106,17 +108,55 @@ Send a POST request to **/gameManage/addQuizQuestions** with the following paylo
     "gameId": ${gameId},
     "questions": [
         {
-          "text": ${questionText},
-          "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-          "correctAnswer": ${questionCorrectAnswer}
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
         },
         {
-        "text": ${questionText},
-        "options": [${questionStringOption1}, ${questionStringOption2}, ...],
-        "correctAnswer": ${questionCorrectAnswer}
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
         }
         ...
     ]
+}
+```
+### Updating a Quiz game's questions
+Send a POST request to **/gameManage/updateQuizQuestions** with the following payload:
+```json
+{
+    "gameId": ${gameId},
+    "questionIndex": [${questionIndex1}, ${questionIndex2},...]
+    "newQuestionInfo": [
+        {
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
+        },
+        {
+            "text": ${questionText},
+            "options": [${questionStringOption1}, ${questionStringOption2}, ...],
+            "correctAnswer": ${questionCorrectAnswer},
+            "timeLimit": ${timeLimit}
+        }
+        ...
+    ]
+}
+```
+`!` *questionIndexN* needs to match the Nth question info in *newQuestionInfo*
+
+`!` length of *questionIndex* and *newQuestionInfo* needs to match
+
+`!` to remove a question, change the info of that question (at that index) to:
+```json
+{
+    "text": "",
+    "options": [],
+    "correctAnswer": -1,
+    "timeLimit": -1
 }
 ```
 ### Performing a shake

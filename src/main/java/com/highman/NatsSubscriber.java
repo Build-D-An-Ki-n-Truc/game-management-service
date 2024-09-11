@@ -67,6 +67,9 @@ public class NatsSubscriber {
 
         MessagePattern addQuizQuestionsMP = new MessagePattern("gameManage", "addQuizQuestions", "POST");
         subscribe(addQuizQuestionsMP, grpcStub);
+
+        MessagePattern updateQuizQuestionsMP = new MessagePattern("gameManage", "updateQuizQuestions", "POST");
+        subscribe(updateQuizQuestionsMP, grpcStub);
     }
 
     private static void subscribe(MessagePattern messagePattern, GameManagementServiceGrpc.GameManagementServiceBlockingStub grpcStub) {
