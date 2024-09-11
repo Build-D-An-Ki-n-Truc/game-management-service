@@ -140,6 +140,16 @@ public final class Service {
   static final 
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_grpc_GameManagementQuizAnswerResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementQuizStartRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementQuizStartRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_grpc_GameManagementQuizStartResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_grpc_GameManagementQuizStartResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -209,40 +219,44 @@ public final class Service {
       "\005\0225\n\017newQuestionInfo\030\003 \003(\0132\034.grpc.GameMa" +
       "nagementQuestion\"N\n)GameManagementUpdate" +
       "QuizQuestionsResponse\022\020\n\010finished\030\001 \001(\010\022" +
-      "\017\n\007message\030\002 \001(\t\"a\n\037GameManagementQuizAn" +
+      "\017\n\007message\030\002 \001(\t\"P\n\037GameManagementQuizAn" +
       "swerRequest\022\016\n\006gameId\030\001 \001(\t\022\016\n\006userId\030\002 " +
-      "\001(\t\022\017\n\007answers\030\003 \003(\005\022\r\n\005score\030\004 \001(\005\"E\n G" +
-      "ameManagementQuizAnswerResponse\022\020\n\010finis" +
-      "hed\030\001 \001(\010\022\017\n\007message\030\002 \001(\t2\342\010\n\025GameManag" +
-      "ementService\022K\n\nupdateInfo\022\037.grpc.GameMa" +
-      "nagementInfoRequest\032\034.grpc.GameManagemen" +
-      "tResponse\022O\n\014updateStatus\022!.grpc.GameMan" +
-      "agementStatusRequest\032\034.grpc.GameManageme" +
-      "ntResponse\022O\n\006getAll\022!.grpc.GameManageme" +
-      "ntGetAllRequest\032\".grpc.GameManagementGet" +
-      "AllResponse\022_\n\016getListByEvent\022).grpc.Gam" +
-      "eManagementGetListByEventRequest\032\".grpc." +
-      "GameManagementGetAllResponse\022I\n\006getOne\022\036" +
-      ".grpc.GameManagementGetRequest\032\037.grpc.Ga" +
-      "meManagementGetResponse\022C\n\003add\022\036.grpc.Ga" +
-      "meManagementAddRequest\032\034.grpc.GameManage" +
-      "mentResponse\022L\n\005shake\022 .grpc.GameManagem" +
-      "entShakeRequest\032!.grpc.GameManagementSha" +
-      "keResponse\022d\n\021updateShakeReward\022&.grpc.G" +
-      "ameManagementShakeRewardRequest\032\'.grpc.G" +
-      "ameManagementShakeRewardResponse\022g\n\020getQ" +
-      "uizQuestions\022(.grpc.GameManagementQuizQu" +
-      "estionsRequest\032).grpc.GameManagementQuiz" +
-      "QuestionsResponse\022m\n\020addQuizQuestions\022+." +
-      "grpc.GameManagementAddQuizQuestionsReque" +
-      "st\032,.grpc.GameManagementAddQuizQuestions" +
-      "Response\022v\n\023updateQuizQuestions\022..grpc.G" +
-      "ameManagementUpdateQuizQuestionsRequest\032" +
-      "/.grpc.GameManagementUpdateQuizQuestions" +
-      "Response\022e\n\021updateQuizAnswers\022%.grpc.Gam" +
-      "eManagementQuizAnswerRequest\032).grpc.Game" +
-      "ManagementQuizQuestionsResponseB\002P\001b\006pro" +
-      "to3"
+      "\001(\t\022\r\n\005score\030\003 \001(\002\"E\n GameManagementQuiz" +
+      "AnswerResponse\022\020\n\010finished\030\001 \001(\010\022\017\n\007mess" +
+      "age\030\002 \001(\t\"0\n\036GameManagementQuizStartRequ" +
+      "est\022\016\n\006gameId\030\001 \001(\t\"D\n\037GameManagementQui" +
+      "zStartResponse\022\020\n\010finished\030\001 \001(\010\022\017\n\007mess" +
+      "age\030\002 \001(\t2\271\t\n\025GameManagementService\022K\n\nu" +
+      "pdateInfo\022\037.grpc.GameManagementInfoReque" +
+      "st\032\034.grpc.GameManagementResponse\022O\n\014upda" +
+      "teStatus\022!.grpc.GameManagementStatusRequ" +
+      "est\032\034.grpc.GameManagementResponse\022O\n\006get" +
+      "All\022!.grpc.GameManagementGetAllRequest\032\"" +
+      ".grpc.GameManagementGetAllResponse\022_\n\016ge" +
+      "tListByEvent\022).grpc.GameManagementGetLis" +
+      "tByEventRequest\032\".grpc.GameManagementGet" +
+      "AllResponse\022I\n\006getOne\022\036.grpc.GameManagem" +
+      "entGetRequest\032\037.grpc.GameManagementGetRe" +
+      "sponse\022C\n\003add\022\036.grpc.GameManagementAddRe" +
+      "quest\032\034.grpc.GameManagementResponse\022L\n\005s" +
+      "hake\022 .grpc.GameManagementShakeRequest\032!" +
+      ".grpc.GameManagementShakeResponse\022d\n\021upd" +
+      "ateShakeReward\022&.grpc.GameManagementShak" +
+      "eRewardRequest\032\'.grpc.GameManagementShak" +
+      "eRewardResponse\022g\n\020getQuizQuestions\022(.gr" +
+      "pc.GameManagementQuizQuestionsRequest\032)." +
+      "grpc.GameManagementQuizQuestionsResponse" +
+      "\022m\n\020addQuizQuestions\022+.grpc.GameManageme" +
+      "ntAddQuizQuestionsRequest\032,.grpc.GameMan" +
+      "agementAddQuizQuestionsResponse\022v\n\023updat" +
+      "eQuizQuestions\022..grpc.GameManagementUpda" +
+      "teQuizQuestionsRequest\032/.grpc.GameManage" +
+      "mentUpdateQuizQuestionsResponse\022b\n\021updat" +
+      "eQuizAnswers\022%.grpc.GameManagementQuizAn" +
+      "swerRequest\032&.grpc.GameManagementQuizAns" +
+      "werResponse\022X\n\tquizStart\022$.grpc.GameMana" +
+      "gementQuizStartRequest\032%.grpc.GameManage" +
+      "mentQuizStartResponseB\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -379,12 +393,24 @@ public final class Service {
     internal_static_grpc_GameManagementQuizAnswerRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementQuizAnswerRequest_descriptor,
-        new java.lang.String[] { "GameId", "UserId", "Answers", "Score", });
+        new java.lang.String[] { "GameId", "UserId", "Score", });
     internal_static_grpc_GameManagementQuizAnswerResponse_descriptor =
       getDescriptor().getMessageTypes().get(22);
     internal_static_grpc_GameManagementQuizAnswerResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_grpc_GameManagementQuizAnswerResponse_descriptor,
+        new java.lang.String[] { "Finished", "Message", });
+    internal_static_grpc_GameManagementQuizStartRequest_descriptor =
+      getDescriptor().getMessageTypes().get(23);
+    internal_static_grpc_GameManagementQuizStartRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementQuizStartRequest_descriptor,
+        new java.lang.String[] { "GameId", });
+    internal_static_grpc_GameManagementQuizStartResponse_descriptor =
+      getDescriptor().getMessageTypes().get(24);
+    internal_static_grpc_GameManagementQuizStartResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_grpc_GameManagementQuizStartResponse_descriptor,
         new java.lang.String[] { "Finished", "Message", });
     descriptor.resolveAllFeaturesImmutable();
   }

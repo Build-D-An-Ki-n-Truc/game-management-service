@@ -6,12 +6,12 @@
 package grpc;
 
 /**
- * Protobuf type {@code grpc.GameManagementQuizAnswerRequest}
+ * Protobuf type {@code grpc.GameManagementQuizStartRequest}
  */
-public final class GameManagementQuizAnswerRequest extends
+public final class GameManagementQuizStartRequest extends
     com.google.protobuf.GeneratedMessage implements
-    // @@protoc_insertion_point(message_implements:grpc.GameManagementQuizAnswerRequest)
-    GameManagementQuizAnswerRequestOrBuilder {
+    // @@protoc_insertion_point(message_implements:grpc.GameManagementQuizStartRequest)
+    GameManagementQuizStartRequestOrBuilder {
 private static final long serialVersionUID = 0L;
   static {
     com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
@@ -20,28 +20,27 @@ private static final long serialVersionUID = 0L;
       /* minor= */ 27,
       /* patch= */ 2,
       /* suffix= */ "",
-      GameManagementQuizAnswerRequest.class.getName());
+      GameManagementQuizStartRequest.class.getName());
   }
-  // Use GameManagementQuizAnswerRequest.newBuilder() to construct.
-  private GameManagementQuizAnswerRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  // Use GameManagementQuizStartRequest.newBuilder() to construct.
+  private GameManagementQuizStartRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
     super(builder);
   }
-  private GameManagementQuizAnswerRequest() {
+  private GameManagementQuizStartRequest() {
     gameId_ = "";
-    userId_ = "";
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return grpc.Service.internal_static_grpc_GameManagementQuizAnswerRequest_descriptor;
+    return grpc.Service.internal_static_grpc_GameManagementQuizStartRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return grpc.Service.internal_static_grpc_GameManagementQuizAnswerRequest_fieldAccessorTable
+    return grpc.Service.internal_static_grpc_GameManagementQuizStartRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            grpc.GameManagementQuizAnswerRequest.class, grpc.GameManagementQuizAnswerRequest.Builder.class);
+            grpc.GameManagementQuizStartRequest.class, grpc.GameManagementQuizStartRequest.Builder.class);
   }
 
   public static final int GAMEID_FIELD_NUMBER = 1;
@@ -83,56 +82,6 @@ private static final long serialVersionUID = 0L;
     }
   }
 
-  public static final int USERID_FIELD_NUMBER = 2;
-  @SuppressWarnings("serial")
-  private volatile java.lang.Object userId_ = "";
-  /**
-   * <code>string userId = 2;</code>
-   * @return The userId.
-   */
-  @java.lang.Override
-  public java.lang.String getUserId() {
-    java.lang.Object ref = userId_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      userId_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string userId = 2;</code>
-   * @return The bytes for userId.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getUserIdBytes() {
-    java.lang.Object ref = userId_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      userId_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  public static final int SCORE_FIELD_NUMBER = 3;
-  private float score_ = 0F;
-  /**
-   * <code>float score = 3;</code>
-   * @return The score.
-   */
-  @java.lang.Override
-  public float getScore() {
-    return score_;
-  }
-
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -150,12 +99,6 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
       com.google.protobuf.GeneratedMessage.writeString(output, 1, gameId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userId_)) {
-      com.google.protobuf.GeneratedMessage.writeString(output, 2, userId_);
-    }
-    if (java.lang.Float.floatToRawIntBits(score_) != 0) {
-      output.writeFloat(3, score_);
-    }
     getUnknownFields().writeTo(output);
   }
 
@@ -168,13 +111,6 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessage.isStringEmpty(gameId_)) {
       size += com.google.protobuf.GeneratedMessage.computeStringSize(1, gameId_);
     }
-    if (!com.google.protobuf.GeneratedMessage.isStringEmpty(userId_)) {
-      size += com.google.protobuf.GeneratedMessage.computeStringSize(2, userId_);
-    }
-    if (java.lang.Float.floatToRawIntBits(score_) != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeFloatSize(3, score_);
-    }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
     return size;
@@ -185,18 +121,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof grpc.GameManagementQuizAnswerRequest)) {
+    if (!(obj instanceof grpc.GameManagementQuizStartRequest)) {
       return super.equals(obj);
     }
-    grpc.GameManagementQuizAnswerRequest other = (grpc.GameManagementQuizAnswerRequest) obj;
+    grpc.GameManagementQuizStartRequest other = (grpc.GameManagementQuizStartRequest) obj;
 
     if (!getGameId()
         .equals(other.getGameId())) return false;
-    if (!getUserId()
-        .equals(other.getUserId())) return false;
-    if (java.lang.Float.floatToIntBits(getScore())
-        != java.lang.Float.floatToIntBits(
-            other.getScore())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -210,54 +141,49 @@ private static final long serialVersionUID = 0L;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + GAMEID_FIELD_NUMBER;
     hash = (53 * hash) + getGameId().hashCode();
-    hash = (37 * hash) + USERID_FIELD_NUMBER;
-    hash = (53 * hash) + getUserId().hashCode();
-    hash = (37 * hash) + SCORE_FIELD_NUMBER;
-    hash = (53 * hash) + java.lang.Float.floatToIntBits(
-        getScore());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(byte[] data)
+  public static grpc.GameManagementQuizStartRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(java.io.InputStream input)
+  public static grpc.GameManagementQuizStartRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -265,26 +191,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static grpc.GameManagementQuizAnswerRequest parseDelimitedFrom(java.io.InputStream input)
+  public static grpc.GameManagementQuizStartRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static grpc.GameManagementQuizAnswerRequest parseDelimitedFrom(
+  public static grpc.GameManagementQuizStartRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessage
         .parseWithIOException(PARSER, input);
   }
-  public static grpc.GameManagementQuizAnswerRequest parseFrom(
+  public static grpc.GameManagementQuizStartRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -297,7 +223,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(grpc.GameManagementQuizAnswerRequest prototype) {
+  public static Builder newBuilder(grpc.GameManagementQuizStartRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -313,26 +239,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code grpc.GameManagementQuizAnswerRequest}
+   * Protobuf type {@code grpc.GameManagementQuizStartRequest}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:grpc.GameManagementQuizAnswerRequest)
-      grpc.GameManagementQuizAnswerRequestOrBuilder {
+      // @@protoc_insertion_point(builder_implements:grpc.GameManagementQuizStartRequest)
+      grpc.GameManagementQuizStartRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return grpc.Service.internal_static_grpc_GameManagementQuizAnswerRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementQuizStartRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return grpc.Service.internal_static_grpc_GameManagementQuizAnswerRequest_fieldAccessorTable
+      return grpc.Service.internal_static_grpc_GameManagementQuizStartRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              grpc.GameManagementQuizAnswerRequest.class, grpc.GameManagementQuizAnswerRequest.Builder.class);
+              grpc.GameManagementQuizStartRequest.class, grpc.GameManagementQuizStartRequest.Builder.class);
     }
 
-    // Construct using grpc.GameManagementQuizAnswerRequest.newBuilder()
+    // Construct using grpc.GameManagementQuizStartRequest.newBuilder()
     private Builder() {
 
     }
@@ -347,25 +273,23 @@ private static final long serialVersionUID = 0L;
       super.clear();
       bitField0_ = 0;
       gameId_ = "";
-      userId_ = "";
-      score_ = 0F;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return grpc.Service.internal_static_grpc_GameManagementQuizAnswerRequest_descriptor;
+      return grpc.Service.internal_static_grpc_GameManagementQuizStartRequest_descriptor;
     }
 
     @java.lang.Override
-    public grpc.GameManagementQuizAnswerRequest getDefaultInstanceForType() {
-      return grpc.GameManagementQuizAnswerRequest.getDefaultInstance();
+    public grpc.GameManagementQuizStartRequest getDefaultInstanceForType() {
+      return grpc.GameManagementQuizStartRequest.getDefaultInstance();
     }
 
     @java.lang.Override
-    public grpc.GameManagementQuizAnswerRequest build() {
-      grpc.GameManagementQuizAnswerRequest result = buildPartial();
+    public grpc.GameManagementQuizStartRequest build() {
+      grpc.GameManagementQuizStartRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -373,50 +297,36 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public grpc.GameManagementQuizAnswerRequest buildPartial() {
-      grpc.GameManagementQuizAnswerRequest result = new grpc.GameManagementQuizAnswerRequest(this);
+    public grpc.GameManagementQuizStartRequest buildPartial() {
+      grpc.GameManagementQuizStartRequest result = new grpc.GameManagementQuizStartRequest(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(grpc.GameManagementQuizAnswerRequest result) {
+    private void buildPartial0(grpc.GameManagementQuizStartRequest result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
         result.gameId_ = gameId_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.userId_ = userId_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.score_ = score_;
       }
     }
 
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof grpc.GameManagementQuizAnswerRequest) {
-        return mergeFrom((grpc.GameManagementQuizAnswerRequest)other);
+      if (other instanceof grpc.GameManagementQuizStartRequest) {
+        return mergeFrom((grpc.GameManagementQuizStartRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(grpc.GameManagementQuizAnswerRequest other) {
-      if (other == grpc.GameManagementQuizAnswerRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(grpc.GameManagementQuizStartRequest other) {
+      if (other == grpc.GameManagementQuizStartRequest.getDefaultInstance()) return this;
       if (!other.getGameId().isEmpty()) {
         gameId_ = other.gameId_;
         bitField0_ |= 0x00000001;
         onChanged();
-      }
-      if (!other.getUserId().isEmpty()) {
-        userId_ = other.userId_;
-        bitField0_ |= 0x00000002;
-        onChanged();
-      }
-      if (other.getScore() != 0F) {
-        setScore(other.getScore());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -449,16 +359,6 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000001;
               break;
             } // case 10
-            case 18: {
-              userId_ = input.readStringRequireUtf8();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 18
-            case 29: {
-              score_ = input.readFloat();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 29
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -548,127 +448,23 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object userId_ = "";
-    /**
-     * <code>string userId = 2;</code>
-     * @return The userId.
-     */
-    public java.lang.String getUserId() {
-      java.lang.Object ref = userId_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        userId_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
-    }
-    /**
-     * <code>string userId = 2;</code>
-     * @return The bytes for userId.
-     */
-    public com.google.protobuf.ByteString
-        getUserIdBytes() {
-      java.lang.Object ref = userId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        userId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string userId = 2;</code>
-     * @param value The userId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUserId(
-        java.lang.String value) {
-      if (value == null) { throw new NullPointerException(); }
-      userId_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string userId = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearUserId() {
-      userId_ = getDefaultInstance().getUserId();
-      bitField0_ = (bitField0_ & ~0x00000002);
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string userId = 2;</code>
-     * @param value The bytes for userId to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUserIdBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) { throw new NullPointerException(); }
-      checkByteStringIsUtf8(value);
-      userId_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-
-    private float score_ ;
-    /**
-     * <code>float score = 3;</code>
-     * @return The score.
-     */
-    @java.lang.Override
-    public float getScore() {
-      return score_;
-    }
-    /**
-     * <code>float score = 3;</code>
-     * @param value The score to set.
-     * @return This builder for chaining.
-     */
-    public Builder setScore(float value) {
-
-      score_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>float score = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearScore() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      score_ = 0F;
-      onChanged();
-      return this;
-    }
-
-    // @@protoc_insertion_point(builder_scope:grpc.GameManagementQuizAnswerRequest)
+    // @@protoc_insertion_point(builder_scope:grpc.GameManagementQuizStartRequest)
   }
 
-  // @@protoc_insertion_point(class_scope:grpc.GameManagementQuizAnswerRequest)
-  private static final grpc.GameManagementQuizAnswerRequest DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:grpc.GameManagementQuizStartRequest)
+  private static final grpc.GameManagementQuizStartRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new grpc.GameManagementQuizAnswerRequest();
+    DEFAULT_INSTANCE = new grpc.GameManagementQuizStartRequest();
   }
 
-  public static grpc.GameManagementQuizAnswerRequest getDefaultInstance() {
+  public static grpc.GameManagementQuizStartRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<GameManagementQuizAnswerRequest>
-      PARSER = new com.google.protobuf.AbstractParser<GameManagementQuizAnswerRequest>() {
+  private static final com.google.protobuf.Parser<GameManagementQuizStartRequest>
+      PARSER = new com.google.protobuf.AbstractParser<GameManagementQuizStartRequest>() {
     @java.lang.Override
-    public GameManagementQuizAnswerRequest parsePartialFrom(
+    public GameManagementQuizStartRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -687,17 +483,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<GameManagementQuizAnswerRequest> parser() {
+  public static com.google.protobuf.Parser<GameManagementQuizStartRequest> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<GameManagementQuizAnswerRequest> getParserForType() {
+  public com.google.protobuf.Parser<GameManagementQuizStartRequest> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public grpc.GameManagementQuizAnswerRequest getDefaultInstanceForType() {
+  public grpc.GameManagementQuizStartRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

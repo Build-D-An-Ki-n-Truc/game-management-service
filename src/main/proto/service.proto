@@ -145,10 +145,17 @@ message GameManagementUpdateQuizQuestionsResponse {
 message GameManagementQuizAnswerRequest {
   string gameId = 1;
   string userId = 2;
-  repeated int32 answers = 3;
-  int32 score = 4;
+  float score = 3;
 }
 message GameManagementQuizAnswerResponse {
+  bool finished = 1;
+  string message = 2;
+}
+
+message GameManagementQuizStartRequest {
+  string gameId = 1;
+}
+message GameManagementQuizStartResponse {
   bool finished = 1;
   string message = 2;
 }
@@ -165,5 +172,6 @@ service GameManagementService {
   rpc getQuizQuestions(GameManagementQuizQuestionsRequest) returns (GameManagementQuizQuestionsResponse);
   rpc addQuizQuestions(GameManagementAddQuizQuestionsRequest) returns (GameManagementAddQuizQuestionsResponse);
   rpc updateQuizQuestions(GameManagementUpdateQuizQuestionsRequest) returns (GameManagementUpdateQuizQuestionsResponse);
-  rpc updateQuizAnswers(GameManagementQuizAnswerRequest) returns (GameManagementQuizQuestionsResponse);
+  rpc updateQuizAnswers(GameManagementQuizAnswerRequest) returns (GameManagementQuizAnswerResponse);
+  rpc quizStart(GameManagementQuizStartRequest) returns (GameManagementQuizStartResponse);
 }

@@ -34,25 +34,8 @@ public interface GameManagementQuizAnswerRequestOrBuilder extends
       getUserIdBytes();
 
   /**
-   * <code>repeated int32 answers = 3;</code>
-   * @return A list containing the answers.
-   */
-  java.util.List<java.lang.Integer> getAnswersList();
-  /**
-   * <code>repeated int32 answers = 3;</code>
-   * @return The count of answers.
-   */
-  int getAnswersCount();
-  /**
-   * <code>repeated int32 answers = 3;</code>
-   * @param index The index of the element to return.
-   * @return The answers at the given index.
-   */
-  int getAnswers(int index);
-
-  /**
-   * <code>int32 score = 4;</code>
+   * <code>float score = 3;</code>
    * @return The score.
    */
-  int getScore();
+  float getScore();
 }

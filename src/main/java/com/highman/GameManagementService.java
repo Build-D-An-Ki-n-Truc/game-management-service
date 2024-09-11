@@ -844,6 +844,115 @@ public class GameManagementService extends GameManagementServiceGrpc.GameManagem
         }
     }
 
+    // UPDATE
+    @Override
+    public void updateQuizAnswers(GameManagementQuizAnswerRequest request, StreamObserver<GameManagementQuizAnswerResponse> responseObserver) {
+        // Response builder
+        GameManagementQuizAnswerResponse.Builder response = GameManagementQuizAnswerResponse.newBuilder();
+
+        try {
+            // Perform update
+            // Find the game by its id and update its shake result
+            Flux.from(participantColl.find(eq("gameId", request.getGameId())))
+                    .publishOn(Schedulers.boundedElastic())
+                    .collectList()
+                    .subscribe(
+                            documents -> {
+                                // Add if not found
+                                if (documents.isEmpty()) {
+                                    // Insert new document
+                                    Publisher<InsertOneResult> insertPublisher = participantColl.insertOne(new Document()
+                                            .append("gameId", request.getGameId())
+                                            .append("players", Map.of(
+                                                    request.getUserId(), Map.of(
+                                                            "result", List.of(request.getScore())
+                                                    )
+                                            )));
+
+                                    // Perform insertion
+                                    Mono.from(insertPublisher)
+                                            .publishOn(Schedulers.boundedElastic())
+                                            .subscribe(
+                                                    insertOneResult -> {
+                                                        String msg = "Quiz result insert complete.";
+                                                        System.out.println(msg);
+
+                                                        response.setFinished(true);
+                                                        response.setMessage(msg);
+                                                        responseObserver.onNext(response.build());
+                                                        responseObserver.onCompleted();
+                                                    },
+                                                    throwable -> {
+                                                        throwable.printStackTrace();
+
+                                                        response.setFinished(false);
+                                                        response.setMessage("Failed to insert quiz result");
+                                                        responseObserver.onNext(response.build());
+                                                        responseObserver.onCompleted();
+                                                    }
+                                            );
+                                }
+//                                else {
+//                                    System.out.println(documents.isEmpty());
+//                                    Publisher<UpdateResult> updatePublisher = participantColl.updateOne(
+//                                            eq("gameId", request.getGameId()),
+//                                            combine(
+//                                                    push("players." + request.getUserId() + ".result", finalResult)
+//                                            )
+//                                    );
+//
+//                                    // Perform update
+//                                    Mono.from(updatePublisher)
+//                                            .publishOn(Schedulers.boundedElastic())
+//                                            .subscribe(
+//                                                    updateResult -> {
+//                                                        String msg = "Shake result update complete.";
+//                                                        System.out.println(msg);
+//
+//                                                        response.setFinished(true);
+//                                                        response.setMessage(msg);
+//                                                        response.setFinalResult(finalResult);
+//                                                        responseObserver.onNext(response.build());
+//                                                        responseObserver.onCompleted();
+//                                                    },
+//                                                    throwable -> {
+//                                                        throwable.printStackTrace();
+//
+//                                                        response.setFinished(false);
+//                                                        response.setMessage("Failed to update shake result");
+//                                                        response.setFinalResult(finalResult);
+//                                                        responseObserver.onNext(response.build());
+//                                                        responseObserver.onCompleted();
+//                                                    }
+//                                            );
+//                                }
+                            },
+                            throwable -> {
+                                throwable.printStackTrace();
+
+                                response.setFinished(false);
+                                response.setMessage("Failed to insert quiz result");
+                                responseObserver.onNext(response.build());
+                                responseObserver.onCompleted();
+                            }
+                    );
+        } catch (Exception e) {
+            // Error message
+            e.printStackTrace();
+
+            response.setFinished(false);
+            response.setMessage("Error while updating quiz result");
+            responseObserver.onNext(response.build());
+            responseObserver.onCompleted();
+        }
+    }
+
+    // Van dap
+    @Override
+    public void quizStart(GameManagementQuizStartRequest request, StreamObserver<GameManagementQuizStartResponse> responseObserver) {
+        super.quizStart(request, responseObserver);
+    }
+
     // CRON JOB: GAME STATUS UPDATE SCHEDULER
     private void setUpGameScheduler() {
         // Query
